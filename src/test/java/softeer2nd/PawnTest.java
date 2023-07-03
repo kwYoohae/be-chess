@@ -15,11 +15,16 @@ public class PawnTest {
         final String white = "white";
         final String black = "black";
 
-        final Pawn whitePawn = new Pawn(white);
-        final Pawn blackPawn = new Pawn(black);
+        //when, then
+        verifyPawn(white);
+        verifyPawn(black);
+    }
+
+    void verifyPawn(final String color) {
+        //given
+        final Pawn pawn = new Pawn(color);
 
         //when, then
-        assertThat(whitePawn.getColor()).isEqualTo(white);
-        assertThat(blackPawn.getColor()).isEqualTo(black);
+        assertThat(pawn.getColor()).isEqualTo(color);
     }
 }
