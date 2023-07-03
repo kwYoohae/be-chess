@@ -1,10 +1,14 @@
 package softeer2nd;
 
 public class Pawn {
-    public Pawn(final String white) {
+
+    private final String color;
+
+    public Pawn(final String color) {
+        this.color = color;
     }
 
     public String getColor() {
-        return "";
+        return color;
     }
 }
