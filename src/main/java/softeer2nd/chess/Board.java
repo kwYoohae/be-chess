@@ -13,7 +13,7 @@ public class Board {
 	public static final int BOARD_MIN_INDEX = 1;
 	public static final String[] WIDTH_ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
-	private Map<String, Pawn> boards = new HashMap<>();
+	private final Map<String, Pawn> boards = new HashMap<>();
 
 	public Board() {
 		initialize();
@@ -34,15 +34,7 @@ public class Board {
 	}
 
 	public int size() {
-		int count = 0;
-		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			for (int j = BOARD_MIN_INDEX; j < BOARD_MAX_INDEX; j++) {
-				String index = WIDTH_ALPHABET[i] + j;
-				if (boards.containsKey(index))
-					count++;
-			}
-		}
-		return count;
+		return boards.size();
 	}
 
 	public Pawn findPawn(final String index) {
