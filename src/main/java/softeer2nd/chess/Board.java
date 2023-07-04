@@ -55,6 +55,10 @@ public class Board {
 
 	public void initialize() {
 		boards.clear();
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			add(new Pawn(Pawn.WHITE_COLOR));
+			add(new Pawn(Pawn.BLACK_COLOR));
+		}
 	}
 
 	public String getWhitePawnsResult() {
