@@ -10,6 +10,8 @@ public class Pawn {
     public static final String BLACK_COLOR = "black";
     public static final char WHITE_REPRESENTATION = 'p';
     public static final char BLACK_REPRESENTATION = 'P';
+    public static final String WHITE_START_LOCATION = "2";
+    public static final String BLACK_START_LOCATION = "7";
 
     private final String color;
     private char representation;

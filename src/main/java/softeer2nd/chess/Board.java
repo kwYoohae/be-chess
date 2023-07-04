@@ -20,9 +20,9 @@ public class Board {
 	}
 
 	public void add(final Pawn pawn) {
-		String endAlphabet = "2";
+		String endAlphabet = Pawn.WHITE_START_LOCATION;
 		if (pawn.getColor().equals("black"))
-			endAlphabet = "7";
+			endAlphabet = Pawn.BLACK_START_LOCATION;
 
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			String index = WIDTH_ALPHABET[i] + endAlphabet;
