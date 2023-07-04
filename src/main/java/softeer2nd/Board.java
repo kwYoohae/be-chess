@@ -16,6 +16,10 @@ public class Board {
 	}
 
 	public Pawn findPawn(final int index) {
+		if (index > size() - 1) {
+			throw new IllegalArgumentException("저장된 갯수보다 많은 Pawn은 불러올 수 없습니다");
+		}
+
 		return pawns.get(index);
 	}
 }
