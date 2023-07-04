@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.exception.ExceptionMessage;
+
 class PawnTest {
 
     @Test
@@ -22,6 +24,14 @@ class PawnTest {
         // when, then
         assertThat(pawn.getColor()).isEqualTo(Pawn.WHITE_COLOR);
         assertThat(pawn.getRepresentation()).isEqualTo(Pawn.WHITE_REPRESENTATION);
+    }
+
+    @Test
+    @DisplayName("폰은 검정색과 흰색으로만 이루어져야한다")
+    void pawnIsOnlyBlackAndWhite() {
+        assertThatThrownBy(() -> new Pawn("yellow"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.EXCEPTION_MESSAGE_CHESS_COLOR_MUST_BLACK_OR_WHITE);
     }
 
     void verifyPawn(final String color, final char representation) {
