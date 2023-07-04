@@ -89,17 +89,20 @@ public class Board {
 		}
 	}
 
+	private char getPawnRepresentation(final Pawn pawn) {
+		if (pawn != null) {
+			return pawn.getRepresentation();
+		} else {
+			return '.';
+		}
+	}
+
 	public void print() {
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			StringBuilder line = new StringBuilder();
 			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
 				String index = WIDTH_ALPHABET[j] + i;
-				final Pawn pawn = boards.get(index);
-				if (pawn != null) {
-					line.append(pawn.getRepresentation());
-				} else {
-					line.append('.');
-				}
+				line.append(getPawnRepresentation(boards.get(index)));
 			}
 			System.out.println(line);
 		}
