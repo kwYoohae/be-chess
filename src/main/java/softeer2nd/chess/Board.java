@@ -71,7 +71,7 @@ public class Board {
 		StringBuilder line = new StringBuilder();
 		for (int j = 0; j < BOARD_MAX_INDEX; j++) {
 			String index = WIDTH_ALPHABET[j] + endAlphabet;
-			line.append(getSameColorPawn(color, boards.get(index)));
+			line.append(getPawnRepresentation(color, boards.get(index)));
 		}
 		if (Objects.equals(line.toString(), EMPTY_LINE_REPRESENTATION)) {
 			return "";
@@ -81,7 +81,7 @@ public class Board {
 		return line.toString();
 	}
 
-	private char getSameColorPawn(final String color, final Pawn pawn) {
+	private char getPawnRepresentation(final String color, final Pawn pawn) {
 		if (pawn != null && pawn.getColor().equals(color)) {
 			return pawn.getRepresentation();
 		} else {
