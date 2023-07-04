@@ -2,7 +2,8 @@ package softeer2nd;
 
 public class Pawn {
 
-    private final String WHITE_COLOR = "white";
+    public static final String WHITE_COLOR = "white";
+    public static final String BLACK_COLOR = "black";
 
     private final String color;
 
