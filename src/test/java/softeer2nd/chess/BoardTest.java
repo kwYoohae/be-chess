@@ -22,13 +22,13 @@ public class BoardTest {
 	public void create() throws Exception {
 		final Pawn white = new Pawn(Pawn.WHITE_COLOR);
 		board.add(white);
-		assertThat(board.size()).isEqualTo(1);
-		assertThat(board.findPawn(0)).isEqualTo(white);
+		verifyBoardSize(1);
+		verifyBoardFindPawn(0, white);
 
 		final Pawn black = new Pawn(Pawn.BLACK_COLOR);
 		board.add(black);
-		assertThat(board.size()).isEqualTo(2);
-		assertThat(board.findPawn(1)).isEqualTo(black);
+		verifyBoardSize(2);
+		verifyBoardFindPawn(1, black);
 	}
 
 	@Test
@@ -44,5 +44,11 @@ public class BoardTest {
 			.hasMessage("저장된 갯수보다 많은 Pawn은 불러올 수 없습니다");
 	}
 
+	private void verifyBoardSize(final int size) {
+		assertThat(board.size()).isEqualTo(size);
+	}
 
+	private void verifyBoardFindPawn(final int index, final Pawn pawn) {
+		assertThat(board.findPawn(index)).isEqualTo(pawn);
+	}
 }
