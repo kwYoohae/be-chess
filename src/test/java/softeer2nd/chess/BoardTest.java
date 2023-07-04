@@ -24,12 +24,12 @@ class BoardTest {
 		final Pawn white = new Pawn(Pawn.WHITE_COLOR);
 		board.add(white);
 		verifyBoardSize(1);
-		verifyBoardFindPawn(0, white);
+		verifyBoardFindPawn("A2", white);
 
 		final Pawn black = new Pawn(Pawn.BLACK_COLOR);
 		board.add(black);
 		verifyBoardSize(2);
-		verifyBoardFindPawn(1, black);
+		verifyBoardFindPawn("A7", black);
 	}
 
 	@Test
@@ -40,9 +40,9 @@ class BoardTest {
 		board.add(pawn);
 
 		// when, then
-		assertThatThrownBy(() -> board.findPawn(2))
+		assertThatThrownBy(() -> board.findPawn("B2"))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage(BOARD_HAS_NOT_OVER_THE_SAVE_PAWN);
+			.hasMessage(DO_NOT_FIND_PAWN_IN_BOARD);
 	}
 
 	@Test
@@ -57,7 +57,7 @@ class BoardTest {
 		assertThat(board.size()).isEqualTo(size);
 	}
 
-	private void verifyBoardFindPawn(final int index, final Pawn pawn) {
+	private void verifyBoardFindPawn(final String index, final Pawn pawn) {
 		assertThat(board.findPawn(index)).isEqualTo(pawn);
 	}
 }

@@ -2,37 +2,59 @@ package softeer2nd.chess;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import softeer2nd.chess.pieces.Pawn;
 
 public class Board {
+	public static final int BOARD_MAX_INDEX = 8;
+	public static final int BOARD_MIN_INDEX = 1;
+	public static final String[] WIDTH_ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
-	private final List<Pawn> pawns = new ArrayList<>();
+	private Map<String, Pawn> boards = new HashMap<>();
 
 	public Board() {
 		initialize();
 	}
 
 	public void add(final Pawn pawn) {
-		pawns.add(pawn);
+		String endAlphabet = "2";
+		if (pawn.getColor().equals("black"))
+			endAlphabet = "7";
+
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			String index = WIDTH_ALPHABET[i] + endAlphabet;
+			if (!boards.containsKey(index)) {
+				boards.put(index, pawn);
+				break;
+			}
+		}
 	}
 
 	public int size() {
-		return pawns.size();
+		int count = 0;
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			for (int j = BOARD_MIN_INDEX; j < BOARD_MAX_INDEX; j++) {
+				String index = WIDTH_ALPHABET[i] + j;
+				if (boards.containsKey(index))
+					count++;
+			}
+		}
+		return count;
 	}
 
-	public Pawn findPawn(final int index) {
-		if (index > size() - 1) {
-			throw new IllegalArgumentException(BOARD_HAS_NOT_OVER_THE_SAVE_PAWN);
+	public Pawn findPawn(final String index) {
+		final Pawn pawn = boards.get(index);
+		if (pawn == null) {
+			throw new IllegalArgumentException(DO_NOT_FIND_PAWN_IN_BOARD);
 		}
 
-		return pawns.get(index);
+		return pawn;
 	}
 
 	public void initialize() {
-
+		boards.clear();
 	}
 
 	public String getWhitePawnsResult() {
