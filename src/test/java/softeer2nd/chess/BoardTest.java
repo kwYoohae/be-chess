@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import static org.assertj.core.api.Assertions.*;
+import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +42,7 @@ class BoardTest {
 		// when, then
 		assertThatThrownBy(() -> board.findPawn(2))
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage("저장된 갯수보다 많은 Pawn은 불러올 수 없습니다");
+			.hasMessage(BOARD_HAS_NOT_OVER_THE_SAVE_PAWN);
 	}
 
 	private void verifyBoardSize(final int size) {
