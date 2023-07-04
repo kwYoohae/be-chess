@@ -1,9 +1,11 @@
-package softeer2nd;
+package softeer2nd.chess.pieces;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import softeer2nd.chess.pieces.Pawn;
 
 public class PawnTest {
 
