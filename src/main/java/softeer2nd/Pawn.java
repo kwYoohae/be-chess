@@ -8,7 +8,7 @@ public class Pawn {
     private final String color;
 
     public Pawn() {
-        this.color = WHITE_COLOR;
+        this(WHITE_COLOR);
     }
     public Pawn(final String color) {
         this.color = color;
