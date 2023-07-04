@@ -14,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         while (true) {
-            String command = sc.next();성
+            String command = sc.next();
             if (command.equals(START_COMMAND)) {
                 final Board board = new Board();
                 board.print();
