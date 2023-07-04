@@ -61,23 +61,22 @@ public class Board {
 	public String getPawnsResult(String color) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
-			sb.append(getPawnsLine(color, i));
+			final String line = getPawnsLineSameColor(color, i);
+			if (!Objects.equals(line, EMPTY_LINE_REPRESENTATION)) {
+				sb.append(line);
+				sb.append(NEW_LINE);
+			}
 		}
 		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 	}
 
-	private String getPawnsLine(final String color, final int endAlphabet) {
+	private String getPawnsLineSameColor(final String color, final int endAlphabet) {
 		StringBuilder line = new StringBuilder();
 		for (int j = 0; j < BOARD_MAX_INDEX; j++) {
 			String index = WIDTH_ALPHABET[j] + endAlphabet;
 			line.append(getPawnRepresentation(color, boards.get(index)));
 		}
-		if (Objects.equals(line.toString(), EMPTY_LINE_REPRESENTATION)) {
-			return "";
-		}
-
-		line.append(NEW_LINE);
 		return line.toString();
 	}
 
@@ -100,16 +99,20 @@ public class Board {
 	public String print() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
-			StringBuilder line = new StringBuilder();
-			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
-				String index = WIDTH_ALPHABET[j] + i;
-				line.append(getPawnRepresentation(boards.get(index)));
-			}
+			sb.append(getPawnLine(String.valueOf(i)));
 			if (i != BOARD_MIN_INDEX) {
-				line.append(NEW_LINE);
+				sb.append(NEW_LINE);
 			}
-			sb.append(line);
 		}
 		return sb.toString();
+	}
+
+	private String getPawnLine(String endAlphabet) {
+		StringBuilder line = new StringBuilder();
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			String index = WIDTH_ALPHABET[i] + endAlphabet;
+			line.append(getPawnRepresentation(boards.get(index)));
+		}
+		return line.toString();
 	}
 }
