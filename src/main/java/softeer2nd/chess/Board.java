@@ -11,6 +11,10 @@ public class Board {
 
 	private final List<Pawn> pawns = new ArrayList<>();
 
+	public Board() {
+		initialize();
+	}
+
 	public void add(final Pawn pawn) {
 		pawns.add(pawn);
 	}
@@ -25,5 +29,17 @@ public class Board {
 		}
 
 		return pawns.get(index);
+	}
+
+	public void initialize() {
+
+	}
+
+	public String getWhitePawnsResult() {
+		return "";
+	}
+
+	public String getBlackPawnsResult() {
+		return "";
 	}
 }

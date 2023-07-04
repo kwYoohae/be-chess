@@ -45,6 +45,14 @@ class BoardTest {
 			.hasMessage(BOARD_HAS_NOT_OVER_THE_SAVE_PAWN);
 	}
 
+	@Test
+	void initialize() {
+		Board board = new Board();
+		board.initialize();
+		assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
+		assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
+	}
+
 	private void verifyBoardSize(final int size) {
 		assertThat(board.size()).isEqualTo(size);
 	}
