@@ -1,8 +1,14 @@
 package softeer2nd;
 
-public class Board {
-	public void add(final Pawn white) {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Board {
+
+	private final List<Pawn> pawns = new ArrayList<>();
+
+	public void add(final Pawn pawn) {
+		pawns.add(pawn);
 	}
 
 	public int size() {
