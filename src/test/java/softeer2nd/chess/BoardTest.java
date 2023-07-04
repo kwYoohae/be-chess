@@ -49,8 +49,8 @@ class BoardTest {
 	void initialize() {
 		Board board = new Board();
 		board.initialize();
-		assertThat(board.getWhitePawnsResult()).isEqualTo("pppppppp");
-		assertThat(board.getBlackPawnsResult()).isEqualTo("PPPPPPPP");
+		assertThat(board.getPawnsResult(Pawn.WHITE_COLOR)).isEqualTo("pppppppp");
+		assertThat(board.getPawnsResult(Pawn.BLACK_COLOR)).isEqualTo("PPPPPPPP");
 	}
 
 	private void verifyBoardSize(final int size) {

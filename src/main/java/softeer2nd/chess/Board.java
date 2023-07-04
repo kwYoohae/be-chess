@@ -62,36 +62,14 @@ public class Board {
 		}
 	}
 
-	public String getWhitePawnsResult() {
+	public String getPawnsResult(String color) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MIN_INDEX; i <= BOARD_MAX_INDEX; i++) {
 			StringBuilder line = new StringBuilder();
 			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
 				String index = WIDTH_ALPHABET[j] + i;
 				Pawn pawn = boards.get(index);
-				if (pawn != null && pawn.getColor().equals(Pawn.WHITE_COLOR)) {
-					line.append(pawn.getRepresentation());
-				} else {
-					line.append(".");
-				}
-			}
-			if (!Objects.equals(line.toString(), "........")) {
-				line.append('\n');
-				sb.append(line);
-			}
-		}
-		sb.deleteCharAt(sb.length()-1);
-		return sb.toString();
-	}
-
-	public String getBlackPawnsResult() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = BOARD_MIN_INDEX; i <= BOARD_MAX_INDEX; i++) {
-			StringBuilder line = new StringBuilder();
-			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
-				String index = WIDTH_ALPHABET[j] + i;
-				Pawn pawn = boards.get(index);
-				if (pawn != null && pawn.getColor().equals(Pawn.BLACK_COLOR)) {
+				if (pawn != null && pawn.getColor().equals(color)) {
 					line.append(pawn.getRepresentation());
 				} else {
 					line.append(".");
