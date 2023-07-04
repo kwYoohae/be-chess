@@ -47,12 +47,4 @@ class BoardTest {
 			+ "pppppppp\n"
 			+ "........\n성");
 	}
-
-	private void verifyBoardSize(final int size) {
-		assertThat(board.size()).isEqualTo(size);
-	}
-
-	private void verifyBoardFindPawn(final String index, final Pawn pawn) {
-		assertThat(board.findPawn(index)).isEqualTo(pawn);
-	}
 }
