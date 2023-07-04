@@ -2,19 +2,24 @@ package softeer2nd.chess;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import softeer2nd.chess.Board;
 import softeer2nd.chess.pieces.Pawn;
 
 public class BoardTest {
 
+	private Board board;
+
+	@BeforeEach
+	void beforeEach() {
+		board = new Board();
+	}
+
 	@Test
 	@DisplayName("board에 Pawn이 제대로 추가 되어야 한다")
 	public void create() throws Exception {
-		Board board = new Board();
-
 		final Pawn white = new Pawn(Pawn.WHITE_COLOR);
 		board.add(white);
 		assertThat(board.size()).isEqualTo(1);
@@ -30,8 +35,6 @@ public class BoardTest {
 	@DisplayName("board에서 저장된 것보다 많은 Pawn은 불러올 수 없어야 한다")
 	public void getSizeOverPawn() {
 		// given
-		final Board board = new Board();
-
 		final Pawn pawn = new Pawn(Pawn.WHITE_COLOR);
 		board.add(pawn);
 
@@ -40,4 +43,6 @@ public class BoardTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage("저장된 갯수보다 많은 Pawn은 불러올 수 없습니다");
 	}
+
+
 }
