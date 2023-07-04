@@ -20,13 +20,13 @@ class BoardTest {
 
 	@Test
 	@DisplayName("board에 Pawn이 제대로 추가 되어야 한다")
-	void create() throws Exception {
-		final Pawn white = new Pawn(Pawn.WHITE_COLOR);
+	void create() {
+		final Pawn white = new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
 		board.add(white);
 		verifyBoardSize(1);
 		verifyBoardFindPawn(0, white);
 
-		final Pawn black = new Pawn(Pawn.BLACK_COLOR);
+		final Pawn black = new Pawn(Pawn.BLACK_COLOR, Pawn.BLACK_REPRESENTATION);
 		board.add(black);
 		verifyBoardSize(2);
 		verifyBoardFindPawn(1, black);
@@ -36,7 +36,7 @@ class BoardTest {
 	@DisplayName("board에서 저장된 것보다 많은 Pawn은 불러올 수 없어야 한다")
 	void getSizeOverPawn() {
 		// given
-		final Pawn pawn = new Pawn(Pawn.WHITE_COLOR);
+		final Pawn pawn = new Pawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
 		board.add(pawn);
 
 		// when, then
