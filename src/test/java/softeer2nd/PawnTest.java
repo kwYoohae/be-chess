@@ -20,6 +20,12 @@ public class PawnTest {
         verifyPawn(black);
     }
 
+    @Test
+    public void create_기본생성자() throws Exception {
+        Pawn pawn = new Pawn();
+        assertThat(pawn.getColor()).isEqualTo("white");
+    }
+
     void verifyPawn(final String color) {
         //given
         final Pawn pawn = new Pawn(color);
