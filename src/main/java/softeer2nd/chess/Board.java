@@ -32,7 +32,7 @@ public class Board {
 	}
 
 	private String getStartAlphabet(final Pawn pawn) {
-		if (pawn.getColor().equals("black"))
+		if (pawn.getColor().equals(Pawn.BLACK_COLOR))
 			return Pawn.BLACK_START_LOCATION;
 		return Pawn.WHITE_START_LOCATION;
 	}
