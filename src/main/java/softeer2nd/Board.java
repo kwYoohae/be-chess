@@ -12,10 +12,10 @@ public class Board {
 	}
 
 	public int size() {
-		return 0;
+		return pawns.size();
 	}
 
-	public Pawn findPawn(final int i) {
-		return null;
+	public Pawn findPawn(final int index) {
+		return pawns.get(index);
 	}
 }
