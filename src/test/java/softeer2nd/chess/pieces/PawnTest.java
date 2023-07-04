@@ -16,12 +16,17 @@ class PawnTest {
 
     @Test
     void create_기본생성자() {
-        verifyPawn(Pawn.WHITE_COLOR, Pawn.WHITE_REPRESENTATION);
+        // given
+        Pawn pawn = new Pawn();
+
+        // when, then
+        assertThat(pawn.getColor()).isEqualTo(Pawn.WHITE_COLOR);
+        assertThat(pawn.getRepresentation()).isEqualTo(Pawn.WHITE_REPRESENTATION);
     }
 
     void verifyPawn(final String color, final char representation) {
         //given
-        final Pawn pawn = new Pawn(color, representation);
+        final Pawn pawn = new Pawn(color);
 
         //when, then
         assertThat(pawn.getColor()).isEqualTo(color);
