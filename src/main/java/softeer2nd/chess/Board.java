@@ -63,7 +63,7 @@ public class Board {
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			sb.append(getPawnsLine(color, i));
 		}
-		sb.deleteCharAt(sb.length()-1);
+		sb.deleteCharAt(sb.length() - 1);
 		return sb.toString();
 	}
 
@@ -109,7 +109,7 @@ public class Board {
 				line.append(NEW_LINE);
 			}
 			sb.append(line);
-;		}
+		}
 		return sb.toString();
 	}
 }
