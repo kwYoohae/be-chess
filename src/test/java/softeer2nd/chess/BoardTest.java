@@ -3,10 +3,6 @@ package softeer2nd.chess;
 import static org.assertj.core.api.Assertions.*;
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,22 +57,17 @@ class BoardTest {
 	@DisplayName("Board 초기화 후 테스트시 제대로 출력이 되야한다")
 	void print() {
 		// given
-		OutputStream out = new ByteArrayOutputStream();
-		System.setOut(new PrintStream(out));
 		board.initialize();
 
-		// when
-		board.print();
-
-		// then
-		assertThat(out.toString()).hasToString("........\n"
+		// when, then
+		assertThat(board.print()).hasToString("........\n"
 			+ "PPPPPPPP\n"
 			+ "........\n"
 			+ "........\n"
 			+ "........\n"
 			+ "........\n"
 			+ "pppppppp\n"
-			+ "........\n");
+			+ "........");
 	}
 
 	private void verifyBoardSize(final int size) {

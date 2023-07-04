@@ -93,14 +93,19 @@ public class Board {
 		}
 	}
 
-	public void print() {
+	public String print() {
+		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			StringBuilder line = new StringBuilder();
 			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
 				String index = WIDTH_ALPHABET[j] + i;
 				line.append(getPawnRepresentation(boards.get(index)));
 			}
-			System.out.println(line);
-		}
+			if (i != BOARD_MIN_INDEX) {
+				line.append('\n');
+			}
+			sb.append(line);
+;		}
+		return sb.toString();
 	}
 }
