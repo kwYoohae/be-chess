@@ -20,9 +20,7 @@ public class Board {
 	}
 
 	public void add(final Pawn pawn) {
-		String endAlphabet = Pawn.WHITE_START_LOCATION;
-		if (pawn.getColor().equals("black"))
-			endAlphabet = Pawn.BLACK_START_LOCATION;
+		String endAlphabet = getStartAlphabet(pawn);
 
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			String index = WIDTH_ALPHABET[i] + endAlphabet;
@@ -31,6 +29,12 @@ public class Board {
 				break;
 			}
 		}
+	}
+
+	private String getStartAlphabet(final Pawn pawn) {
+		if (pawn.getColor().equals("black"))
+			return Pawn.BLACK_START_LOCATION;
+		return Pawn.WHITE_START_LOCATION;
 	}
 
 	public int size() {
@@ -57,22 +61,31 @@ public class Board {
 	public String getPawnsResult(String color) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MIN_INDEX; i <= BOARD_MAX_INDEX; i++) {
-			StringBuilder line = new StringBuilder();
-			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
-				String index = WIDTH_ALPHABET[j] + i;
-				Pawn pawn = boards.get(index);
-				if (pawn != null && pawn.getColor().equals(color)) {
-					line.append(pawn.getRepresentation());
-				} else {
-					line.append(".");
-				}
-			}
-			if (!Objects.equals(line.toString(), "........")) {
-				line.append('\n');
-				sb.append(line);
-			}
+			sb.append(getPawnsLine(color, i));
 		}
 		sb.deleteCharAt(sb.length()-1);
 		return sb.toString();
+	}
+
+	private String getPawnsLine(final String color, final int endAlphabet) {
+		StringBuilder line = new StringBuilder();
+		for (int j = 0; j < BOARD_MAX_INDEX; j++) {
+			String index = WIDTH_ALPHABET[j] + endAlphabet;
+			line.append(getSameColorPawn(color, boards.get(index)));
+		}
+		if (Objects.equals(line.toString(), "........")) {
+			return "";
+		}
+
+		line.append('\n');
+		return line.toString();
+	}
+
+	private char getSameColorPawn(final String color, final Pawn pawn) {
+		if (pawn != null && pawn.getColor().equals(color)) {
+			return pawn.getRepresentation();
+		} else {
+			return '.';
+		}
 	}
 }
