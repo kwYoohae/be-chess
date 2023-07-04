@@ -17,6 +17,7 @@ public class Main {
             String command = sc.next();
             if (command.equals(START_COMMAND)) {
                 final Board board = new Board();
+                board.initialize();
                 board.print();
             } else if (command.equals(END_COMMAND)) {
                 break;

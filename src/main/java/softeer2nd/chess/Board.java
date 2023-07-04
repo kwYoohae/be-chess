@@ -15,10 +15,6 @@ public class Board {
 
 	private final Map<String, Pawn> boards = new HashMap<>();
 
-	public Board() {
-		initialize();
-	}
-
 	public void add(final Pawn pawn) {
 		String endAlphabet = getStartAlphabet(pawn);
 
