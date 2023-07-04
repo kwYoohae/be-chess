@@ -9,6 +9,10 @@ import java.util.Objects;
 import softeer2nd.chess.pieces.Pawn;
 
 public class Board {
+
+	private static final char NEW_LINE = '\n';
+	private static final String EMPTY_LINE_REPRESENTATION = "........";
+	private static final char EMPTY_POSITION_REPRESENTATION = '.';
 	public static final int BOARD_MAX_INDEX = 8;
 	public static final int BOARD_MIN_INDEX = 1;
 	public static final String[] WIDTH_ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -69,11 +73,11 @@ public class Board {
 			String index = WIDTH_ALPHABET[j] + endAlphabet;
 			line.append(getSameColorPawn(color, boards.get(index)));
 		}
-		if (Objects.equals(line.toString(), "........")) {
+		if (Objects.equals(line.toString(), EMPTY_LINE_REPRESENTATION)) {
 			return "";
 		}
 
-		line.append('\n');
+		line.append(NEW_LINE);
 		return line.toString();
 	}
 
@@ -81,7 +85,7 @@ public class Board {
 		if (pawn != null && pawn.getColor().equals(color)) {
 			return pawn.getRepresentation();
 		} else {
-			return '.';
+			return EMPTY_POSITION_REPRESENTATION;
 		}
 	}
 
@@ -89,7 +93,7 @@ public class Board {
 		if (pawn != null) {
 			return pawn.getRepresentation();
 		} else {
-			return '.';
+			return EMPTY_POSITION_REPRESENTATION;
 		}
 	}
 
@@ -102,7 +106,7 @@ public class Board {
 				line.append(getPawnRepresentation(boards.get(index)));
 			}
 			if (i != BOARD_MIN_INDEX) {
-				line.append('\n');
+				line.append(NEW_LINE);
 			}
 			sb.append(line);
 ;		}
