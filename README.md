@@ -11,6 +11,6 @@
 ### Step-2
 - [x] Pawn 기본값 생성
   - [x] Pawn 테스트 코드 작성
-- [ ] Board 생성
-  - [ ] Board 말 추가 로직 작성
-  - [ ] Board 테스트 코드 작성
+- [x] Board 생성
+  - [x] Board 말 추가 로직 작성
+  - [x] Board 테스트 코드 작성
