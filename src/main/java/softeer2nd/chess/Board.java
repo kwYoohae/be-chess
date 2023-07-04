@@ -60,7 +60,7 @@ public class Board {
 
 	public String getPawnsResult(String color) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = BOARD_MIN_INDEX; i <= BOARD_MAX_INDEX; i++) {
+		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			sb.append(getPawnsLine(color, i));
 		}
 		sb.deleteCharAt(sb.length()-1);
@@ -86,6 +86,22 @@ public class Board {
 			return pawn.getRepresentation();
 		} else {
 			return '.';
+		}
+	}
+
+	public void print() {
+		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
+			StringBuilder line = new StringBuilder();
+			for (int j = 0; j < BOARD_MAX_INDEX; j++) {
+				String index = WIDTH_ALPHABET[j] + i;
+				final Pawn pawn = boards.get(index);
+				if (pawn != null) {
+					line.append(pawn.getRepresentation());
+				} else {
+					line.append('.');
+				}
+			}
+			System.out.println(line);
 		}
 	}
 }
