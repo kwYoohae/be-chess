@@ -22,4 +22,19 @@ public class BoardTest {
 		assertThat(board.size()).isEqualTo(2);
 		assertThat(board.findPawn(1)).isEqualTo(black);
 	}
+
+	@Test
+	@DisplayName("board에서 저장된 것보다 많은 Pawn은 불러올 수 없어야 한다")
+	public void getSizeOverPawn() {
+		// given
+		final Board board = new Board();
+
+		final Pawn pawn = new Pawn(Pawn.WHITE_COLOR);
+		board.add(pawn);
+
+		// when, then
+		assertThatThrownBy(() -> board.findPawn(2))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage("저장된 갯수보다 많은 Pawn은 불러올 수 없습니다");
+	}
 }
