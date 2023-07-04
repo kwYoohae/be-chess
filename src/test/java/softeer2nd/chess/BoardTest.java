@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.pieces.Pawn;
 
-public class BoardTest {
+class BoardTest {
 
 	private Board board;
 
@@ -19,7 +19,7 @@ public class BoardTest {
 
 	@Test
 	@DisplayName("board에 Pawn이 제대로 추가 되어야 한다")
-	public void create() throws Exception {
+	void create() throws Exception {
 		final Pawn white = new Pawn(Pawn.WHITE_COLOR);
 		board.add(white);
 		verifyBoardSize(1);
@@ -33,7 +33,7 @@ public class BoardTest {
 
 	@Test
 	@DisplayName("board에서 저장된 것보다 많은 Pawn은 불러올 수 없어야 한다")
-	public void getSizeOverPawn() {
+	void getSizeOverPawn() {
 		// given
 		final Pawn pawn = new Pawn(Pawn.WHITE_COLOR);
 		board.add(pawn);
