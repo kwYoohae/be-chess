@@ -1,6 +1,5 @@
 package softeer2nd.chess;
 
-import static softeer2nd.chess.exception.ExceptionMessage.*;
 import static softeer2nd.utils.StringUtils.*;
 
 import java.util.HashMap;
@@ -19,44 +18,59 @@ public class Board {
 
 	private final Map<String, Piece> boards = new HashMap<>();
 
-	public void add(final Piece piece) {
-		String endAlphabet = getStartAlphabet(piece);
+	public void initializePawn(final Piece pawn) {
+		String endAlphabet = getPawnColorStartIndex(pawn);
 
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			String index = WIDTH_ALPHABET[i] + endAlphabet;
-			if (!boards.containsKey(index)) {
-				boards.put(index, piece);
-				break;
-			}
+			boards.put(index, pawn);
 		}
 	}
 
-	private String getStartAlphabet(final Piece piece) {
+	private String getPawnColorStartIndex(final Piece piece) {
 		if (piece.getColor().equals(Piece.BLACK_COLOR))
 			return Piece.BLACK_START_LOCATION;
 		return Piece.WHITE_START_LOCATION;
 	}
 
-	public int size() {
-		return boards.size();
-	}
-
-	public Piece findPawn(final String index) {
-		final Piece piece = boards.get(index);
-		if (piece == null) {
-			throw new IllegalArgumentException(DO_NOT_FIND_PAWN_IN_BOARD);
-		}
-
-		return piece;
-	}
-
 	public void initialize() {
 		boards.clear();
+		initializePawn(Piece.createWhitePawn());
+		initializePawn(Piece.createBlackPawn());
+
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			add(Piece.createWhitePawn());
-			add(Piece.createBlackPawn());
+			initializeOtherPieces(WIDTH_ALPHABET[i]);
 		}
 	}
+
+	private void initializeOtherPieces(String startIndex) {
+		switch (startIndex) {
+			case "A":
+			case "H":
+				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackRook());
+				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteRook());
+				break;
+			case "B":
+			case "G":
+				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackKnight());
+				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteKnight());
+				break;
+			case "C":
+			case "F":
+				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackBishop());
+				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteBishop());
+				break;
+			case "D":
+				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackQueen());
+				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteQueen());
+				break;
+			default:
+				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackKing());
+				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteKing());
+				break;
+		}
+	}
+
 
 	public String getPawnsResult(String color) {
 		StringBuilder sb = new StringBuilder();
