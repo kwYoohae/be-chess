@@ -16,6 +16,11 @@ class PieceTest {
         verifyPawn(Piece.createWhiteBishop(), Piece.createBlackBishop(), Piece.Type.BISHOP);
         verifyPawn(Piece.createWhiteQueen(), Piece.createBlackQueen(), Piece.Type.QUEEN);
         verifyPawn(Piece.createWhiteKing(), Piece.createBlackKing(), Piece.Type.KING);
+
+        Piece blank = Piece.createBlank();
+        assertThat(blank.isBlack()).isFalse();
+        assertThat(blank.isWhite()).isFalse();
+        assertThat(blank.getType()).isEqualTo(Piece.Type.NO_PIECE);
     }
 
     @Test
