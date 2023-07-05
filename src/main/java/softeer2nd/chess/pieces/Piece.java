@@ -4,7 +4,7 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import java.util.Objects;
 
-public class Pawn {
+public class Piece {
 
 	public static final String WHITE_COLOR = "white";
 	public static final String BLACK_COLOR = "black";
@@ -16,11 +16,11 @@ public class Pawn {
 	private final String color;
 	private char representation;
 
-	public Pawn() {
+	public Piece() {
 		this(WHITE_COLOR);
 	}
 
-	public Pawn(final String color) {
+	public Piece(final String color) {
 		this.color = color;
 		setRepresentation(color);
 	}

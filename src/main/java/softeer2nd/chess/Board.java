@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import softeer2nd.chess.pieces.Pawn;
+import softeer2nd.chess.pieces.Piece;
 
 public class Board {
 
@@ -17,44 +17,44 @@ public class Board {
 	public static final int BOARD_MIN_INDEX = 1;
 	public static final String[] WIDTH_ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
-	private final Map<String, Pawn> boards = new HashMap<>();
+	private final Map<String, Piece> boards = new HashMap<>();
 
-	public void add(final Pawn pawn) {
-		String endAlphabet = getStartAlphabet(pawn);
+	public void add(final Piece piece) {
+		String endAlphabet = getStartAlphabet(piece);
 
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			String index = WIDTH_ALPHABET[i] + endAlphabet;
 			if (!boards.containsKey(index)) {
-				boards.put(index, pawn);
+				boards.put(index, piece);
 				break;
 			}
 		}
 	}
 
-	private String getStartAlphabet(final Pawn pawn) {
-		if (pawn.getColor().equals(Pawn.BLACK_COLOR))
-			return Pawn.BLACK_START_LOCATION;
-		return Pawn.WHITE_START_LOCATION;
+	private String getStartAlphabet(final Piece piece) {
+		if (piece.getColor().equals(Piece.BLACK_COLOR))
+			return Piece.BLACK_START_LOCATION;
+		return Piece.WHITE_START_LOCATION;
 	}
 
 	public int size() {
 		return boards.size();
 	}
 
-	public Pawn findPawn(final String index) {
-		final Pawn pawn = boards.get(index);
-		if (pawn == null) {
+	public Piece findPawn(final String index) {
+		final Piece piece = boards.get(index);
+		if (piece == null) {
 			throw new IllegalArgumentException(DO_NOT_FIND_PAWN_IN_BOARD);
 		}
 
-		return pawn;
+		return piece;
 	}
 
 	public void initialize() {
 		boards.clear();
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			add(new Pawn(Pawn.WHITE_COLOR));
-			add(new Pawn(Pawn.BLACK_COLOR));
+			add(new Piece(Piece.WHITE_COLOR));
+			add(new Piece(Piece.BLACK_COLOR));
 		}
 	}
 
@@ -79,17 +79,17 @@ public class Board {
 		return line.toString();
 	}
 
-	private char getPawnRepresentation(final String color, final Pawn pawn) {
-		if (pawn != null && pawn.getColor().equals(color)) {
-			return pawn.getRepresentation();
+	private char getPawnRepresentation(final String color, final Piece piece) {
+		if (piece != null && piece.getColor().equals(color)) {
+			return piece.getRepresentation();
 		} else {
 			return EMPTY_POSITION_REPRESENTATION;
 		}
 	}
 
-	private char getPawnRepresentation(final Pawn pawn) {
-		if (pawn != null) {
-			return pawn.getRepresentation();
+	private char getPawnRepresentation(final Piece piece) {
+		if (piece != null) {
+			return piece.getRepresentation();
 		} else {
 			return EMPTY_POSITION_REPRESENTATION;
 		}
