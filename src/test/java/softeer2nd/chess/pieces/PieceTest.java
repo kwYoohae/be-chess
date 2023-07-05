@@ -5,6 +5,8 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.exception.ExceptionMessage;
+
 class PieceTest {
 
     @Test
@@ -39,6 +41,17 @@ class PieceTest {
         verifyColor(Piece.createWhiteQueen(), Piece.Color.WHITE);
         verifyColor(Piece.createWhiteBishop(), Piece.Color.WHITE);
         verifyColor(Piece.createWhiteRook(), Piece.Color.WHITE);
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 기물을 생성할 경우 에러가 발생한다")
+    void notExistsPiece() {
+        assertThatThrownBy(() -> Piece.createPiece(Piece.Color.NOCOLOR, Piece.Type.PAWN))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.NOT_EXIST_PIECE);
+        assertThatThrownBy(() -> Piece.createPiece(Piece.Color.WHITE, Piece.Type.NO_PIECE))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.NOT_EXIST_PIECE);
     }
 
     void verifyColor(Piece piece, final Piece.Color color) {
