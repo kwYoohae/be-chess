@@ -13,6 +13,6 @@ class StringUtilsTest {
 		String input = "........";
 		String answer = "........" + StringUtils.NEWLINE;
 		// when, then
-		Assertions.assertThat(StringUtils.appendLine(input)).isEqualTo(answer);
+		Assertions.assertThat(StringUtils.appendNewLine(input)).isEqualTo(answer);
 	}
 }
