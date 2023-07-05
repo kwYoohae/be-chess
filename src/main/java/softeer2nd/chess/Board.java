@@ -10,7 +10,7 @@ import softeer2nd.chess.pieces.Piece;
 
 public class Board {
 
-	private static final String EMPTY_POSITION_REPRESENTATION = ".";
+	private static final char EMPTY_POSITION_REPRESENTATION = '.';
 	public static final int BOARD_MAX_INDEX = 8;
 	public static final int BOARD_MIN_INDEX = 1;
 	public static final String[] WIDTH_ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H"};
@@ -75,7 +75,7 @@ public class Board {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			final String line = getPawnsLineSameColor(color, i);
-			if (line.contains(Piece.WHITE_PAWN_REPRESENTATION) || line.contains(Piece.BLACK_PAWN_REPRESENTATION)) {
+			if (line.contains(String.valueOf(Piece.Type.PAWN.getWhiteRepresentation())) || line.contains(String.valueOf(Piece.Type.PAWN.getBlackRepresentation()))) {
 				sb.append(appendNewLine(line));
 			}
 		}
@@ -92,14 +92,14 @@ public class Board {
 		return line.toString();
 	}
 
-	private String getPawnRepresentation(final Piece.Color color, final Piece piece) {
+	private char getPawnRepresentation(final Piece.Color color, final Piece piece) {
 		if (piece != null && color == piece.getColor()) {
 			return piece.getRepresentation();
 		}
 		return EMPTY_POSITION_REPRESENTATION;
 	}
 
-	private String getPawnRepresentation(final Piece piece) {
+	private char getPawnRepresentation(final Piece piece) {
 		if (piece != null) {
 			return piece.getRepresentation();
 		}
