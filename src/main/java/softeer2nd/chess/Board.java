@@ -115,4 +115,12 @@ public class Board {
 		}
 		return line.toString();
 	}
+
+	public int pieceCount() {
+		return 0;
+	}
+
+	public String showBoard() {
+		return null;
+	}
 }
