@@ -5,8 +5,6 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 import java.util.Objects;
 
 public class Piece {
-	public static final String WHITE_START_LOCATION = "2";
-	public static final String BLACK_START_LOCATION = "7";
 
 	private final Color color;
 	private final Type type;
