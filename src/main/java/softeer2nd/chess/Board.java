@@ -63,7 +63,7 @@ public class Board {
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			final String line = getPawnsLineSameColor(color, i);
 			if (!Objects.equals(line, EMPTY_LINE_REPRESENTATION)) {
-				sb.append(appendLine(line));
+				sb.append(appendNewLine(line));
 			}
 		}
 		sb.deleteCharAt(sb.length() - 1);
@@ -101,7 +101,7 @@ public class Board {
 			if (i == BOARD_MIN_INDEX) {
 				sb.append(getPawnLine(String.valueOf(i)));
 			} else {
-				sb.append(appendLine(getPawnLine(String.valueOf(i))));
+				sb.append(appendNewLine(getPawnLine(String.valueOf(i))));
 			}
 		}
 		return sb.toString();
