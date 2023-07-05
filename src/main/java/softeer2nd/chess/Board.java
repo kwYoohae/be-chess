@@ -1,10 +1,10 @@
 package softeer2nd.chess;
 
+import static softeer2nd.chess.pieces.Piece.*;
 import static softeer2nd.utils.StringUtils.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 import softeer2nd.chess.pieces.Piece;
 
@@ -12,70 +12,61 @@ public class Board {
 
 	private static final char EMPTY_POSITION_REPRESENTATION = '.';
 	public static final int BOARD_MAX_INDEX = 8;
-	public static final int BOARD_MIN_INDEX = 1;
-	public static final String[] WIDTH_ALPHABET = {"A", "B", "C", "D", "E", "F", "G", "H"};
 
-	private final Map<String, Piece> boards = new HashMap<>();
-
-	public void initializePawn(final Piece pawn) {
-		String endAlphabet = getPawnColorStartIndex(pawn);
-
-		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			String index = WIDTH_ALPHABET[i] + endAlphabet;
-			boards.put(index, pawn);
-		}
-	}
-
-	private String getPawnColorStartIndex(final Piece piece) {
-		if (piece.isBlack())
-			return Piece.BLACK_START_LOCATION;
-		return Piece.WHITE_START_LOCATION;
-	}
+	private final List<List<Piece>> boards = new ArrayList<>();
 
 	public void initialize() {
 		boards.clear();
-		initializePawn(Piece.createWhitePawn());
-		initializePawn(Piece.createBlackPawn());
+		boards.add(initializeOtherPieces(Color.WHITE));
+		boards.add(initializePawn(Color.WHITE));
+		boards.add(initializeBlank());
+		boards.add(initializeBlank());
+		boards.add(initializeBlank());
+		boards.add(initializeBlank());
+		boards.add(initializePawn(Color.BLACK));
+		boards.add(initializeOtherPieces(Color.BLACK));
+	}
 
+	public List<Piece> initializePawn(Color color) {
+		List<Piece> pawns = new ArrayList<>();
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			initializeOtherPieces(WIDTH_ALPHABET[i]);
+			if (color == Color.BLACK) {
+				pawns.add(Piece.createBlackPawn());
+			} else if (color == Color.WHITE) {
+				pawns.add(Piece.createWhitePawn());
+			}
 		}
+		return pawns;
 	}
 
-	private void initializeOtherPieces(String startIndex) {
-		switch (startIndex) {
-			case "A":
-			case "H":
-				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackRook());
-				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteRook());
-				break;
-			case "B":
-			case "G":
-				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackKnight());
-				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteKnight());
-				break;
-			case "C":
-			case "F":
-				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackBishop());
-				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteBishop());
-				break;
-			case "D":
-				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackQueen());
-				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteQueen());
-				break;
-			default:
-				boards.put(startIndex + BOARD_MAX_INDEX, Piece.createBlackKing());
-				boards.put(startIndex + BOARD_MIN_INDEX, Piece.createWhiteKing());
-				break;
+	public List<Piece> initializeBlank() {
+		List<Piece> blanks = new ArrayList<>();
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			blanks.add(Piece.createBlank());
 		}
+
+		return blanks;
 	}
 
+	private List<Piece> initializeOtherPieces(Color color) {
+		List<Piece> pieces = new ArrayList<>();
+		pieces.add(Piece.createPiece(color, Type.ROOK));
+		pieces.add(Piece.createPiece(color, Type.KNIGHT));
+		pieces.add(Piece.createPiece(color, Type.BISHOP));
+		pieces.add(Piece.createPiece(color, Type.QUEEN));
+		pieces.add(Piece.createPiece(color, Type.KING));
+		pieces.add(Piece.createPiece(color, Type.BISHOP));
+		pieces.add(Piece.createPiece(color, Type.KNIGHT));
+		pieces.add(Piece.createPiece(color, Type.ROOK));
+		return pieces;
+	}
 
-	public String getPawnsResult(Piece.Color color) {
+	public String getPawnsResult(Color color) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
+		for (int i = BOARD_MAX_INDEX - 1; i >= 0; i--) {
 			final String line = getPawnsLineSameColor(color, i);
-			if (line.contains(String.valueOf(Piece.Type.PAWN.getWhiteRepresentation())) || line.contains(String.valueOf(Piece.Type.PAWN.getBlackRepresentation()))) {
+			if (line.contains(String.valueOf(Type.PAWN.getWhiteRepresentation())) || line.contains(
+				String.valueOf(Type.PAWN.getBlackRepresentation()))) {
 				sb.append(appendNewLine(line));
 			}
 		}
@@ -83,16 +74,16 @@ public class Board {
 		return sb.toString();
 	}
 
-	private String getPawnsLineSameColor(final Piece.Color color, final int endAlphabet) {
+	private String getPawnsLineSameColor(final Color color, final int rowIndex) {
 		StringBuilder line = new StringBuilder();
+		final List<Piece> rowPieces = boards.get(rowIndex);
 		for (int j = 0; j < BOARD_MAX_INDEX; j++) {
-			String index = WIDTH_ALPHABET[j] + endAlphabet;
-			line.append(getPawnRepresentation(color, boards.get(index)));
+			line.append(getPawnRepresentation(color, rowPieces.get(j)));
 		}
 		return line.toString();
 	}
 
-	private char getPawnRepresentation(final Piece.Color color, final Piece piece) {
+	private char getPawnRepresentation(final Color color, final Piece piece) {
 		if (piece != null && color == piece.getColor()) {
 			return piece.getRepresentation();
 		}
@@ -108,24 +99,32 @@ public class Board {
 
 	public String showBoard() {
 		StringBuilder sb = new StringBuilder();
-		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
-			sb.append(appendNewLine(getPawnLine(String.valueOf(i))));
+		for (int i = BOARD_MAX_INDEX - 1; i >= 0; i--) {
+			sb.append(appendNewLine(getPawnLine(i)));
 		}
 		return sb.toString();
 	}
 
-	private String getPawnLine(String endAlphabet) {
+	private String getPawnLine(final int rowIndex) {
 		StringBuilder line = new StringBuilder();
+		final List<Piece> rowPieces = boards.get(rowIndex);
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			String index = WIDTH_ALPHABET[i] + endAlphabet;
-			line.append(getPawnRepresentation(boards.get(index)));
+			line.append(getPawnRepresentation(rowPieces.get(i)));
 		}
 		return line.toString();
 	}
 
-	public long pieceCount() {
-		return boards.values().stream()
-			.filter((Objects::nonNull))
+	public int pieceCount() {
+		int sum = 0;
+		for (List<Piece> row : boards) {
+			sum += piecesRowCount(row);
+		}
+		return sum;
+	}
+
+	private long piecesRowCount(List<Piece> pieces) {
+		return pieces.stream().
+			filter(piece -> piece.getType() != Type.NO_PIECE)
 			.count();
 	}
 }
