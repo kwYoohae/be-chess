@@ -53,8 +53,8 @@ public class Board {
 	public void initialize() {
 		boards.clear();
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			add(new Piece(Piece.WHITE_COLOR));
-			add(new Piece(Piece.BLACK_COLOR));
+			add(Piece.createWhitePawn());
+			add(Piece.createBlackPawn());
 		}
 	}
 

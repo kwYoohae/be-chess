@@ -21,23 +21,20 @@ class BoardTest {
 	@Test
 	@DisplayName("board에 Pawn이 제대로 추가 되어야 한다")
 	void create() {
-		final Piece white = new Piece(Piece.WHITE_COLOR);
-		board.add(white);
+		board.add(Piece.createWhitePawn());
 		verifyBoardSize(1);
-		verifyBoardFindPawn("A2", white);
+		verifyBoardFindPawn("A2", Piece.createWhitePawn());
 
-		final Piece black = new Piece(Piece.BLACK_COLOR);
-		board.add(black);
+		board.add(Piece.createBlackPawn());
 		verifyBoardSize(2);
-		verifyBoardFindPawn("A7", black);
+		verifyBoardFindPawn("A7", Piece.createBlackPawn());
 	}
 
 	@Test
 	@DisplayName("board에서 저장된 것보다 많은 Pawn은 불러올 수 없어야 한다")
 	void getSizeOverPawn() {
 		// given
-		final Piece piece = new Piece(Piece.WHITE_COLOR);
-		board.add(piece);
+		board.add(Piece.createWhitePawn());
 
 		// when, then
 		assertThatThrownBy(() -> board.findPawn("B2"))

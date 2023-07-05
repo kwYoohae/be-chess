@@ -1,7 +1,5 @@
 package softeer2nd.chess.pieces;
 
-import static softeer2nd.chess.exception.ExceptionMessage.*;
-
 import java.util.Objects;
 
 public class Piece {
@@ -14,15 +12,19 @@ public class Piece {
 	public static final String BLACK_START_LOCATION = "7";
 
 	private final String color;
-	private char representation;
+	private final char representation;
 
-	public Piece() {
-		this(WHITE_COLOR);
+	private Piece(String color, char representation) {
+		this.color = color;
+		this.representation = representation;
 	}
 
-	public Piece(final String color) {
-		this.color = color;
-		setRepresentation(color);
+	public static Piece createWhitePawn() {
+		return new Piece(WHITE_COLOR, WHITE_REPRESENTATION);
+	}
+
+	public static Piece createBlackPawn() {
+		return new Piece(BLACK_COLOR, BLACK_REPRESENTATION);
 	}
 
 	public String getColor() {
@@ -33,16 +35,18 @@ public class Piece {
 		return representation;
 	}
 
-	private void setRepresentation(final String color) {
-		if (Objects.equals(color, WHITE_COLOR)) {
-			this.representation = WHITE_REPRESENTATION;
-			return;
-		}
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		final Piece piece = (Piece)o;
+		return representation == piece.representation && Objects.equals(color, piece.color);
+	}
 
-		if (Objects.equals(color, BLACK_COLOR)) {
-			this.representation = BLACK_REPRESENTATION;
-			return;
-		}
-		throw new IllegalArgumentException(EXCEPTION_MESSAGE_CHESS_COLOR_MUST_BLACK_OR_WHITE);
+	@Override
+	public int hashCode() {
+		return Objects.hash(color, representation);
 	}
 }
