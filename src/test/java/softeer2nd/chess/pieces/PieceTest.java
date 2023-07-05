@@ -29,7 +29,7 @@ class PieceTest {
         verifyPawn(Piece.createBlackKing() ,Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);
     }
 
-    void verifyPawn(final Piece piece, final String color, final char representation) {
+    void verifyPawn(final Piece piece, final String color, final String representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getRepresentation()).isEqualTo(representation);
     }

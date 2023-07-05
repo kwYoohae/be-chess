@@ -6,25 +6,25 @@ public class Piece {
 
 	public static final String WHITE_COLOR = "white";
 	public static final String BLACK_COLOR = "black";
-	public static final char WHITE_PAWN_REPRESENTATION = 'p';
-	public static final char WHITE_KNIGHT_REPRESENTATION = 'n';
-	public static final char WHITE_ROOK_REPRESENTATION = 'r';
-	public static final char WHITE_BISHOP_REPRESENTATION = 'b';
-	public static final char WHITE_QUEEN_REPRESENTATION = 'q';
-	public static final char WHITE_KING_REPRESENTATION = 'k';
-	public static final char BLACK_PAWN_REPRESENTATION = 'P';
-	public static final char BLACK_KNIGHT_REPRESENTATION = 'N';
-	public static final char BLACK_ROOK_REPRESENTATION = 'R';
-	public static final char BLACK_BISHOP_REPRESENTATION = 'B';
-	public static final char BLACK_QUEEN_REPRESENTATION = 'Q';
-	public static final char BLACK_KING_REPRESENTATION = 'K';
+	public static final String WHITE_PAWN_REPRESENTATION = "p";
+	public static final String WHITE_KNIGHT_REPRESENTATION = "n";
+	public static final String WHITE_ROOK_REPRESENTATION = "r";
+	public static final String WHITE_BISHOP_REPRESENTATION = "b";
+	public static final String WHITE_QUEEN_REPRESENTATION = "q";
+	public static final String WHITE_KING_REPRESENTATION = "k";
+	public static final String BLACK_PAWN_REPRESENTATION = "P";
+	public static final String BLACK_KNIGHT_REPRESENTATION = "N";
+	public static final String BLACK_ROOK_REPRESENTATION = "R";
+	public static final String BLACK_BISHOP_REPRESENTATION = "B";
+	public static final String BLACK_QUEEN_REPRESENTATION = "Q";
+	public static final String BLACK_KING_REPRESENTATION = "K";
 	public static final String WHITE_START_LOCATION = "2";
 	public static final String BLACK_START_LOCATION = "7";
 
 	private final String color;
-	private final char representation;
+	private final String representation;
 
-	private Piece(String color, char representation) {
+	private Piece(String color, String representation) {
 		this.color = color;
 		this.representation = representation;
 	}
@@ -81,7 +81,7 @@ public class Piece {
 		return color;
 	}
 
-	public char getRepresentation() {
+	public String getRepresentation() {
 		return representation;
 	}
 
@@ -92,7 +92,8 @@ public class Piece {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		final Piece piece = (Piece)o;
-		return representation == piece.representation && Objects.equals(color, piece.color);
+		return Objects.equals(color, piece.color) && Objects.equals(representation,
+			piece.representation);
 	}
 
 	@Override
