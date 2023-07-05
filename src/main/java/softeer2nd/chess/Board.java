@@ -1,6 +1,7 @@
 package softeer2nd.chess;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
+import static softeer2nd.utils.StringUtils.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,6 @@ import softeer2nd.chess.pieces.Pawn;
 
 public class Board {
 
-	private static final char NEW_LINE = '\n';
 	private static final String EMPTY_LINE_REPRESENTATION = "........";
 	private static final char EMPTY_POSITION_REPRESENTATION = '.';
 	public static final int BOARD_MAX_INDEX = 8;
@@ -63,8 +63,7 @@ public class Board {
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			final String line = getPawnsLineSameColor(color, i);
 			if (!Objects.equals(line, EMPTY_LINE_REPRESENTATION)) {
-				sb.append(line);
-				sb.append(NEW_LINE);
+				sb.append(appendLine(line));
 			}
 		}
 		sb.deleteCharAt(sb.length() - 1);
@@ -99,9 +98,10 @@ public class Board {
 	public String print() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
-			sb.append(getPawnLine(String.valueOf(i)));
-			if (i != BOARD_MIN_INDEX) {
-				sb.append(NEW_LINE);
+			if (i == BOARD_MIN_INDEX) {
+				sb.append(getPawnLine(String.valueOf(i)));
+			} else {
+				sb.append(appendLine(getPawnLine(String.valueOf(i))));
 			}
 		}
 		return sb.toString();
