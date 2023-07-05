@@ -20,7 +20,7 @@ public class Main {
 				System.out.println(START_GAME_MESSAGE);
 				final Board board = new Board();
 				board.initialize();
-				System.out.println(board.print());
+				System.out.println(board.showBoard());
 			} else if (input.equals(END_COMMAND)) {
 				System.out.println(END_GAME_MESSAGE);
 				break;

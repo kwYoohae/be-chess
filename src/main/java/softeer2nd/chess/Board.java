@@ -95,14 +95,10 @@ public class Board {
 		}
 	}
 
-	public String print() {
+	public String showBoard() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
-			if (i == BOARD_MIN_INDEX) {
-				sb.append(getPawnLine(String.valueOf(i)));
-			} else {
-				sb.append(appendNewLine(getPawnLine(String.valueOf(i))));
-			}
+			sb.append(appendNewLine(getPawnLine(String.valueOf(i))));
 		}
 		return sb.toString();
 	}
@@ -116,11 +112,9 @@ public class Board {
 		return line.toString();
 	}
 
-	public int pieceCount() {
-		return 0;
-	}
-
-	public String showBoard() {
-		return null;
+	public long pieceCount() {
+		return boards.values().stream()
+			.filter((Objects::nonNull))
+			.count();
 	}
 }

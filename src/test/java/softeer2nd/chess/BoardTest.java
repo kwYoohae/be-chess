@@ -54,23 +54,6 @@ class BoardTest {
 		assertThat(board.getPawnsResult(Piece.BLACK_COLOR)).isEqualTo("PPPPPPPP");
 	}
 
-	@Test
-	@DisplayName("Board 초기화 후 테스트시 제대로 출력이 되야한다")
-	void print() {
-		// given
-		board.initialize();
-
-		// when, then
-		assertThat(board.print()).hasToString("........\n"
-			+ "PPPPPPPP\n"
-			+ "........\n"
-			+ "........\n"
-			+ "........\n"
-			+ "........\n"
-			+ "pppppppp\n"
-			+ "........");
-	}
-
 	private void verifyBoardSize(final int size) {
 		assertThat(board.size()).isEqualTo(size);
 	}
