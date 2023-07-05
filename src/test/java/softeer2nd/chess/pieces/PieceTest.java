@@ -29,6 +29,36 @@ class PieceTest {
         verifyPawn(Piece.createBlackKing() ,Piece.BLACK_COLOR, Piece.BLACK_KING_REPRESENTATION);
     }
 
+    @Test
+    @DisplayName("기물들의 색은 생성한 그대로여야 한다")
+    void checkColor() {
+        verifyColor(Piece.createBlackKing(), Piece.BLACK_COLOR);
+        verifyColor(Piece.createBlackPawn(), Piece.BLACK_COLOR);
+        verifyColor(Piece.createBlackKnight(), Piece.BLACK_COLOR);
+        verifyColor(Piece.createBlackQueen(), Piece.BLACK_COLOR);
+        verifyColor(Piece.createBlackBishop(), Piece.BLACK_COLOR);
+        verifyColor(Piece.createBlackRook(), Piece.BLACK_COLOR);
+
+        verifyColor(Piece.createWhiteKing(), Piece.WHITE_COLOR);
+        verifyColor(Piece.createWhitePawn(), Piece.WHITE_COLOR);
+        verifyColor(Piece.createWhiteKnight(), Piece.WHITE_COLOR);
+        verifyColor(Piece.createWhiteQueen(), Piece.WHITE_COLOR);
+        verifyColor(Piece.createWhiteBishop(), Piece.WHITE_COLOR);
+        verifyColor(Piece.createWhiteRook(), Piece.WHITE_COLOR);
+    }
+
+    void verifyColor(Piece piece, final String color) {
+        if (color.equals(Piece.WHITE_COLOR)) {
+            assertThat(piece.isWhite()).isTrue();
+            assertThat(piece.isBlack()).isFalse();
+        }
+
+        if (color.equals(Piece.BLACK_COLOR)) {
+            assertThat(piece.isBlack()).isTrue();
+            assertThat(piece.isWhite()).isFalse();
+        }
+    }
+
     void verifyPawn(final Piece piece, final String color, final String representation) {
         assertThat(piece.getColor()).isEqualTo(color);
         assertThat(piece.getRepresentation()).isEqualTo(representation);
