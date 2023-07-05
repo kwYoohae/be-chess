@@ -1,5 +1,7 @@
 package softeer2nd.chess.pieces;
 
+import static softeer2nd.chess.exception.ExceptionMessage.*;
+
 import java.util.Objects;
 
 public class Piece {
@@ -63,15 +65,22 @@ public class Piece {
 	}
 
 	public static Piece createBlank() {
-		return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+		return createPiece(Color.NOCOLOR, Type.NO_PIECE);
 	}
 
 	private static Piece createBlack(Type type) {
-		return new Piece(Color.BLACK, type);
+		return createPiece(Color.BLACK, type);
 	}
 
 	private static Piece createWhite(Type type) {
-		return new Piece(Color.WHITE, type);
+		return createPiece(Color.WHITE, type);
+	}
+
+	public static Piece createPiece(Color color, Type type) {
+		if ((color == Color.NOCOLOR && type != Type.NO_PIECE) || (color != Color.NOCOLOR && type == Type.NO_PIECE)) {
+			throw new IllegalArgumentException(NOT_EXIST_PIECE);
+		}
+		return new Piece(color, type);
 	}
 
 	public Color getColor() {
