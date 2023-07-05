@@ -37,7 +37,7 @@ class BoardTest {
 	void initialize() {
 		board.initialize();
 
-		assertThat(board.getPawnsResult(Piece.WHITE_COLOR)).isEqualTo("pppppppp");
-		assertThat(board.getPawnsResult(Piece.BLACK_COLOR)).isEqualTo("PPPPPPPP");
+		assertThat(board.getPawnsResult(Piece.Color.WHITE)).isEqualTo("pppppppp");
+		assertThat(board.getPawnsResult(Piece.Color.BLACK)).isEqualTo("PPPPPPPP");
 	}
 }

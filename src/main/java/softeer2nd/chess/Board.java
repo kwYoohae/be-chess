@@ -27,7 +27,7 @@ public class Board {
 	}
 
 	private String getPawnColorStartIndex(final Piece piece) {
-		if (piece.getColor().equals(Piece.BLACK_COLOR))
+		if (piece.getColor() == Piece.Color.BLACK)
 			return Piece.BLACK_START_LOCATION;
 		return Piece.WHITE_START_LOCATION;
 	}
@@ -71,7 +71,7 @@ public class Board {
 	}
 
 
-	public String getPawnsResult(String color) {
+	public String getPawnsResult(Piece.Color color) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX; i >= BOARD_MIN_INDEX; i--) {
 			final String line = getPawnsLineSameColor(color, i);
@@ -83,7 +83,7 @@ public class Board {
 		return sb.toString();
 	}
 
-	private String getPawnsLineSameColor(final String color, final int endAlphabet) {
+	private String getPawnsLineSameColor(final Piece.Color color, final int endAlphabet) {
 		StringBuilder line = new StringBuilder();
 		for (int j = 0; j < BOARD_MAX_INDEX; j++) {
 			String index = WIDTH_ALPHABET[j] + endAlphabet;
@@ -92,7 +92,7 @@ public class Board {
 		return line.toString();
 	}
 
-	private String getPawnRepresentation(final String color, final Piece piece) {
+	private String getPawnRepresentation(final Piece.Color color, final Piece piece) {
 		if (piece != null && piece.getColor().equals(color)) {
 			return piece.getRepresentation();
 		} else {
