@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import softeer2nd.chess.pieces.Pawn;
+import softeer2nd.chess.pieces.Piece;
 
 class BoardTest {
 
@@ -21,12 +21,12 @@ class BoardTest {
 	@Test
 	@DisplayName("board에 Pawn이 제대로 추가 되어야 한다")
 	void create() {
-		final Pawn white = new Pawn(Pawn.WHITE_COLOR);
+		final Piece white = new Piece(Piece.WHITE_COLOR);
 		board.add(white);
 		verifyBoardSize(1);
 		verifyBoardFindPawn("A2", white);
 
-		final Pawn black = new Pawn(Pawn.BLACK_COLOR);
+		final Piece black = new Piece(Piece.BLACK_COLOR);
 		board.add(black);
 		verifyBoardSize(2);
 		verifyBoardFindPawn("A7", black);
@@ -36,8 +36,8 @@ class BoardTest {
 	@DisplayName("board에서 저장된 것보다 많은 Pawn은 불러올 수 없어야 한다")
 	void getSizeOverPawn() {
 		// given
-		final Pawn pawn = new Pawn(Pawn.WHITE_COLOR);
-		board.add(pawn);
+		final Piece piece = new Piece(Piece.WHITE_COLOR);
+		board.add(piece);
 
 		// when, then
 		assertThatThrownBy(() -> board.findPawn("B2"))
@@ -49,8 +49,8 @@ class BoardTest {
 	void initialize() {
 		board.initialize();
 
-		assertThat(board.getPawnsResult(Pawn.WHITE_COLOR)).isEqualTo("pppppppp");
-		assertThat(board.getPawnsResult(Pawn.BLACK_COLOR)).isEqualTo("PPPPPPPP");
+		assertThat(board.getPawnsResult(Piece.WHITE_COLOR)).isEqualTo("pppppppp");
+		assertThat(board.getPawnsResult(Piece.BLACK_COLOR)).isEqualTo("PPPPPPPP");
 	}
 
 	@Test
@@ -74,7 +74,7 @@ class BoardTest {
 		assertThat(board.size()).isEqualTo(size);
 	}
 
-	private void verifyBoardFindPawn(final String index, final Pawn pawn) {
-		assertThat(board.findPawn(index)).isEqualTo(pawn);
+	private void verifyBoardFindPawn(final String index, final Piece piece) {
+		assertThat(board.findPawn(index)).isEqualTo(piece);
 	}
 }
