@@ -27,7 +27,7 @@ public class Board {
 	}
 
 	private String getPawnColorStartIndex(final Piece piece) {
-		if (piece.getColor() == Piece.Color.BLACK)
+		if (piece.isBlack())
 			return Piece.BLACK_START_LOCATION;
 		return Piece.WHITE_START_LOCATION;
 	}
@@ -93,19 +93,17 @@ public class Board {
 	}
 
 	private String getPawnRepresentation(final Piece.Color color, final Piece piece) {
-		if (piece != null && piece.getColor().equals(color)) {
+		if (piece != null && color == piece.getColor()) {
 			return piece.getRepresentation();
-		} else {
-			return EMPTY_POSITION_REPRESENTATION;
 		}
+		return EMPTY_POSITION_REPRESENTATION;
 	}
 
 	private String getPawnRepresentation(final Piece piece) {
 		if (piece != null) {
 			return piece.getRepresentation();
-		} else {
-			return EMPTY_POSITION_REPRESENTATION;
 		}
+		return EMPTY_POSITION_REPRESENTATION;
 	}
 
 	public String showBoard() {
