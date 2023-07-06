@@ -62,7 +62,7 @@ public class Position {
 		return charX - ROW[0].charAt(0);
 	}
 	private int convertToSecondPosition(int numberY) {
-		return Integer.parseInt(COLUMN[7]) - numberY;
+		return numberY - 1;
 	}
 
 }

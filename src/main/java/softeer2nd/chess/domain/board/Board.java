@@ -63,6 +63,6 @@ public class Board {
 		final int x = position.getX();
 		final int y = position.getY();
 
-		return null;
+		return boards.get(y).getPiece(x);
 	}
 }

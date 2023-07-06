@@ -110,8 +110,8 @@ class BoardTest {
 
 		// then
 		assertThat(startX).isEqualTo(0);
-		assertThat(startY).isEqualTo(7);
+		assertThat(startY).isEqualTo(0);
 		assertThat(endX).isEqualTo(7);
-		assertThat(endY).isEqualTo(0);
+		assertThat(endY).isEqualTo(7);
 	}
 }

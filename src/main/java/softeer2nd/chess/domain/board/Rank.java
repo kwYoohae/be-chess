@@ -95,4 +95,8 @@ public class Rank {
 			.filter(piece -> piece.getType() == type && piece.getColor() == color)
 			.count();
 	}
+
+	public Piece getPiece(int index) {
+		return row.get(index);
+	}
 }
