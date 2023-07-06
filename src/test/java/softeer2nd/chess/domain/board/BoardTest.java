@@ -94,4 +94,24 @@ class BoardTest {
 		assertThat(whiteRook1).isEqualTo(Piece.createWhiteRook());
 		assertThat(whiteRook2).isEqualTo(Piece.createWhiteRook());
 	}
+
+	@Test
+	@DisplayName("좌표는 제대로 boards를 위한 좌표로 변환되어야 한다")
+	void convertPosition() {
+		// given
+		final Position startPosition = Position.from("a1");
+		final Position endPosition = Position.from("h8");
+
+		// when
+		final int startX = startPosition.getX();
+		final int startY = startPosition.getY();
+		final int endX = endPosition.getX();
+		final int endY = endPosition.getY();
+
+		// then
+		assertThat(startX).isEqualTo(0);
+		assertThat(startY).isEqualTo(7);
+		assertThat(endX).isEqualTo(7);
+		assertThat(endY).isEqualTo(0);
+	}
 }
