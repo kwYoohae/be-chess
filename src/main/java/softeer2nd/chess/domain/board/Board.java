@@ -60,6 +60,9 @@ public class Board {
 
 	public Piece findPiece(final String input) {
 		final Position position = Position.from(input);
+		final int x = position.getX();
+		final int y = position.getY();
+
 		return null;
 	}
 }
