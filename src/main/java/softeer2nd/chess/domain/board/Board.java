@@ -2,6 +2,7 @@ package softeer2nd.chess.domain.board;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -145,5 +146,10 @@ public class Board {
 			.map(rank -> rank.getScoreExceptPawnInRank(color))
 			.reduce(0.0d, Double::sum);
 
+	}
+
+	public void sortAscendingAllPieces() {
+		blackPieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
+		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
 	}
 }

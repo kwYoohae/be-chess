@@ -266,19 +266,20 @@ class BoardTest {
 		board.sortAscendingAllPieces();
 		// when, then
 		assertThat(board.getBlackPieces()).containsExactly(
-			Piece.createBlackQueen(),
-			Piece.createBlackRook(),
-			Piece.createBlackBishop(),
-			Piece.createBlackKnight(),
+			Piece.createBlackKing(),
 			Piece.createBlackPawn(),
-			Piece.createBlackKing());
+			Piece.createBlackKnight(),
+			Piece.createBlackBishop(),
+			Piece.createBlackRook(),
+			Piece.createBlackQueen());
+
 		assertThat(board.getWhitePieces()).containsExactly(
-			Piece.createWhiteQueen(),
-			Piece.createWhiteRook(),
-			Piece.createWhiteBishop(),
-			Piece.createWhiteKnight(),
+			Piece.createWhiteKing(),
 			Piece.createWhitePawn(),
-			Piece.createWhiteKing());
+			Piece.createWhiteKnight(),
+			Piece.createWhiteBishop(),
+			Piece.createWhiteRook(),
+			Piece.createWhiteQueen());
 	}
 
 
