@@ -52,7 +52,7 @@ public class Position {
 		}
 
 		final boolean isFirstPositionValid = Arrays.stream(ROW).anyMatch(row -> row.equals(inputs[0]));
-		final boolean isSecondPositionValid = Arrays.stream(COLUMN).anyMatch(column -> column.equals(inputs[0]));
+		final boolean isSecondPositionValid = Arrays.stream(COLUMN).anyMatch(column -> column.equals(inputs[1]));
 		if (!isFirstPositionValid || !isSecondPositionValid) {
 			throw new IllegalArgumentException(POSITION_INPUT_IS_WRONG);
 		}
