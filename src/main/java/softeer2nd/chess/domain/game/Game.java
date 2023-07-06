@@ -3,30 +3,35 @@ package softeer2nd.chess.domain.game;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.view.Command;
 import softeer2nd.chess.view.InputView;
+import softeer2nd.chess.view.OutputView;
 
 public class Game {
 
-	private static final String START_GAME_MESSAGE = "게임을 시작합니다";
-	private static final String END_GAME_MESSAGE = "게임을 종료합니다";
-
 	private final InputView inputView;
+	private final OutputView outputView;
+	private final Board board;
 
-	public Game(final InputView inputView) {
+	public Game(final InputView inputView, OutputView outputView, Board board) {
 		this.inputView = inputView;
+		this.outputView = outputView;
+		this.board = board;
 	}
 
 	public void startGame() {
 		while (true) {
 			Command command = inputView.getUserInput();
 			if (command == Command.START) {
-				System.out.println(START_GAME_MESSAGE);
-				final Board board = new Board();
-				board.initialize();
-				System.out.println(board.showBoard());
+				initializeGame();
 			} else if (command == Command.END) {
-				System.out.println(END_GAME_MESSAGE);
+				outputView.gameEnd();
 				break;
 			}
 		}
+	}
+
+	public void initializeGame() {
+		outputView.gameStart();
+		board.initialize();
+		outputView.printBoard(board);
 	}
 }
