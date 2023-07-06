@@ -57,4 +57,9 @@ public class Board {
 		}
 		return sum;
 	}
+
+	public Piece findPiece(final String input) {
+		final Position position = Position.from(input);
+		return null;
+	}
 }
