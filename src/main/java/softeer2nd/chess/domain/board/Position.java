@@ -22,7 +22,7 @@ public class Position {
 
 	private static void validatePosition(final String[] inputs) {
 		if (inputs.length != POSITION_COUNT) {
-			throw new IllegalArgumentException(POSITION_INPUT_IS_WRONG);
+			throw new IllegalArgumentException(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);
 		}
 	}
 
