@@ -48,20 +48,19 @@ class BoardTest {
 		board.initialize();
 
 		// when
-		final int whiteQueen = board.pieceCount(Piece.Type.QUEEN, Piece.Color.WHITE);
-		final int blackQueen = board.pieceCount(Piece.Type.QUEEN, Piece.Color.BLACK);
-		final int whiteRook = board.pieceCount(Piece.Type.ROOK, Piece.Color.WHITE);
-		final int blackRook = board.pieceCount(Piece.Type.ROOK, Piece.Color.BLACK);
-		final int whiteKing = board.pieceCount(Piece.Type.KING, Piece.Color.WHITE);
-		final int blackKing = board.pieceCount(Piece.Type.KING, Piece.Color.BLACK);
-		final int whiteKnight = board.pieceCount(Piece.Type.KNIGHT, Piece.Color.WHITE);
-		final int blackKnight = board.pieceCount(Piece.Type.KNIGHT, Piece.Color.BLACK);
-		final int whiteBishop = board.pieceCount(Piece.Type.BISHOP, Piece.Color.WHITE);
-		final int blackBishop = board.pieceCount(Piece.Type.BISHOP, Piece.Color.BLACK);
-		final int whitePawn = board.pieceCount(Piece.Type.PAWN, Piece.Color.WHITE);
-		final int blackPawn = board.pieceCount(Piece.Type.PAWN, Piece.Color.BLACK);
-		final int blankPiece = board.pieceCount(Piece.Type.NO_PIECE, Piece.Color.NOCOLOR);
-
+		final long whiteQueen = board.pieceCount(Piece.Type.QUEEN, Piece.Color.WHITE);
+		final long blackQueen = board.pieceCount(Piece.Type.QUEEN, Piece.Color.BLACK);
+		final long whiteRook = board.pieceCount(Piece.Type.ROOK, Piece.Color.WHITE);
+		final long blackRook = board.pieceCount(Piece.Type.ROOK, Piece.Color.BLACK);
+		final long whiteKing = board.pieceCount(Piece.Type.KING, Piece.Color.WHITE);
+		final long blackKing = board.pieceCount(Piece.Type.KING, Piece.Color.BLACK);
+		final long whiteKnight = board.pieceCount(Piece.Type.KNIGHT, Piece.Color.WHITE);
+		final long blackKnight = board.pieceCount(Piece.Type.KNIGHT, Piece.Color.BLACK);
+		final long whiteBishop = board.pieceCount(Piece.Type.BISHOP, Piece.Color.WHITE);
+		final long blackBishop = board.pieceCount(Piece.Type.BISHOP, Piece.Color.BLACK);
+		final long whitePawn = board.pieceCount(Piece.Type.PAWN, Piece.Color.WHITE);
+		final long blackPawn = board.pieceCount(Piece.Type.PAWN, Piece.Color.BLACK);
+		final long blankPiece = board.pieceCount(Piece.Type.NO_PIECE, Piece.Color.NOCOLOR);
 		// then
 		assertThat(whiteQueen).isEqualTo(1);
 		assertThat(blackQueen).isEqualTo(1);

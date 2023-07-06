@@ -5,6 +5,8 @@ import static softeer2nd.chess.utils.StringUtils.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import softeer2nd.chess.domain.pieces.Piece;
 
@@ -20,19 +22,17 @@ public class Rank {
 	}
 
 	public static Rank initializePawn(Color color) {
-		List<Piece> pawns = new ArrayList<>();
-		for (int i = 0; i < MAX_ROW; i++) {
-			pawns.add(Piece.createPiece(color, Type.PAWN));
-		}
+		final List<Piece> pawns = IntStream.range(0, MAX_ROW)
+			.mapToObj((i) -> createPiece(color, Type.PAWN))
+			.collect(Collectors.toList());
 
 		return new Rank(pawns);
 	}
 
 	public static Rank initializeBlank() {
-		List<Piece> blanks = new ArrayList<>();
-		for (int i = 0; i < MAX_ROW; i++) {
-			blanks.add(createBlank());
-		}
+		final List<Piece> blanks = IntStream.range(0, MAX_ROW)
+			.mapToObj((i) -> Piece.createBlank())
+			.collect(Collectors.toList());
 
 		return new Rank(blanks);
 	}

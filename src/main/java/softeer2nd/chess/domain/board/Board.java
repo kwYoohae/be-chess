@@ -2,6 +2,7 @@ package softeer2nd.chess.domain.board;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import softeer2nd.chess.domain.pieces.Piece;
 
@@ -42,20 +43,16 @@ public class Board {
 		return sb.toString();
 	}
 
-	public int pieceCount() {
-		int sum = 0;
-		for (Rank row : boards) {
-			sum += row.pieceCount();
-		}
-		return sum;
+	public long pieceCount() {
+		return boards.stream()
+			.map(Rank::pieceCount)
+			.reduce(0L, Long::sum);
 	}
 
-	public int pieceCount(Piece.Type type, Piece.Color color) {
-		int sum = 0;
-		for (Rank row : boards) {
-			sum += row.pieceCount(type, color);
-		}
-		return sum;
+	public long pieceCount(Piece.Type type, Piece.Color color) {
+		return boards.stream()
+			.map(row -> row.pieceCount(type, color))
+			.reduce(0L, Long::sum);
 	}
 
 	public Piece findPiece(final String input) {
@@ -89,14 +86,12 @@ public class Board {
 		return false;
 	}
 
-	private int countPawnInColumn(final Piece.Color color, int xPos) {
-		int sum = 0;
-		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			final Rank rank = boards.get(i);
-			if (rank.isPawn(xPos, color)) {
-				sum++;
-			}
-		}
-		return sum;
+	private long countPawnInColumn(final Piece.Color color, int xPos) {
+		return IntStream.range(0, BOARD_MAX_INDEX)
+			.filter((i) -> {
+				final Rank rank = boards.get(i);
+				return rank.isPawn(xPos, color);
+			})
+			.count();
 	}
 }
