@@ -1,6 +1,7 @@
 package softeer2nd.chess.domain.board;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -11,6 +12,8 @@ public class Board {
 	private static final int BOARD_MAX_INDEX = 8;
 
 	private final List<Rank> boards = new ArrayList<>();
+	private final List<Piece> blackPieces = new ArrayList<>();
+	private final List<Piece> whitePieces = new ArrayList<>();
 
 	public void initialize() {
 		boards.clear();
@@ -22,6 +25,32 @@ public class Board {
 		boards.add(Rank.initializeBlank());
 		boards.add(Rank.initializePawn(Piece.Color.BLACK));
 		boards.add(Rank.initializeOtherPieces(Piece.Color.BLACK));
+
+		initializePiece();
+	}
+
+	private void initializePiece() {
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.PAWN));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.BISHOP));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.ROOK));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KING));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.QUEEN));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KNIGHT));
+
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.PAWN));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.BISHOP));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.ROOK));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KING));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.QUEEN));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KNIGHT));
+	}
+
+	public List<Piece> getBlackPieces() {
+		return Collections.unmodifiableList(blackPieces);
+	}
+
+	public List<Piece> getWhitePieces() {
+		return Collections.unmodifiableList(whitePieces);
 	}
 
 	public String getPawnsResult(Piece.Color color) {
