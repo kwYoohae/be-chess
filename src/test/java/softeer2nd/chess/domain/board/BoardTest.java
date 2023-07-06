@@ -203,8 +203,40 @@ class BoardTest {
 		addPiece("g2", Piece.createWhitePawn());
 		addPiece("e1", Piece.createWhiteRook());
 		addPiece("f1", Piece.createWhiteKing());
+
+		// when, then
 		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
 		assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
+
+		System.out.println(board.showBoard());
+	}
+
+	@Test
+	@DisplayName("점수를 구할때 폰이 세로줄에 있는 경우는 0.5점을 주고 총점을 계산한다")
+	void calculatePawnHalf() {
+		// given
+		board.initializeEmpty();
+
+		addPiece("b8", Piece.createBlackKing());
+		addPiece("c8", Piece.createBlackRook());
+		addPiece("a7", Piece.createBlackPawn());
+		addPiece("c7", Piece.createBlackPawn());
+		addPiece("d7", Piece.createBlackBishop());
+		addPiece("b6", Piece.createBlackPawn());
+		addPiece("e6", Piece.createBlackQueen());
+
+		addPiece("f4", Piece.createWhiteKnight());
+		addPiece("g4", Piece.createWhiteQueen());
+		addPiece("f3", Piece.createWhitePawn());
+		addPiece("h3", Piece.createWhitePawn());
+		addPiece("f2", Piece.createWhitePawn());
+		addPiece("g2", Piece.createWhitePawn());
+		addPiece("e1", Piece.createWhiteRook());
+		addPiece("f1", Piece.createWhiteKing());
+
+		// when, then
+		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(20.0);
+		assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(19.5);
 
 		System.out.println(board.showBoard());
 	}

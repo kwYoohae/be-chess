@@ -102,8 +102,14 @@ public class Board {
 		double bishopScore = 0.0d;
 		double queenScore = 0.0d;
 
-		for (Rank rank : boards) {
-			pawnScore += rank.pieceCount(Piece.Type.PAWN, color) * Piece.Type.PAWN.getDefaultPoint();
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			final Rank rank = boards.get(i);
+			final long pawnCount = countPawnInColumn(color, i);
+			if (pawnCount > 1)
+				pawnScore += pawnCount * Piece.Type.PAWN.getDefaultPoint() / 2;
+			else
+				pawnScore += pawnCount * Piece.Type.PAWN.getDefaultPoint();
+
 			rookScore += rank.pieceCount(Piece.Type.ROOK, color) * Piece.Type.ROOK.getDefaultPoint();
 			knightScore += rank.pieceCount(Piece.Type.KNIGHT, color) * Piece.Type.KNIGHT.getDefaultPoint();
 			bishopScore += rank.pieceCount(Piece.Type.BISHOP, color) * Piece.Type.BISHOP.getDefaultPoint();
