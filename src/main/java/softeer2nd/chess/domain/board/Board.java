@@ -133,12 +133,15 @@ public class Board {
 		double pawnScore = 0.0d;
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			final long pawnCount = countPawnInColumn(color, i);
-			if (pawnCount > 1)
-				pawnScore += pawnCount * Piece.Type.PAWN.getDefaultPoint() / 2;
-			else
-				pawnScore += pawnCount * Piece.Type.PAWN.getDefaultPoint();
+			pawnScore += calculatePawnPointInLine(pawnCount);
 		}
 		return pawnScore;
+	}
+
+	private double calculatePawnPointInLine(long pawnCount) {
+		if (pawnCount > 1)
+			return pawnCount * Piece.Type.PAWN.getDefaultPoint() / 2;
+		return pawnCount * Piece.Type.PAWN.getDefaultPoint();
 	}
 
 	private double calculateExceptPawnPoint(Piece.Color color) {
