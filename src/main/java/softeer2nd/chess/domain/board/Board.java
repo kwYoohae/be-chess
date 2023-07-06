@@ -80,4 +80,23 @@ public class Board {
 
 		boards.get(y).move(x, piece);
 	}
+
+	public boolean checkSamePawnInColum(final Piece.Color color) {
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			if (countPawnInColumn(color, i) > 1)
+				return true;
+		}
+		return false;
+	}
+
+	private int countPawnInColumn(final Piece.Color color, int xPos) {
+		int sum = 0;
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			final Rank rank = boards.get(i);
+			if (rank.isPawn(xPos, color)) {
+				sum++;
+			}
+		}
+		return sum;
+	}
 }

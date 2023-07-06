@@ -103,4 +103,9 @@ public class Rank {
 	public void move(int index, Piece piece) {
 		row.set(index, piece);
 	}
+
+	public boolean isPawn(int index, Color color) {
+		final Piece piece = row.get(index);
+		return piece.getType() == Type.PAWN && piece.getColor() == color;
+	}
 }
