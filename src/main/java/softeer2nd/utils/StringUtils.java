@@ -7,8 +7,6 @@ public class StringUtils {
 	private StringUtils() {}
 
 	public static String appendNewLine(final String input) {
-		StringBuilder sb = new StringBuilder(input);
-		sb.append(NEWLINE);
-		return sb.toString();
+		return input + NEWLINE;
 	}
 }
