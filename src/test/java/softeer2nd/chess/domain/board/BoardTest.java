@@ -125,6 +125,15 @@ class BoardTest {
 		board.move(position, piece);
 
 		assertThat(board.findPiece(position)).isEqualTo(piece);
-		System.out.println(board.showBoard());
+		String blankLine = "........";
+		assertThat(board.showBoard())
+			.isEqualTo(appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(".R......") +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine));
 	}
 }
