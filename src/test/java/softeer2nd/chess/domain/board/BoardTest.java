@@ -122,7 +122,7 @@ class BoardTest {
 
 		String position = "b5";
 		final Piece piece = Piece.createBlackRook();
-		board.move(position, piece);
+		addPiece(position, piece);
 
 		assertThat(board.findPiece(position)).isEqualTo(piece);
 		String blankLine = "........";
@@ -160,10 +160,10 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		board.move("b2", Piece.createBlackPawn());
-		board.move("b7", Piece.createBlackPawn());
-		board.move("c4", Piece.createWhitePawn());
-		board.move("h6", Piece.createWhitePawn());
+		addPiece("b2", Piece.createBlackPawn());
+		addPiece("b7", Piece.createBlackPawn());
+		addPiece("c4", Piece.createWhitePawn());
+		addPiece("h6", Piece.createWhitePawn());
 
 		// when, then
 		assertThat(board.checkSamePawnInColum(Piece.Color.BLACK)).isTrue();
@@ -173,18 +173,38 @@ class BoardTest {
 
 	@Test
 	@DisplayName("폰의 점수를 계산할 수 있어야한다")
-	void calculatePawnScore() {
+	void calculatePawnPoint() {
 		// given
 		board.initializeEmpty();
 
-		board.move("b2", Piece.createBlackPawn());
-		board.move("a7", Piece.createBlackPawn());
-		board.move("c4", Piece.createWhitePawn());
-		board.move("h6", Piece.createWhitePawn());
-		board.move("f6", Piece.createWhitePawn());
+		addPiece("b2", Piece.createBlackPawn());
+		addPiece("a7", Piece.createBlackPawn());
+		addPiece("c4", Piece.createWhitePawn());
+		addPiece("h6", Piece.createWhitePawn());
+		addPiece("f6", Piece.createWhitePawn());
 
 		// when, then
 		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(2.0);
 		assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(3.0);
+	}
+
+	@Test
+	@DisplayName("각 기물의 총 점수를 구할 수 있어야한다")
+	void calculatePoint() {
+		// given
+		board.initializeEmpty();
+
+		addPiece("b6", Piece.createBlackPawn());
+		addPiece("e6", Piece.createBlackQueen());
+		addPiece("b8", Piece.createBlackKing());
+		addPiece("c8", Piece.createBlackRook());
+
+		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
+
+		System.out.println(board.showBoard());
+	}
+
+	private void addPiece(String position, Piece piece) {
+		board.move(position, piece);
 	}
 }
