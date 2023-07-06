@@ -77,4 +77,21 @@ class BoardTest {
 		assertThat(blackPawn).isEqualTo(8);
 		assertThat(blankPiece).isEqualTo(32);
 	}
+
+	@Test
+	@DisplayName("원하는 좌표의 기물을 가져올 수 있어야 한다")
+	void findPiece() {
+		// given
+		board.initialize();
+
+		Piece blackRook1 = board.findPiece("a8");
+		Piece blackRook2 = board.findPiece("h8");
+		Piece whiteRook1 = board.findPiece("a1");
+		Piece whiteRook2 = board.findPiece("h1");
+
+		assertThat(blackRook1).isEqualTo(Piece.createBlackRook());
+		assertThat(blackRook2).isEqualTo(Piece.createBlackRook());
+		assertThat(whiteRook1).isEqualTo(Piece.createWhiteRook());
+		assertThat(whiteRook2).isEqualTo(Piece.createWhiteRook());
+	}
 }
