@@ -114,4 +114,17 @@ class BoardTest {
 		assertThat(endX).isEqualTo(7);
 		assertThat(endY).isEqualTo(7);
 	}
+
+	@Test
+	@DisplayName("임의의 위치에 마음대로 기물을 추가할 수 있어야 한다")
+	void createAnywherePiece() {
+		board.initializeEmpty();
+
+		String position = "b5";
+		final Piece piece = Piece.createBlackRook();
+		board.move(position, piece);
+
+		assertThat(board.findPiece(position)).isEqualTo(piece);
+		System.out.println(board.showBoard());
+	}
 }
