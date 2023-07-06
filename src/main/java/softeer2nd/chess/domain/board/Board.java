@@ -65,4 +65,11 @@ public class Board {
 
 		return boards.get(y).getPiece(x);
 	}
+
+	public void initializeEmpty() {
+		boards.clear();
+		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
+			boards.add(Rank.initializeBlank());
+		}
+	}
 }
