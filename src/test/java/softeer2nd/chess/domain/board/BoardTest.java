@@ -153,4 +153,21 @@ class BoardTest {
 				appendNewLine(blankLine) +
 				appendNewLine(blankLine));
 	}
+
+	@Test
+	@DisplayName("같은 세로줄에 폰이 있는지 확인할 수 있어야한다")
+	void checkColumnSamePawn() {
+		// given
+		board.initializeEmpty();
+
+		board.move("b2", Piece.createBlackPawn());
+		board.move("b7", Piece.createBlackPawn());
+		board.move("c4", Piece.createWhitePawn());
+		board.move("h6", Piece.createWhitePawn());
+
+		// when, then
+		assertThat(board.checkSamePawnInColum(Piece.Color.BLACK)).isTrue();
+		assertThat(board.checkSamePawnInColum(Piece.Color.WHITE)).isFalse();
+
+	}
 }
