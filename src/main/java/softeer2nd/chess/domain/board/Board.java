@@ -96,8 +96,11 @@ public class Board {
 	}
 
 	public double calculatePoint(final Piece.Color color) {
-		double pawnScore = 0.0d;
+		return calculatePawnPoint(color) + calculateExceptPawnPoint(color);
+	}
 
+	private double calculatePawnPoint(Piece.Color color) {
+		double pawnScore = 0.0d;
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			final long pawnCount = countPawnInColumn(color, i);
 			if (pawnCount > 1)
@@ -105,11 +108,10 @@ public class Board {
 			else
 				pawnScore += pawnCount * Piece.Type.PAWN.getDefaultPoint();
 		}
-
-		return pawnScore + calculateExceptPawnPoint(color);
+		return pawnScore;
 	}
 
-	public double calculateExceptPawnPoint(Piece.Color color) {
+	private double calculateExceptPawnPoint(Piece.Color color) {
 		return boards.stream()
 			.map(rank -> rank.getScoreExceptPawnInRank(color))
 			.reduce(0.0d, Double::sum);
