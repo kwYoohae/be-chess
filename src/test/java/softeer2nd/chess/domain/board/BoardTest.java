@@ -136,4 +136,21 @@ class BoardTest {
 				appendNewLine(blankLine) +
 				appendNewLine(blankLine));
 	}
+
+	@Test
+	@DisplayName("보드를 아무것도 없는 상태로 초기화 할 수 있어야한다")
+	void initializeEmpty() {
+		board.initializeEmpty();
+
+		String blankLine = "........";
+		assertThat(board.showBoard())
+			.isEqualTo(appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine) +
+				appendNewLine(blankLine));
+	}
 }
