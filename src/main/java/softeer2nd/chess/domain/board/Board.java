@@ -49,4 +49,12 @@ public class Board {
 		}
 		return sum;
 	}
+
+	public int pieceCount(Piece.Type type, Piece.Color color) {
+		int sum = 0;
+		for (Rank row : boards) {
+			sum += row.pieceCount(type, color);
+		}
+		return sum;
+	}
 }

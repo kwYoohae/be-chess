@@ -1,5 +1,6 @@
 package softeer2nd.chess.domain.board;
 
+import static softeer2nd.chess.domain.pieces.Piece.*;
 import static softeer2nd.chess.utils.StringUtils.*;
 
 import java.util.ArrayList;
@@ -18,13 +19,13 @@ public class Rank {
 		this.row = row;
 	}
 
-	public static Rank initializePawn(Piece.Color color) {
+	public static Rank initializePawn(Color color) {
 		List<Piece> pawns = new ArrayList<>();
 		for (int i = 0; i < MAX_ROW; i++) {
-			if (color == Piece.Color.BLACK) {
-				pawns.add(Piece.createBlackPawn());
-			} else if (color == Piece.Color.WHITE) {
-				pawns.add(Piece.createWhitePawn());
+			if (color == Color.BLACK) {
+				pawns.add(createBlackPawn());
+			} else if (color == Color.WHITE) {
+				pawns.add(createWhitePawn());
 			}
 		}
 
@@ -34,29 +35,29 @@ public class Rank {
 	public static Rank initializeBlank() {
 		List<Piece> blanks = new ArrayList<>();
 		for (int i = 0; i < MAX_ROW; i++) {
-			blanks.add(Piece.createBlank());
+			blanks.add(createBlank());
 		}
 
 		return new Rank(blanks);
 	}
 
-	public static Rank initializeOtherPieces(Piece.Color color) {
+	public static Rank initializeOtherPieces(Color color) {
 		List<Piece> pieces = new ArrayList<>();
-		pieces.add(Piece.createPiece(color, Piece.Type.ROOK));
-		pieces.add(Piece.createPiece(color, Piece.Type.KNIGHT));
-		pieces.add(Piece.createPiece(color, Piece.Type.BISHOP));
-		pieces.add(Piece.createPiece(color, Piece.Type.QUEEN));
-		pieces.add(Piece.createPiece(color, Piece.Type.KING));
-		pieces.add(Piece.createPiece(color, Piece.Type.BISHOP));
-		pieces.add(Piece.createPiece(color, Piece.Type.KNIGHT));
-		pieces.add(Piece.createPiece(color, Piece.Type.ROOK));
+		pieces.add(createPiece(color, Type.ROOK));
+		pieces.add(createPiece(color, Type.KNIGHT));
+		pieces.add(createPiece(color, Type.BISHOP));
+		pieces.add(createPiece(color, Type.QUEEN));
+		pieces.add(createPiece(color, Type.KING));
+		pieces.add(createPiece(color, Type.BISHOP));
+		pieces.add(createPiece(color, Type.KNIGHT));
+		pieces.add(createPiece(color, Type.ROOK));
 
 		return new Rank(pieces);
 	}
 
 	public long pieceCount() {
 		return row.stream()
-			.filter(piece -> piece.getType() != Piece.Type.NO_PIECE)
+			.filter(piece -> piece.getType() != Type.NO_PIECE)
 			.count();
 	}
 
@@ -68,7 +69,7 @@ public class Rank {
 		return appendNewLine(line.toString());
 	}
 
-	public String showLineWantPiece(Piece.Type type, Piece.Color color) {
+	public String showLineWantPiece(Type type, Color color) {
 		final String line = getLineSamePiece(type, color);
 		if (line.equals(BLACK_LINE)) {
 			return EMPTY_STRING;
@@ -76,7 +77,7 @@ public class Rank {
 		return appendNewLine(line);
 	}
 
-	private String getLineSamePiece(Piece.Type type, Piece.Color color) {
+	private String getLineSamePiece(Type type, Color color) {
 		StringBuilder line = new StringBuilder();
 		for (int i = 0; i < MAX_ROW; i++) {
 			final Piece piece = row.get(i);
@@ -84,8 +85,14 @@ public class Rank {
 				line.append(piece.getRepresentation());
 				continue;
 			}
-			line.append(Piece.Type.NO_PIECE.getBlackRepresentation());
+			line.append(Type.NO_PIECE.getBlackRepresentation());
 		}
 		return line.toString();
+	}
+
+	public long pieceCount(final Type type, final Color color) {
+		return row.stream()
+			.filter(piece -> piece.getType() == type && piece.getColor() == color)
+			.count();
 	}
 }
