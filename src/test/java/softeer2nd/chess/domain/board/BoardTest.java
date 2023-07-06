@@ -3,7 +3,6 @@ package softeer2nd.chess.domain.board;
 import static org.assertj.core.api.Assertions.*;
 import static softeer2nd.chess.utils.StringUtils.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -185,7 +184,7 @@ class BoardTest {
 		board.move("f6", Piece.createWhitePawn());
 
 		// when, then
-		assertThat(board.caculatePoint(Piece.Color.BLACK)).isEqualTo(2.0);
-		assertThat(board.caculatePoint(Piece.Color.WHITE)).isEqualTo(3.0);
+		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(2.0);
+		assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(3.0);
 	}
 }

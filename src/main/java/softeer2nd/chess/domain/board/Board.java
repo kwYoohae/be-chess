@@ -94,4 +94,10 @@ public class Board {
 			})
 			.count();
 	}
+
+	public double calculatePoint(final Piece.Color color) {
+		return boards.stream()
+			.map(row -> row.getScoreInRank(color))
+			.reduce(0.0d, Double::sum);
+	}
 }
