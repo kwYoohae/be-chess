@@ -18,6 +18,14 @@ public class Position {
 		this.y = y;
 	}
 
+	public int getX() {
+		return convertCharacterToPosition(x.charAt(0));
+	}
+
+	public int getY() {
+		return Integer.parseInt(COLUMN[7]) - Integer.parseInt(y);
+	}
+
 	public static Position from(final String input) {
 		final String[] split = input.split("");
 		validatePosition(split);
@@ -34,6 +42,10 @@ public class Position {
 		if (!isFirstPositionValid || !isSecondPositionValid) {
 			throw new IllegalArgumentException(POSITION_INPUT_IS_WRONG);
 		}
+	}
+
+	private int convertCharacterToPosition(char charX) {
+		return charX - ROW[0].charAt(0);
 	}
 
 }
