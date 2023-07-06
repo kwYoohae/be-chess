@@ -257,6 +257,31 @@ class BoardTest {
 
 	}
 
+	@Test
+	@DisplayName("기물이 오름차순으로 정렬될 수 있다.")
+	void ascendingCollection() {
+		// given
+		board.initialize();
+
+		board.sortAscendingAllPieces();
+		// when, then
+		assertThat(board.getBlackPieces()).containsExactly(
+			Piece.createBlackQueen(),
+			Piece.createBlackRook(),
+			Piece.createBlackBishop(),
+			Piece.createBlackKnight(),
+			Piece.createBlackPawn(),
+			Piece.createBlackKing());
+		assertThat(board.getWhitePieces()).containsExactly(
+			Piece.createWhiteQueen(),
+			Piece.createWhiteRook(),
+			Piece.createWhiteBishop(),
+			Piece.createWhiteKnight(),
+			Piece.createWhitePawn(),
+			Piece.createWhiteKing());
+	}
+
+
 	private void addPiece(String position, Piece piece) {
 		board.move(position, piece);
 	}
