@@ -20,4 +20,20 @@ class PositionTest {
 			.hasMessage(POSITION_INPUT_IS_WRONG);
 	}
 
+	@Test
+	@DisplayName("Position의 인자를 적게 혹은 많이 입력하면 오류가 발생한다")
+	void lessOrManyInput() {
+		// given
+		String manyInput = "a12";
+		String lessInput = "1";
+
+		// when, then
+		Assertions.assertThatThrownBy(() -> Position.from(manyInput))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);
+
+		Assertions.assertThatThrownBy(() -> Position.from(lessInput))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);
+	}
 }
