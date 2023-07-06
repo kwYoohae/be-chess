@@ -99,4 +99,8 @@ public class Rank {
 	public Piece getPiece(int index) {
 		return row.get(index);
 	}
+
+	public void move(int index, Piece piece) {
+		row.set(index, piece);
+	}
 }

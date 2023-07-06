@@ -72,4 +72,12 @@ public class Board {
 			boards.add(Rank.initializeBlank());
 		}
 	}
+
+	public void move(final String input, final Piece piece) {
+		final Position position = Position.from(input);
+		final int x = position.getX();
+		final int y = position.getY();
+
+		boards.get(y).move(x, piece);
+	}
 }
