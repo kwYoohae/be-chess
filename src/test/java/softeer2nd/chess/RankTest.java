@@ -38,7 +38,7 @@ class RankTest {
 
 		// when, then
 		assertThat(blackPawnsRank.pieceCount()).isEqualTo(8);
-		assertThat(blankRank.pieceCount()).isEqualTo(0);
+		assertThat(blankRank.pieceCount()).isZero();
 		assertThat(whiteInitialRank.pieceCount()).isEqualTo(8);
 	}
 }
