@@ -3,6 +3,7 @@ package softeer2nd.chess.domain.board;
 import static org.assertj.core.api.Assertions.*;
 import static softeer2nd.chess.utils.StringUtils.*;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -61,6 +62,7 @@ class BoardTest {
 		final long whitePawn = board.pieceCount(Piece.Type.PAWN, Piece.Color.WHITE);
 		final long blackPawn = board.pieceCount(Piece.Type.PAWN, Piece.Color.BLACK);
 		final long blankPiece = board.pieceCount(Piece.Type.NO_PIECE, Piece.Color.NOCOLOR);
+
 		// then
 		assertThat(whiteQueen).isEqualTo(1);
 		assertThat(blackQueen).isEqualTo(1);
@@ -168,5 +170,22 @@ class BoardTest {
 		assertThat(board.checkSamePawnInColum(Piece.Color.BLACK)).isTrue();
 		assertThat(board.checkSamePawnInColum(Piece.Color.WHITE)).isFalse();
 
+	}
+
+	@Test
+	@DisplayName("폰의 점수를 계산할 수 있어야한다")
+	void calculatePawnScore() {
+		// given
+		board.initializeEmpty();
+
+		board.move("b2", Piece.createBlackPawn());
+		board.move("a7", Piece.createBlackPawn());
+		board.move("c4", Piece.createWhitePawn());
+		board.move("h6", Piece.createWhitePawn());
+		board.move("f6", Piece.createWhitePawn());
+
+		// when, then
+		assertThat(board.caculatePoint(Piece.Color.BLACK)).isEqualTo(2.0);
+		assertThat(board.caculatePoint(Piece.Color.WHITE)).isEqualTo(3.0);
 	}
 }
