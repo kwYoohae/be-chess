@@ -27,4 +27,18 @@ class RankTest {
 		assertThat(blackInitialRank.showPieceLine()).isEqualTo(appendNewLine("RNBQKBNR"));
 		assertThat(whiteInitialRank.showPieceLine()).isEqualTo(appendNewLine("rnbqkbnr"));
 	}
+
+	@Test
+	@DisplayName("piece의 개수를 세는 메서드는 blank 기물을 빼고 계산을 해야한다")
+	void pieceCount() {
+		// given
+		final Rank blackPawnsRank = Rank.initializePawn(Piece.Color.BLACK);
+		final Rank blankRank = Rank.initializeBlank();
+		final Rank whiteInitialRank = Rank.initializeOtherPieces(Piece.Color.WHITE);
+
+		// when, then
+		assertThat(blackPawnsRank.pieceCount()).isEqualTo(8);
+		assertThat(blankRank.pieceCount()).isEqualTo(0);
+		assertThat(whiteInitialRank.pieceCount()).isEqualTo(8);
+	}
 }
