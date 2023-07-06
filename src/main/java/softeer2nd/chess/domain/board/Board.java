@@ -152,4 +152,12 @@ public class Board {
 		blackPieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
 		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
 	}
+
+	public void sortDescendingAllPieces() {
+		blackPieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
+		Collections.reverse(blackPieces);
+
+		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
+		Collections.reverse(whitePieces);
+	}
 }
