@@ -96,8 +96,20 @@ public class Board {
 	}
 
 	public double calculatePoint(final Piece.Color color) {
-		return boards.stream()
-			.map(row -> row.getScoreInRank(color))
-			.reduce(0.0d, Double::sum);
+		double pawnScore = 0.0d;
+		double rookScore = 0.0d;
+		double knightScore = 0.0d;
+		double bishopScore = 0.0d;
+		double queenScore = 0.0d;
+
+		for (Rank rank : boards) {
+			pawnScore += rank.pieceCount(Piece.Type.PAWN, color) * Piece.Type.PAWN.getDefaultPoint();
+			rookScore += rank.pieceCount(Piece.Type.ROOK, color) * Piece.Type.ROOK.getDefaultPoint();
+			knightScore += rank.pieceCount(Piece.Type.KNIGHT, color) * Piece.Type.KNIGHT.getDefaultPoint();
+			bishopScore += rank.pieceCount(Piece.Type.BISHOP, color) * Piece.Type.BISHOP.getDefaultPoint();
+			queenScore += rank.pieceCount(Piece.Type.QUEEN, color) * Piece.Type.QUEEN.getDefaultPoint();
+		}
+
+		return pawnScore + rookScore + knightScore + bishopScore + queenScore;
 	}
 }
