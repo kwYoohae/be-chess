@@ -241,6 +241,22 @@ class BoardTest {
 		System.out.println(board.showBoard());
 	}
 
+	@Test
+	@DisplayName("모든 기물이 Collection에 저장되어 있어야 한다")
+	void savePieces() {
+		// given
+		board.initialize();
+
+		// when, then
+		assertThat(board.getBlackPieces()).contains(Piece.createBlackBishop(),
+			Piece.createBlackRook(), Piece.createBlackQueen(), Piece.createBlackKing(), Piece.createBlackKnight(),
+			Piece.createBlackPawn());
+		assertThat(board.getWhitePieces()).contains(Piece.createWhiteBishop(),
+			Piece.createWhiteRook(), Piece.createWhiteQueen(), Piece.createWhiteKing(), Piece.createWhiteKnight(),
+			Piece.createWhitePawn());
+
+	}
+
 	private void addPiece(String position, Piece piece) {
 		board.move(position, piece);
 	}
