@@ -199,7 +199,12 @@ class BoardTest {
 		addPiece("b8", Piece.createBlackKing());
 		addPiece("c8", Piece.createBlackRook());
 
+		addPiece("f2", Piece.createWhitePawn());
+		addPiece("g2", Piece.createWhitePawn());
+		addPiece("e1", Piece.createWhiteRook());
+		addPiece("f1", Piece.createWhiteKing());
 		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
+		assertThat(board.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
 
 		System.out.println(board.showBoard());
 	}
