@@ -1,8 +1,10 @@
-package softeer2nd.utils;
+package softeer2nd.chess.utils;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import softeer2nd.chess.utils.StringUtils;
 
 class StringUtilsTest {
 

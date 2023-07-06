@@ -1,10 +1,11 @@
-package softeer2nd.chess.pieces;
+package softeer2nd.chess.domain.pieces;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class PieceTest {

@@ -1,4 +1,4 @@
-package softeer2nd.chess.pieces;
+package softeer2nd.chess.domain.pieces;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 

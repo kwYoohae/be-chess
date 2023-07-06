@@ -1,10 +1,11 @@
 package softeer2nd;
 
-import static softeer2nd.Command.*;
+import static softeer2nd.chess.view.Command.*;
 
 import java.util.Scanner;
 
-import softeer2nd.chess.Board;
+import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.view.Command;
 
 public class Main {
 

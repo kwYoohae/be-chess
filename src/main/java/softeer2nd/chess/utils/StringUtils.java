@@ -1,4 +1,4 @@
-package softeer2nd.utils;
+package softeer2nd.chess.utils;
 
 public class StringUtils {
 

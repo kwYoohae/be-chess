@@ -1,4 +1,4 @@
-package softeer2nd;
+package softeer2nd.chess.view;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
