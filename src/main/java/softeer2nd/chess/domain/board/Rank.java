@@ -22,11 +22,7 @@ public class Rank {
 	public static Rank initializePawn(Color color) {
 		List<Piece> pawns = new ArrayList<>();
 		for (int i = 0; i < MAX_ROW; i++) {
-			if (color == Color.BLACK) {
-				pawns.add(createBlackPawn());
-			} else if (color == Color.WHITE) {
-				pawns.add(createWhitePawn());
-			}
+			pawns.add(Piece.createPiece(color, Type.PAWN));
 		}
 
 		return new Rank(pawns);
