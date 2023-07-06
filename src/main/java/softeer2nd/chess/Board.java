@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Board {
 
-	public static final int BOARD_MAX_INDEX = 8;
+	private static final int BOARD_MAX_INDEX = 8;
 
 	private final List<Rank> boards = new ArrayList<>();
 
