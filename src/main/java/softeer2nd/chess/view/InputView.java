@@ -4,7 +4,7 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import java.util.Scanner;
 
-public class Command {
+public class InputView {
 
 	private static final String ASK_COMMAND_MESSAGE = "명령어를 입력해주세요 : ";
 	public static final String START_COMMAND = "start";
@@ -12,7 +12,7 @@ public class Command {
 
 	private final Scanner scanner;
 
-	public Command(final Scanner scanner) {
+	public InputView(final Scanner scanner) {
 		this.scanner = scanner;
 	}
 

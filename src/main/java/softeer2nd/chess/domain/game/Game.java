@@ -1,18 +1,18 @@
 package softeer2nd.chess.domain.game;
 
-import static softeer2nd.chess.view.Command.*;
+import static softeer2nd.chess.view.InputView.*;
 
 import softeer2nd.chess.domain.board.Board;
-import softeer2nd.chess.view.Command;
+import softeer2nd.chess.view.InputView;
 
 public class Game {
 
 	private static final String START_GAME_MESSAGE = "게임을 시작합니다";
 	private static final String END_GAME_MESSAGE = "게임을 종료합니다";
 
-	private final Command command;
+	private final InputView command;
 
-	public Game(final Command command) {
+	public Game(final InputView command) {
 		this.command = command;
 	}
 
