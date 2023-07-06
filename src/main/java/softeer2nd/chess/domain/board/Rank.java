@@ -104,4 +104,11 @@ public class Rank {
 		final Piece piece = row.get(index);
 		return piece.getType() == Type.PAWN && piece.getColor() == color;
 	}
+
+	public double getScoreExceptPawnInRank(Color color) {
+		return row.stream()
+			.filter(piece -> piece.getType() != Type.PAWN && piece.getColor() == color)
+			.map(piece -> piece.getType().getDefaultPoint())
+			.reduce(0.0d, Double::sum);
+	}
 }
