@@ -19,19 +19,31 @@ public class Game {
 
 	public void startGame() {
 		while (true) {
-			Command command = inputView.getUserInput();
-			if (command == Command.START) {
+			String command = inputView.getUserInput();
+			Command gameState = Command.valueOfInput(command);
+			if (gameState == Command.START) {
 				initializeGame();
-			} else if (command == Command.END) {
+			} else if (gameState == Command.END) {
 				outputView.gameEnd();
 				break;
+			} else if (gameState == Command.MOVE) {
+				movePiece(command);
 			}
 		}
 	}
 
-	public void initializeGame() {
+	private void initializeGame() {
 		outputView.gameStart();
 		board.initialize();
+		outputView.printBoard(board);
+	}
+
+	private void movePiece(String command) {
+		final String[] commands = command.split(" ");
+		String sourcePosition = commands[1];
+		String destinationPosition = commands[2];
+
+		board.move(sourcePosition, destinationPosition);
 		outputView.printBoard(board);
 	}
 }

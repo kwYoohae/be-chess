@@ -12,9 +12,10 @@ public class InputView {
 		this.scanner = scanner;
 	}
 
-	public Command getUserInput() {
+	public String getUserInput() {
 		System.out.print(ASK_COMMAND_MESSAGE);
 		String input = scanner.nextLine();
-		return Command.valueOfInput(input);
+		Command.validationCommand(input);
+		return input;
 	}
 }
