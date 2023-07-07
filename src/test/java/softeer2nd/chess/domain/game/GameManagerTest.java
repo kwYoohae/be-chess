@@ -13,9 +13,11 @@ import java.util.Scanner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
-import softeer2nd.chess.view.InputView;
+import softeer2nd.chess.domain.GameManager;
 import softeer2nd.chess.view.ChessView;
+import softeer2nd.chess.view.InputView;
 
 class GameManagerTest {
 
@@ -33,7 +35,7 @@ class GameManagerTest {
 		OutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 
-		GameManager gameManager = new GameManager(new InputView(new Scanner(inputStream)), new ChessView(), board);
+		GameManager gameManager = new GameManager(new InputView(new Scanner(inputStream)), new ChessView(), new Chess(board));
 
 		// when
 		gameManager.startGame();

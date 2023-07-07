@@ -1,6 +1,6 @@
 package softeer2nd.chess.view;
 
-import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.domain.Chess;
 
 public class ChessView {
 
@@ -11,8 +11,8 @@ public class ChessView {
 		System.out.println(START_GAME_MESSAGE);
 	}
 
-	public void printBoard(Board board) {
-		System.out.println(board.showBoard());
+	public void printBoard(Chess chess) {
+		System.out.println(chess.showBoard());
 	}
 
 	public void gameEnd() {
