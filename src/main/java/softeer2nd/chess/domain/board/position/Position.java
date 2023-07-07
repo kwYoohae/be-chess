@@ -1,19 +1,33 @@
-package softeer2nd.chess.domain.board;
+package softeer2nd.chess.domain.board.position;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Position {
 
 	private static final int POSITION_COUNT = 2;
-	private static final char[] ROW = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 	private static final char[] COLUMN = {'1', '2', '3', '4', '5', '6', '7', '8'};
 
 	private final String position;
 	private Optional<Integer> cachedX;
 	private Optional<Integer> cachedY;
+
+	@Override
+	public boolean equals(final Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		final Position position1 = (Position)o;
+		return Objects.equals(position, position1.position);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(position);
+	}
 
 	public Position(final String position) {
 		validatePosition(position);
@@ -24,7 +38,7 @@ public class Position {
 
 	public int getX() {
 		if (cachedX.isEmpty()) {
-			final int posX = convertCharacterToPosition(position.charAt(0));
+			final int posX = Row.valueOfPosition(position.charAt(0)).getIndex();
 			cachedX = Optional.of(posX);
 		}
 		return cachedX.get();
@@ -43,21 +57,16 @@ public class Position {
 			throw new IllegalArgumentException(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);
 		}
 
-		if (!checkRowInChar(inputs.charAt(0)) || !checkColumnInChar(inputs.charAt(1))) {
+		if (!Row.checkInRow(inputs.charAt(0)) || !checkColumnInChar(inputs.charAt(1))) {
 			throw new IllegalArgumentException(POSITION_INPUT_IS_WRONG);
 		}
 	}
 
-	private boolean checkRowInChar(char firstPosition) {
-		return Arrays.binarySearch(ROW, firstPosition) >= 0;
-	}
-
 	private boolean checkColumnInChar(char secondPosition) {
-		return Arrays.binarySearch(COLUMN, secondPosition) >= 0;
-	}
-
-	private int convertCharacterToPosition(char charX) {
-		return charX - ROW[0];
+		final int startNumber = Character.getNumericValue(COLUMN[0]);
+		final int endNumber = Character.getNumericValue(COLUMN[7]);
+		final int positionNumber = Character.getNumericValue(secondPosition);
+		return startNumber <= positionNumber && endNumber >= positionNumber;
 	}
 	private int convertToSecondPosition(char charY) {
 		return Character.getNumericValue(charY) - 1;

@@ -14,9 +14,9 @@ class RankTest {
 	@DisplayName("초기화를 담당하는 정적 팩터리 메서드는 제대로 동작해야한다")
 	void initialize() {
 		// given
-		final Rank whitePawnsRank = Rank.initializePawn(Piece.Color.WHITE);
-		final Rank blackPawnsRank = Rank.initializePawn(Piece.Color.BLACK);
-		final Rank blankRank = Rank.initializeBlank();
+		final Rank whitePawnsRank = Rank.initializePawn(Piece.Color.WHITE, 1);
+		final Rank blackPawnsRank = Rank.initializePawn(Piece.Color.BLACK, 2);
+		final Rank blankRank = Rank.initializeBlank(3);
 		final Rank whiteInitialRank = Rank.initializeOtherPieces(Piece.Color.WHITE);
 		final Rank blackInitialRank = Rank.initializeOtherPieces(Piece.Color.BLACK);
 
@@ -32,8 +32,8 @@ class RankTest {
 	@DisplayName("piece의 개수를 세는 메서드는 blank 기물을 빼고 계산을 해야한다")
 	void pieceCount() {
 		// given
-		final Rank blackPawnsRank = Rank.initializePawn(Piece.Color.BLACK);
-		final Rank blankRank = Rank.initializeBlank();
+		final Rank blackPawnsRank = Rank.initializePawn(Piece.Color.BLACK, 1);
+		final Rank blankRank = Rank.initializeBlank(3);
 		final Rank whiteInitialRank = Rank.initializeOtherPieces(Piece.Color.WHITE);
 
 		// when, then

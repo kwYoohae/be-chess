@@ -6,11 +6,16 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 
 public class Board {
 
 	private static final int BOARD_MAX_INDEX = 8;
+	private static final int BLANK_START_INDEX = 3;
+	private static final int BLANK_END_INDEX = 6;
+	private static final int WHITE_PAWN_START_INDEX = 2;
+	private static final int BLACK_PAWN_START_INDEX = 7;
 
 	private final List<Rank> boards = new ArrayList<>();
 	private final List<Piece> blackPieces = new ArrayList<>();
@@ -19,31 +24,33 @@ public class Board {
 	public void initialize() {
 		boards.clear();
 		boards.add(Rank.initializeOtherPieces(Piece.Color.WHITE));
-		boards.add(Rank.initializePawn(Piece.Color.WHITE));
-		boards.add(Rank.initializeBlank());
-		boards.add(Rank.initializeBlank());
-		boards.add(Rank.initializeBlank());
-		boards.add(Rank.initializeBlank());
-		boards.add(Rank.initializePawn(Piece.Color.BLACK));
+		boards.add(Rank.initializePawn(Piece.Color.WHITE, WHITE_PAWN_START_INDEX));
+		initializeBlanks();
+		boards.add(Rank.initializePawn(Piece.Color.BLACK, BLACK_PAWN_START_INDEX));
 		boards.add(Rank.initializeOtherPieces(Piece.Color.BLACK));
 
 		initializePiece();
 	}
 
 	private void initializePiece() {
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.PAWN));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.BISHOP));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.ROOK));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KING));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.QUEEN));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KNIGHT));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.PAWN, new Position("a8")));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.BISHOP, new Position("b8")));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.ROOK, new Position("c8")));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KING, new Position("d8")));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.QUEEN, new Position("e8")));
+		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KNIGHT, new Position("f8")));
 
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.PAWN));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.BISHOP));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.ROOK));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KING));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.QUEEN));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KNIGHT));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.PAWN, new Position("a1")));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.BISHOP, new Position("b1")));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.ROOK, new Position("c1")));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KING, new Position("d1")));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.QUEEN, new Position("e1")));
+		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KNIGHT, new Position("f1")));
+	}
+
+	private void initializeBlanks() {
+		IntStream.range(BLANK_START_INDEX, BLANK_END_INDEX + 1)
+			.forEach((index) -> boards.add(Rank.initializeBlank(index)));
 	}
 
 	public List<Piece> getBlackPieces() {
@@ -96,7 +103,7 @@ public class Board {
 	public void initializeEmpty() {
 		boards.clear();
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			boards.add(Rank.initializeBlank());
+			boards.add(Rank.initializeBlank(i + 1));
 		}
 	}
 
@@ -166,9 +173,8 @@ public class Board {
 
 	public void move(final String sourcePosition, final String targetPosition) {
 		final Piece sourcePiece = findPiece(sourcePosition);
-		final Piece targetPiece = findPiece(targetPosition);
 
-		move(sourcePosition, sourcePiece);
-		move(targetPosition, targetPiece);
+		move(targetPosition, sourcePiece);
+		move(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
 	}
 }
