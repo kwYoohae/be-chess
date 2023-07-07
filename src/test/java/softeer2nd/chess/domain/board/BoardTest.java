@@ -307,6 +307,22 @@ class BoardTest {
 			Piece.createWhiteKing());
 	}
 
+	@Test
+	@DisplayName("기물이 다른 위치로도 이동할 수 있어야한다")
+	void move() {
+		// given
+		board.initialize();
+
+		String sourcePosition = "b2";
+		String targetPosition = "b3";
+
+		// when
+		board.move(sourcePosition, targetPosition);
+
+		// then
+		assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
+		assertThat(Piece.createWhitePawn(new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));g
+	}
 
 	private void addPiece(String position, Piece piece) {
 		board.move(position, piece);
