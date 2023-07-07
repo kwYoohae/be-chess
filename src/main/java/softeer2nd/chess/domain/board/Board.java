@@ -86,7 +86,7 @@ public class Board {
 	}
 
 	public Piece findPiece(final String input) {
-		final Position position = Position.from(input);
+		final Position position = new Position(input);
 		final int x = position.getX();
 		final int y = position.getY();
 
@@ -101,7 +101,7 @@ public class Board {
 	}
 
 	public void move(final String input, final Piece piece) {
-		final Position position = Position.from(input);
+		final Position position = new Position(input);
 		final int x = position.getX();
 		final int y = position.getY();
 
@@ -162,5 +162,13 @@ public class Board {
 
 		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
 		Collections.reverse(whitePieces);
+	}
+
+	public void move(final String sourcePosition, final String targetPosition) {
+		final Piece sourcePiece = findPiece(sourcePosition);
+		final Piece targetPiece = findPiece(targetPosition);
+
+		move(sourcePosition, sourcePiece);
+		move(targetPosition, targetPiece);
 	}
 }

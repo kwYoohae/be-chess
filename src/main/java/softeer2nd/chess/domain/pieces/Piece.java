@@ -4,10 +4,13 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import java.util.Objects;
 
+import softeer2nd.chess.domain.board.Position;
+
 public class Piece {
 
 	private final Color color;
 	private final Type type;
+	private Position position;
 
 	private Piece(Color color, Type type) {
 		this.color = color;
