@@ -18,4 +18,16 @@ class RowTest {
 			Row.valueOfPosition(targetPosition);
 		});
 	}
+
+	@Test
+	@DisplayName("존재하지 않은 index의 값을 반환할때 오류가 발생한다")
+	void valueOfIndex() {
+		// given
+		int index = 9;
+
+		// when, then
+		assertThrows(IllegalArgumentException.class, () -> {
+			Row.valueOfIndex(index);
+		});
+	}
 }
