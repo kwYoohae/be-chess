@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 
 class BoardTest {
@@ -89,10 +90,10 @@ class BoardTest {
 		Piece whiteRook1 = board.findPiece("a1");
 		Piece whiteRook2 = board.findPiece("h1");
 
-		assertThat(blackRook1).isEqualTo(Piece.createBlackRook());
-		assertThat(blackRook2).isEqualTo(Piece.createBlackRook());
-		assertThat(whiteRook1).isEqualTo(Piece.createWhiteRook());
-		assertThat(whiteRook2).isEqualTo(Piece.createWhiteRook());
+		assertThat(blackRook1).isEqualTo(Piece.createBlackRook(new Position("a8")));
+		assertThat(blackRook2).isEqualTo(Piece.createBlackRook(new Position("h8")));
+		assertThat(whiteRook1).isEqualTo(Piece.createWhiteRook(new Position("a1")));
+		assertThat(whiteRook2).isEqualTo(Piece.createWhiteRook(new Position("h1")));
 	}
 
 	@Test
@@ -121,7 +122,7 @@ class BoardTest {
 		board.initializeEmpty();
 
 		String position = "b5";
-		final Piece piece = Piece.createBlackRook();
+		final Piece piece = Piece.createBlackRook(new Position(position));
 		addPiece(position, piece);
 
 		assertThat(board.findPiece(position)).isEqualTo(piece);
@@ -160,10 +161,10 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b2", Piece.createBlackPawn());
-		addPiece("b7", Piece.createBlackPawn());
-		addPiece("c4", Piece.createWhitePawn());
-		addPiece("h6", Piece.createWhitePawn());
+		addPiece("b2", Piece.createBlackPawn(new Position("b2")));
+		addPiece("b7", Piece.createBlackPawn(new Position("b7")));
+		addPiece("c4", Piece.createWhitePawn(new Position("c4")));
+		addPiece("h6", Piece.createWhitePawn(new Position("h6")));
 
 		// when, then
 		assertThat(board.checkSamePawnInColum(Piece.Color.BLACK)).isTrue();
@@ -177,11 +178,11 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b2", Piece.createBlackPawn());
-		addPiece("a7", Piece.createBlackPawn());
-		addPiece("c4", Piece.createWhitePawn());
-		addPiece("h6", Piece.createWhitePawn());
-		addPiece("f6", Piece.createWhitePawn());
+		addPiece("b2", Piece.createBlackPawn(new Position("b2")));
+		addPiece("a7", Piece.createBlackPawn(new Position("a7")));
+		addPiece("c4", Piece.createWhitePawn(new Position("c4")));
+		addPiece("h6", Piece.createWhitePawn(new Position("h6")));
+		addPiece("f6", Piece.createWhitePawn(new Position("f6")));
 
 		// when, then
 		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(2.0);
@@ -194,15 +195,15 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b6", Piece.createBlackPawn());
-		addPiece("e6", Piece.createBlackQueen());
-		addPiece("b8", Piece.createBlackKing());
-		addPiece("c8", Piece.createBlackRook());
+		addPiece("b6", Piece.createBlackPawn(new Position("b6")));
+		addPiece("e6", Piece.createBlackQueen(new Position("e6")));
+		addPiece("b8", Piece.createBlackKing(new Position("b8")));
+		addPiece("c8", Piece.createBlackRook(new Position("c8")));
 
-		addPiece("f2", Piece.createWhitePawn());
-		addPiece("g2", Piece.createWhitePawn());
-		addPiece("e1", Piece.createWhiteRook());
-		addPiece("f1", Piece.createWhiteKing());
+		addPiece("f2", Piece.createWhitePawn(new Position("f2")));
+		addPiece("g2", Piece.createWhitePawn(new Position("g2")));
+		addPiece("e1", Piece.createWhiteRook(new Position("e1")));
+		addPiece("f1", Piece.createWhiteKing(new Position("f1")));
 
 		// when, then
 		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
@@ -217,22 +218,22 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b8", Piece.createBlackKing());
-		addPiece("c8", Piece.createBlackRook());
-		addPiece("a7", Piece.createBlackPawn());
-		addPiece("c7", Piece.createBlackPawn());
-		addPiece("d7", Piece.createBlackBishop());
-		addPiece("b6", Piece.createBlackPawn());
-		addPiece("e6", Piece.createBlackQueen());
+		addPiece("b8", Piece.createBlackKing(new Position("b8")));
+		addPiece("c8", Piece.createBlackRook(new Position("c8")));
+		addPiece("a7", Piece.createBlackPawn(new Position("a7")));
+		addPiece("c7", Piece.createBlackPawn(new Position("c7")));
+		addPiece("d7", Piece.createBlackBishop(new Position("d7")));
+		addPiece("b6", Piece.createBlackPawn(new Position("b6")));
+		addPiece("e6", Piece.createBlackQueen(new Position("e6")));
 
-		addPiece("f4", Piece.createWhiteKnight());
-		addPiece("g4", Piece.createWhiteQueen());
-		addPiece("f3", Piece.createWhitePawn());
-		addPiece("h3", Piece.createWhitePawn());
-		addPiece("f2", Piece.createWhitePawn());
-		addPiece("g2", Piece.createWhitePawn());
-		addPiece("e1", Piece.createWhiteRook());
-		addPiece("f1", Piece.createWhiteKing());
+		addPiece("f4", Piece.createWhiteKnight(new Position("f4")));
+		addPiece("g4", Piece.createWhiteQueen(new Position("g4")));
+		addPiece("f3", Piece.createWhitePawn(new Position("f3")));
+		addPiece("h3", Piece.createWhitePawn(new Position("h3")));
+		addPiece("f2", Piece.createWhitePawn(new Position("f2")));
+		addPiece("g2", Piece.createWhitePawn(new Position("g2")));
+		addPiece("e1", Piece.createWhiteRook(new Position("e1")));
+		addPiece("f1", Piece.createWhiteKing(new Position("f1")));
 
 		// when, then
 		assertThat(board.calculatePoint(Piece.Color.BLACK)).isEqualTo(20.0);
@@ -248,12 +249,19 @@ class BoardTest {
 		board.initialize();
 
 		// when, then
-		assertThat(board.getBlackPieces()).contains(Piece.createBlackBishop(),
-			Piece.createBlackRook(), Piece.createBlackQueen(), Piece.createBlackKing(), Piece.createBlackKnight(),
-			Piece.createBlackPawn());
-		assertThat(board.getWhitePieces()).contains(Piece.createWhiteBishop(),
-			Piece.createWhiteRook(), Piece.createWhiteQueen(), Piece.createWhiteKing(), Piece.createWhiteKnight(),
-			Piece.createWhitePawn());
+		assertThat(board.getBlackPieces()).contains(Piece.createBlackBishop(new Position("b8")),
+			Piece.createBlackRook(new Position("c8")),
+			Piece.createBlackQueen(new Position("e8")),
+			Piece.createBlackKing(new Position("d8")),
+			Piece.createBlackKnight(new Position("f8")),
+			Piece.createBlackPawn(new Position("a8")));
+		assertThat(board.getWhitePieces()).contains(
+			Piece.createWhiteBishop(new Position("b1")),
+			Piece.createWhiteRook(new Position("c1")),
+			Piece.createWhiteQueen(new Position("e1")),
+			Piece.createWhiteKing(new Position("d1")),
+			Piece.createWhiteKnight(new Position("f1")),
+			Piece.createWhitePawn(new Position("a1")));
 
 	}
 
@@ -266,20 +274,20 @@ class BoardTest {
 		board.sortAscendingAllPieces();
 		// when, then
 		assertThat(board.getBlackPieces()).containsExactly(
-			Piece.createBlackKing(),
-			Piece.createBlackPawn(),
-			Piece.createBlackKnight(),
-			Piece.createBlackBishop(),
-			Piece.createBlackRook(),
-			Piece.createBlackQueen());
+			Piece.createBlackKing(new Position("d8")),
+			Piece.createBlackPawn(new Position("a8")),
+			Piece.createBlackKnight(new Position("f8")),
+			Piece.createBlackBishop(new Position("b8")),
+			Piece.createBlackRook(new Position("c8")),
+			Piece.createBlackQueen(new Position("e8")));
 
 		assertThat(board.getWhitePieces()).containsExactly(
-			Piece.createWhiteKing(),
-			Piece.createWhitePawn(),
-			Piece.createWhiteKnight(),
-			Piece.createWhiteBishop(),
-			Piece.createWhiteRook(),
-			Piece.createWhiteQueen());
+			Piece.createWhiteKing(new Position("d1")),
+			Piece.createWhitePawn(new Position("a1")),
+			Piece.createWhiteKnight(new Position("f1")),
+			Piece.createWhiteBishop(new Position("b1")),
+			Piece.createWhiteRook(new Position("c1")),
+			Piece.createWhiteQueen(new Position("e1")));
 	}
 
 	@Test
@@ -291,20 +299,20 @@ class BoardTest {
 		board.sortDescendingAllPieces();
 		// when, then
 		assertThat(board.getBlackPieces()).containsExactly(
-			Piece.createBlackQueen(),
-			Piece.createBlackRook(),
-			Piece.createBlackBishop(),
-			Piece.createBlackKnight(),
-			Piece.createBlackPawn(),
-			Piece.createBlackKing());
+			Piece.createBlackQueen(new Position("e8")),
+			Piece.createBlackRook(new Position("c8")),
+			Piece.createBlackBishop(new Position("b8")),
+			Piece.createBlackKnight(new Position("f8")),
+			Piece.createBlackPawn(new Position("a8")),
+			Piece.createBlackKing(new Position("d8")));
 
 		assertThat(board.getWhitePieces()).containsExactly(
-			Piece.createWhiteQueen(),
-			Piece.createWhiteRook(),
-			Piece.createWhiteBishop(),
-			Piece.createWhiteKnight(),
-			Piece.createWhitePawn(),
-			Piece.createWhiteKing());
+			Piece.createWhiteQueen(new Position("e1")),
+			Piece.createWhiteRook(new Position("c1")),
+			Piece.createWhiteBishop(new Position("b1")),
+			Piece.createWhiteKnight(new Position("f1")),
+			Piece.createWhitePawn(new Position("a1")),
+			Piece.createWhiteKing(new Position("d1")));
 	}
 
 	@Test
@@ -320,8 +328,8 @@ class BoardTest {
 		board.move(sourcePosition, targetPosition);
 
 		// then
-		// assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
-		// assertThat(Piece.createWhitePawn(new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));g
+		assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
+		assertThat(Piece.createWhitePawn(new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));
 	}
 
 	private void addPiece(String position, Piece piece) {

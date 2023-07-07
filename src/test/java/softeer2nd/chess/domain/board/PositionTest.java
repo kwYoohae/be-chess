@@ -6,6 +6,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.board.position.Position;
+
 class PositionTest {
 
 	@Test

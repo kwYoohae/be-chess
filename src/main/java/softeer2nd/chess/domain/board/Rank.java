@@ -8,10 +8,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.domain.board.position.Row;
 import softeer2nd.chess.domain.pieces.Piece;
 
 public class Rank {
 
+	private static final String BLACK_PIECE_START_INDEX = "8";
+	private static final String WHITE_PIECE_START_INDEX = "1";
 	private static final int MAX_ROW = 8;
 	private static final String BLACK_LINE = "........";
 	private static final String EMPTY_STRING = "";
@@ -21,34 +25,49 @@ public class Rank {
 		this.row = row;
 	}
 
-	public static Rank initializePawn(Color color) {
+	public static Rank initializePawn(Color color, int columnIndex) {
 		final List<Piece> pawns = IntStream.range(0, MAX_ROW)
-			.mapToObj((i) -> createPiece(color, Type.PAWN))
+			.mapToObj((i) -> {
+				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
+				return createPiece(color, Type.PAWN, new Position(position));
+			})
 			.collect(Collectors.toList());
 
 		return new Rank(pawns);
 	}
 
-	public static Rank initializeBlank() {
+	public static Rank initializeBlank(int columnIndex) {
 		final List<Piece> blanks = IntStream.range(0, MAX_ROW)
-			.mapToObj((i) -> Piece.createBlank())
+			.mapToObj((i) -> {
+				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
+				return Piece.createBlank(new Position(position));
+			})
 			.collect(Collectors.toList());
 
 		return new Rank(blanks);
 	}
 
 	public static Rank initializeOtherPieces(Color color) {
+		String startIndex = getStartIndex(color);
+
 		List<Piece> pieces = new ArrayList<>();
-		pieces.add(createPiece(color, Type.ROOK));
-		pieces.add(createPiece(color, Type.KNIGHT));
-		pieces.add(createPiece(color, Type.BISHOP));
-		pieces.add(createPiece(color, Type.QUEEN));
-		pieces.add(createPiece(color, Type.KING));
-		pieces.add(createPiece(color, Type.BISHOP));
-		pieces.add(createPiece(color, Type.KNIGHT));
-		pieces.add(createPiece(color, Type.ROOK));
+		pieces.add(createPiece(color, Type.ROOK, new Position(Row.A.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.KNIGHT, new Position(Row.B.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.BISHOP, new Position(Row.C.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.QUEEN, new Position(Row.D.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.KING, new Position(Row.E.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.BISHOP, new Position(Row.F.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.KNIGHT, new Position(Row.G.getPosition() + startIndex)));
+		pieces.add(createPiece(color, Type.ROOK, new Position(Row.H.getPosition() + startIndex)));
 
 		return new Rank(pieces);
+	}
+
+	private static String getStartIndex(final Color color) {
+		String startIndex = WHITE_PIECE_START_INDEX;
+		if (color == Color.BLACK)
+			startIndex = BLACK_PIECE_START_INDEX;
+		return startIndex;
 	}
 
 	public long pieceCount() {
