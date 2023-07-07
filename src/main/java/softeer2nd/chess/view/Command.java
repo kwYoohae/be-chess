@@ -18,9 +18,8 @@ public enum Command {
 	}
 
 	public static Command valueOfInput(String input) {
-		final String[] inputs = input.split(" ");
 		return Arrays.stream(values())
-			.filter(value -> value.command.equals(inputs[0]))
+			.filter(value -> input.startsWith(value.command))
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException(NOT_EXECUTE_COMMAND));
 	}
