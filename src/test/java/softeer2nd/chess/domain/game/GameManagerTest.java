@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.view.InputView;
-import softeer2nd.chess.view.OutputView;
+import softeer2nd.chess.view.ChessView;
 
-class GameTest {
+class GameManagerTest {
 
 	@Test
 	@DisplayName("move를 할 수 있어야 한다")
@@ -33,10 +33,10 @@ class GameTest {
 		OutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 
-		Game game = new Game(new InputView(new Scanner(inputStream)), new OutputView(), board);
+		GameManager gameManager = new GameManager(new InputView(new Scanner(inputStream)), new ChessView(), board);
 
 		// when
-		game.startGame();
+		gameManager.startGame();
 
 		// then
 		assertThat(outputStream.toString())

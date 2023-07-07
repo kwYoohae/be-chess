@@ -3,17 +3,17 @@ package softeer2nd.chess.domain.game;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.view.Command;
 import softeer2nd.chess.view.InputView;
-import softeer2nd.chess.view.OutputView;
+import softeer2nd.chess.view.ChessView;
 
-public class Game {
+public class GameManager {
 
 	private final InputView inputView;
-	private final OutputView outputView;
+	private final ChessView chessView;
 	private final Board board;
 
-	public Game(final InputView inputView, OutputView outputView, Board board) {
+	public GameManager(final InputView inputView, final ChessView chessView, final Board board) {
 		this.inputView = inputView;
-		this.outputView = outputView;
+		this.chessView = chessView;
 		this.board = board;
 	}
 
@@ -24,7 +24,7 @@ public class Game {
 			if (gameState == Command.START) {
 				initializeGame();
 			} else if (gameState == Command.END) {
-				outputView.gameEnd();
+				chessView.gameEnd();
 				break;
 			} else if (gameState == Command.MOVE) {
 				movePiece(command);
@@ -33,9 +33,9 @@ public class Game {
 	}
 
 	private void initializeGame() {
-		outputView.gameStart();
+		chessView.gameStart();
 		board.initialize();
-		outputView.printBoard(board);
+		chessView.printBoard(board);
 	}
 
 	private void movePiece(String command) {
@@ -44,6 +44,6 @@ public class Game {
 		String destinationPosition = commands[2];
 
 		board.move(sourcePosition, destinationPosition);
-		outputView.printBoard(board);
+		chessView.printBoard(board);
 	}
 }
