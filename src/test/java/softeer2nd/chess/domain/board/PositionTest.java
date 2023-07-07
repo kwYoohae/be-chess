@@ -15,7 +15,7 @@ class PositionTest {
 		String input = "z4";
 
 		// when, then
-		Assertions.assertThatThrownBy(() -> Position.from(input))
+		Assertions.assertThatThrownBy(() -> new Position(input))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(POSITION_INPUT_IS_WRONG);
 	}
@@ -28,11 +28,11 @@ class PositionTest {
 		String lessInput = "1";
 
 		// when, then
-		Assertions.assertThatThrownBy(() -> Position.from(manyInput))
+		Assertions.assertThatThrownBy(() -> new Position(manyInput))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);
 
-		Assertions.assertThatThrownBy(() -> Position.from(lessInput))
+		Assertions.assertThatThrownBy(() -> new Position(lessInput))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);
 	}
