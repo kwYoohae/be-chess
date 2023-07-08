@@ -97,7 +97,8 @@ public class Board {
 		final int x = position.getX();
 		final int y = position.getY();
 
-		return boards.get(y).getPiece(x);
+		final Rank rank = boards.get(y);
+		return rank.getPiece(x);
 	}
 
 	public void initializeEmpty() {
@@ -112,7 +113,8 @@ public class Board {
 		final int x = position.getX();
 		final int y = position.getY();
 
-		boards.get(y).move(x, piece);
+		final Rank rank = boards.get(y);
+		rank.move(x, piece);
 	}
 
 	public boolean checkSamePawnInColum(final Piece.Color color) {
