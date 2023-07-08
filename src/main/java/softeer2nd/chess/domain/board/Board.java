@@ -132,32 +132,6 @@ public class Board {
 			.count();
 	}
 
-	public double calculatePoint(final Piece.Color color) {
-		return calculatePawnPoint(color) + calculateExceptPawnPoint(color);
-	}
-
-	private double calculatePawnPoint(Piece.Color color) {
-		double pawnScore = 0.0d;
-		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			final long pawnCount = countPawnInColumn(color, i);
-			pawnScore += calculatePawnPointInLine(pawnCount);
-		}
-		return pawnScore;
-	}
-
-	private double calculatePawnPointInLine(long pawnCount) {
-		if (pawnCount > 1)
-			return pawnCount * Piece.Type.PAWN.getDefaultPoint() / 2;
-		return pawnCount * Piece.Type.PAWN.getDefaultPoint();
-	}
-
-	private double calculateExceptPawnPoint(Piece.Color color) {
-		return boards.stream()
-			.map(rank -> rank.getScoreExceptPawnInRank(color))
-			.reduce(0.0d, Double::sum);
-
-	}
-
 	public void sortAscendingAllPieces() {
 		blackPieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
 		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
