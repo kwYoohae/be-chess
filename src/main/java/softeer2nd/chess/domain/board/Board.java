@@ -11,7 +11,7 @@ import softeer2nd.chess.domain.pieces.Piece;
 
 public class Board {
 
-	private static final int BOARD_MAX_INDEX = 8;
+	public static final int BOARD_MAX_INDEX = 8;
 	private static final int BLANK_START_INDEX = 3;
 	private static final int BLANK_END_INDEX = 6;
 	private static final int WHITE_PAWN_START_INDEX = 2;
@@ -123,7 +123,7 @@ public class Board {
 		return false;
 	}
 
-	private long countPawnInColumn(final Piece.Color color, int xPos) {
+	public long countPawnInColumn(final Piece.Color color, int xPos) {
 		return IntStream.range(0, BOARD_MAX_INDEX)
 			.filter((i) -> {
 				final Rank rank = boards.get(i);
@@ -176,5 +176,9 @@ public class Board {
 
 		move(targetPosition, sourcePiece);
 		move(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
+	}
+
+	public List<Rank> getBoards() {
+		return Collections.unmodifiableList(boards);
 	}
 }
