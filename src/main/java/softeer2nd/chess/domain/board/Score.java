@@ -1,7 +1,12 @@
 package softeer2nd.chess.domain.board;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 
 public class Score {
@@ -36,5 +41,22 @@ public class Score {
 		return boards.stream()
 			.map(rank -> rank.getScoreExceptPawnInRank(color))
 			.reduce(0.0d, Double::sum);
+	}
+
+	public List<Piece> getPiecesInBoard(Piece.Color color) {
+		List<Rank> boards = board.getBoards();
+		return boards.stream()
+			.flatMap(rank -> rank.getRow().stream())
+			.filter(piece -> piece.getColor() == color)
+			.collect(Collectors.toList());
+	}
+
+	public void sortAscendingAllPiece(List<Piece> pieces) {
+		pieces.sort(Comparator.comparing(a -> a.getType().getDefaultPoint()));
+	}
+
+	public void sortDescendingAllPieces(List<Piece> pieces) {
+		pieces.sort(Comparator.comparing(a -> a.getType().getDefaultPoint()));
+		Collections.reverse(pieces);
 	}
 }

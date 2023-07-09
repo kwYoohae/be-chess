@@ -4,6 +4,7 @@ import static softeer2nd.chess.domain.pieces.Piece.*;
 import static softeer2nd.chess.utils.StringUtils.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -68,6 +69,10 @@ public class Rank {
 		if (color == Color.BLACK)
 			startIndex = BLACK_PIECE_START_INDEX;
 		return startIndex;
+	}
+
+	public List<Piece> getRow() {
+		return Collections.unmodifiableList(row);
 	}
 
 	public long pieceCount() {

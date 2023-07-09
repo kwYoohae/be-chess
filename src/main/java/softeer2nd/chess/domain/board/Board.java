@@ -18,8 +18,6 @@ public class Board {
 	private static final int BLACK_PAWN_START_INDEX = 7;
 
 	private final List<Rank> boards = new ArrayList<>();
-	private final List<Piece> blackPieces = new ArrayList<>();
-	private final List<Piece> whitePieces = new ArrayList<>();
 
 	public void initialize() {
 		boards.clear();
@@ -28,37 +26,11 @@ public class Board {
 		initializeBlanks();
 		boards.add(Rank.initializePawn(Piece.Color.BLACK, BLACK_PAWN_START_INDEX));
 		boards.add(Rank.initializeOtherPieces(Piece.Color.BLACK));
-
-		initializePiece();
-	}
-
-	private void initializePiece() {
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.PAWN, new Position("a8")));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.BISHOP, new Position("b8")));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.ROOK, new Position("c8")));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KING, new Position("d8")));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.QUEEN, new Position("e8")));
-		blackPieces.add(Piece.createPiece(Piece.Color.BLACK, Piece.Type.KNIGHT, new Position("f8")));
-
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.PAWN, new Position("a1")));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.BISHOP, new Position("b1")));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.ROOK, new Position("c1")));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KING, new Position("d1")));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.QUEEN, new Position("e1")));
-		whitePieces.add(Piece.createPiece(Piece.Color.WHITE, Piece.Type.KNIGHT, new Position("f1")));
 	}
 
 	private void initializeBlanks() {
 		IntStream.range(BLANK_START_INDEX, BLANK_END_INDEX + 1)
 			.forEach((index) -> boards.add(Rank.initializeBlank(index)));
-	}
-
-	public List<Piece> getBlackPieces() {
-		return Collections.unmodifiableList(blackPieces);
-	}
-
-	public List<Piece> getWhitePieces() {
-		return Collections.unmodifiableList(whitePieces);
 	}
 
 	public String getPawnsResult(Piece.Color color) {
@@ -132,19 +104,6 @@ public class Board {
 				return rank.isPawn(xPos, color);
 			})
 			.count();
-	}
-
-	public void sortAscendingAllPieces() {
-		blackPieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
-		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
-	}
-
-	public void sortDescendingAllPieces() {
-		blackPieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
-		Collections.reverse(blackPieces);
-
-		whitePieces.sort(Comparator.comparingDouble(a -> a.getType().getDefaultPoint()));
-		Collections.reverse(whitePieces);
 	}
 
 	public void move(final String sourcePosition, final String targetPosition) {
