@@ -17,7 +17,7 @@ public class Rank {
 	private static final String BLACK_PIECE_START_INDEX = "8";
 	private static final String WHITE_PIECE_START_INDEX = "1";
 	private static final int MAX_ROW = 8;
-	private static final String BLACK_LINE = "........";
+	private static final String BLANK_LINE = "........";
 	private static final String EMPTY_STRING = "";
 	private final List<Piece> row;
 
@@ -86,7 +86,7 @@ public class Rank {
 
 	public String showLineWantPiece(Type type, Color color) {
 		final String line = getLineSamePiece(type, color);
-		if (line.equals(BLACK_LINE)) {
+		if (line.equals(BLANK_LINE)) {
 			return EMPTY_STRING;
 		}
 		return appendNewLine(line);
