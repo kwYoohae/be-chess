@@ -166,6 +166,14 @@ public abstract class Piece {
 		public static List<Direction> diagonalDirection() {
 			return Arrays.asList(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST);
 		}
+
+		public static List<Direction> whitePawnDirection() {
+			return Arrays.asList(NORTH, NORTHEAST, NORTHWEST);
+		}
+
+		public static List<Direction> blackPawnDirection() {
+			return Arrays.asList(SOUTH, SOUTHWEST, SOUTHEAST);
+		}
 	}
 
 }
