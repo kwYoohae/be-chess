@@ -102,7 +102,7 @@ public class Board {
 		final Piece sourcePiece = findPiece(sourcePosition);
 
 		// TODO: throw 어디서 할건지 리팩토링 하기
-		if (!sourcePiece.checkPieceCanGo(new Position(sourcePosition), new Position(targetPosition), )) {
+		if (!sourcePiece.checkPieceCanGo(new Position(sourcePosition), new Position(targetPosition))) {
 			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
 		validateSamePieceMovePosition(sourcePosition, targetPosition);
