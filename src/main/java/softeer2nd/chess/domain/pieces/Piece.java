@@ -137,7 +137,17 @@ public abstract class Piece {
 		SOUTH(0, -1),
 		SOUTHWEST(-1,-1),
 		WEST(-1, 0),
-		NORTHWEST(-1, 1);
+		NORTHWEST(-1, 1),
+
+		NNE(1, 2),
+		NNW(-1, 2),
+		SSE(1, -2),
+		SSW(-1, -2),
+		EEN(2, 1),
+		EES(2, -1),
+		WWN(-2, 1),
+		WWS(-2, -1);
+
 
 		private final int xDegree;
 		private final int yDegree;
@@ -173,6 +183,10 @@ public abstract class Piece {
 
 		public static List<Direction> blackPawnDirection() {
 			return Arrays.asList(SOUTH, SOUTHWEST, SOUTHEAST);
+		}
+
+		public static List<Direction> knightDirection() {
+			return Arrays.asList(NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS);
 		}
 	}
 
