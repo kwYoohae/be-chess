@@ -32,10 +32,7 @@ public class Pawn extends Piece{
 		final int subtractY = targetPosition.getY() - sourcePosition.getY();
 		final int subtractX = targetPosition.getX() - sourcePosition.getX();
 
-		if (subtractX == direction.getXDegree() * 2 && subtractY == direction.getYDegree() * 2) {
-			return true;
-		}
-		return false;
+		return subtractX == direction.getXDegree() * 2 && subtractY == direction.getYDegree() * 2;
 	}
 
 	private void setPawnDirection(Color color) {
