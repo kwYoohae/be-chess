@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 class BishopTest {
 
@@ -35,5 +36,22 @@ class BishopTest {
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(bishop);
+	}
+
+	@ParameterizedTest
+	@DisplayName("비숍은 대각선 이외에 다른곳으로 움직일 수 없다")
+	@ValueSource(strings = {"e4", "c4", "d5", "d3"})
+	void canNotGo(String destination) {
+		// given
+		board.initializeEmpty();
+
+		String position = "d4";
+		final Piece bishop = Piece.createBishop(Piece.Color.WHITE, new Position(position));
+		board.move(position, bishop);
+
+		// when
+		assertThatThrownBy(() -> board.move(position, destination))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
 }
