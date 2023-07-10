@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.exception.ExceptionMessage;
 import softeer2nd.chess.view.ChessView;
 
 class BoardTest {
@@ -190,6 +191,20 @@ class BoardTest {
 		// then
 		assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
 		assertThat(Piece.createPawn(Piece.Color.WHITE, new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));
+	}
+
+	@Test
+	@DisplayName("기물은 자기 자신의 위치로 움직일 수 없습니다")
+	void moveSelfPosition() {
+		// given
+		board.initialize();
+
+		String position = "b2";
+
+		// when, then
+		assertThatThrownBy(() -> board.move(position, position))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_NOT_MOVE_SELF_POSITION);
 	}
 
 	private void addPiece(String position, Piece piece) {
