@@ -1,5 +1,7 @@
 package softeer2nd.chess.domain.board;
 
+import static softeer2nd.chess.exception.ExceptionMessage.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -98,6 +100,10 @@ public class Board {
 
 	public void move(final String sourcePosition, final String targetPosition) {
 		final Piece sourcePiece = findPiece(sourcePosition);
+
+		if (!sourcePiece.checkPieceCanGo(new Position(sourcePosition), new Position(targetPosition))) {
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+		}
 
 		move(targetPosition, sourcePiece);
 		move(sourcePosition, Piece.createBlank(new Position(sourcePosition)));

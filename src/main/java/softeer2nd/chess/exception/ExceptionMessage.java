@@ -6,6 +6,7 @@ public final class ExceptionMessage {
 	public static final String NOT_EXIST_PIECE = "존재하지 않는 기물입니다";
 	public static final String POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH = "위치의 값을 너무 많이 또는 적게 입력하셨습니다";
 	public static final String POSITION_INPUT_IS_WRONG = "위치의 값은 a~h + 1~8만 될 수 있습니다 (ex. a8)";
+	public static final String PIECE_CAN_NOT_GO_DESTINATION_POSITION = "이 기물은 해당 장소로 갈 수 없습니다";
 
 	private ExceptionMessage() {
 		throw new IllegalStateException(EXCEPTION_MESSAGE_CLASS_MUST_NOT_INSTANTIATE);
