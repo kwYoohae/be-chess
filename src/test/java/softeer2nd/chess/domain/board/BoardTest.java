@@ -93,10 +93,10 @@ class BoardTest {
 		Piece whiteRook1 = board.findPiece("a1");
 		Piece whiteRook2 = board.findPiece("h1");
 
-		assertThat(blackRook1).isEqualTo(Piece.createBlackRook(new Position("a8")));
-		assertThat(blackRook2).isEqualTo(Piece.createBlackRook(new Position("h8")));
-		assertThat(whiteRook1).isEqualTo(Piece.createWhiteRook(new Position("a1")));
-		assertThat(whiteRook2).isEqualTo(Piece.createWhiteRook(new Position("h1")));
+		assertThat(blackRook1).isEqualTo(Piece.createRook(Piece.Color.BLACK, new Position("a8")));
+		assertThat(blackRook2).isEqualTo(Piece.createRook(Piece.Color.BLACK, new Position("h8")));
+		assertThat(whiteRook1).isEqualTo(Piece.createRook(Piece.Color.WHITE, new Position("a1")));
+		assertThat(whiteRook2).isEqualTo(Piece.createRook(Piece.Color.WHITE, new Position("h1")));
 	}
 
 	@Test
@@ -125,7 +125,7 @@ class BoardTest {
 		board.initializeEmpty();
 
 		String position = "b5";
-		final Piece piece = Piece.createBlackRook(new Position(position));
+		final Piece piece = Piece.createRook(Piece.Color.BLACK, new Position(position));
 		addPiece(position, piece);
 
 		assertThat(board.findPiece(position)).isEqualTo(piece);
@@ -164,10 +164,10 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b2", Piece.createBlackPawn(new Position("b2")));
-		addPiece("b7", Piece.createBlackPawn(new Position("b7")));
-		addPiece("c4", Piece.createWhitePawn(new Position("c4")));
-		addPiece("h6", Piece.createWhitePawn(new Position("h6")));
+		addPiece("b2", Piece.createPawn(Piece.Color.BLACK, new Position("b2")));
+		addPiece("b7", Piece.createPawn(Piece.Color.BLACK, new Position("b7")));
+		addPiece("c4", Piece.createPawn(Piece.Color.WHITE, new Position("c4")));
+		addPiece("h6", Piece.createPawn(Piece.Color.WHITE, new Position("h6")));
 
 		// when, then
 		assertThat(board.checkSamePawnInColum(Piece.Color.BLACK)).isTrue();
@@ -189,7 +189,7 @@ class BoardTest {
 
 		// then
 		assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
-		assertThat(Piece.createWhitePawn(new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));
+		assertThat(Piece.createPawn(Piece.Color.WHITE, new Position(targetPosition))).isEqualTo(board.findPiece(targetPosition));
 	}
 
 	private void addPiece(String position, Piece piece) {

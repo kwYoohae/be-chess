@@ -30,7 +30,7 @@ public class Rank {
 		final List<Piece> pawns = IntStream.range(0, MAX_ROW)
 			.mapToObj((i) -> {
 				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
-				return createPiece(color, Type.PAWN, new Position(position));
+				return createPawn(color, new Position(position));
 			})
 			.collect(Collectors.toList());
 
@@ -52,14 +52,14 @@ public class Rank {
 		String startIndex = getStartIndex(color);
 
 		List<Piece> pieces = new ArrayList<>();
-		pieces.add(createPiece(color, Type.ROOK, new Position(Row.A.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.KNIGHT, new Position(Row.B.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.BISHOP, new Position(Row.C.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.QUEEN, new Position(Row.D.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.KING, new Position(Row.E.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.BISHOP, new Position(Row.F.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.KNIGHT, new Position(Row.G.getPosition() + startIndex)));
-		pieces.add(createPiece(color, Type.ROOK, new Position(Row.H.getPosition() + startIndex)));
+		pieces.add(createRook(color, new Position(Row.A.getPosition() + startIndex)));
+		pieces.add(createKnight(color, new Position(Row.B.getPosition() + startIndex)));
+		pieces.add(createBishop(color, new Position(Row.C.getPosition() + startIndex)));
+		pieces.add(createQueen(color, new Position(Row.D.getPosition() + startIndex)));
+		pieces.add(createKing(color, new Position(Row.E.getPosition() + startIndex)));
+		pieces.add(createBishop(color, new Position(Row.F.getPosition() + startIndex)));
+		pieces.add(createKnight(color, new Position(Row.G.getPosition() + startIndex)));
+		pieces.add(createRook(color, new Position(Row.H.getPosition() + startIndex)));
 
 		return new Rank(pieces);
 	}
