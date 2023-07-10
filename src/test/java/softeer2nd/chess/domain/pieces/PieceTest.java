@@ -71,14 +71,17 @@ class PieceTest {
         String pawnPosition = "d5";
         String kingPosition = "d6";
         String rookPosition = "c5";
+        String bishopPosition = "e6";
         final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(queenPosition));
         final Piece king = Piece.createKing(Piece.Color.WHITE, new Position(kingPosition));
         final Piece pawn = Piece.createPawn(Piece.Color.WHITE, new Position(pawnPosition));
         final Piece rook = Piece.createRook(Piece.Color.WHITE, new Position(rookPosition));
+        final Piece bishop = Piece.createBishop(Piece.Color.WHITE, new Position(bishopPosition));
         board.move(queenPosition, queen);
         board.move(pawnPosition, pawn);
         board.move(kingPosition, king);
         board.move(rookPosition, rook);
+        board.move(bishopPosition, bishop);
 
         // when
         assertThatThrownBy(() -> board.move(kingPosition, pawnPosition))
@@ -96,6 +99,11 @@ class PieceTest {
         assertThatThrownBy(() -> board.move(rookPosition, pawnPosition))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+
+        assertThatThrownBy(() -> board.move(bishopPosition, pawnPosition))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+
 
     }
 
