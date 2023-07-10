@@ -2,6 +2,7 @@ package softeer2nd.chess.domain.pieces;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +14,7 @@ public abstract class Piece {
 	protected Color color;
 	protected Type type;
 	protected Position position;
+	protected List<Direction> direction = new ArrayList<>();
 
 	public static Piece createPawn(Color color, Position position) {
 		validatePiece(color);
@@ -79,6 +81,8 @@ public abstract class Piece {
 	public Position getPosition() {
 		return position;
 	}
+
+	public abstract boolean checkPieceCanGo(Position sourcePosition, Position destinationPosition);
 
 	@Override
 	public boolean equals(final Object o) {
