@@ -2,7 +2,6 @@ package softeer2nd.chess.domain.board;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -40,15 +39,6 @@ public class Board {
 			sb.append(row.showLineWantPiece(Piece.Type.PAWN, color));
 		}
 		sb.deleteCharAt(sb.length() - 1);
-		return sb.toString();
-	}
-
-	public String showBoard() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = BOARD_MAX_INDEX - 1; i >= 0; i--) {
-			final Rank row = boards.get(i);
-			sb.append(row.showPieceLine());
-		}
 		return sb.toString();
 	}
 
@@ -115,5 +105,9 @@ public class Board {
 
 	public List<Rank> getBoards() {
 		return Collections.unmodifiableList(boards);
+	}
+
+	public Rank getRankInIndex(int index) {
+		return boards.get(index);
 	}
 }

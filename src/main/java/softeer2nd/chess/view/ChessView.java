@@ -1,21 +1,22 @@
 package softeer2nd.chess.view;
 
-import softeer2nd.chess.domain.Chess;
+import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.domain.board.Rank;
 
 public class ChessView {
 
-	private static final String START_GAME_MESSAGE = "게임을 시작합니다";
-	private static final String END_GAME_MESSAGE = "게임을 종료합니다";
+	private final Board board;
 
-	public void gameStart() {
-		System.out.println(START_GAME_MESSAGE);
+	public ChessView(Board board) {
+		this.board = board;
 	}
 
-	public void printBoard(Chess chess) {
-		System.out.println(chess.showBoard());
-	}
-
-	public void gameEnd() {
-		System.out.println(END_GAME_MESSAGE);
+	public String showBoard() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = Board.BOARD_MAX_INDEX - 1; i >= 0; i--) {
+			final Rank rank = board.getRankInIndex(i);
+			sb.append(rank.showPieceLine());
+		}
+		return sb.toString();
 	}
 }
