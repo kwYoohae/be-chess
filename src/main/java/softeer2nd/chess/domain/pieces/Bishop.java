@@ -20,23 +20,4 @@ public class Bishop extends Piece{
 			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
 	}
-
-	private boolean checkRecursive(final int subtractX, final int subtractY, final int multiplyNumber) {
-		if (multiplyNumber == 8)
-			return false;
-
-		final boolean isCanGo = directions.stream()
-			.anyMatch(direction -> {
-				final int xDegree = direction.getXDegree() * multiplyNumber;
-				final int yDegree = direction.getYDegree() * multiplyNumber;
-
-				return xDegree == subtractX && subtractY == yDegree;
-			});
-
-		if (!isCanGo) {
-			return checkRecursive(subtractX, subtractY, multiplyNumber + 1);
-		}
-
-		return true;
-	}
 }

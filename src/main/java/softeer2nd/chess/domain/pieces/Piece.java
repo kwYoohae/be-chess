@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 public abstract class Piece {
 
@@ -86,6 +87,37 @@ public abstract class Piece {
 	}
 
 	public abstract void checkPieceCanGo(final Position sourcePosition, final Position targetPosition);
+
+	protected boolean checkRecursive(final int subtractX, final int subtractY, final int multiplyNumber) {
+		if (multiplyNumber == 8)
+			return false;
+
+		final boolean isCanGo = directions.stream()
+			.anyMatch(direction -> {
+				final int xDegree = direction.getXDegree() * multiplyNumber;
+				final int yDegree = direction.getYDegree() * multiplyNumber;
+
+				return xDegree == subtractX && subtractY == yDegree;
+			});
+
+		if (!isCanGo) {
+			return checkRecursive(subtractX, subtractY, multiplyNumber + 1);
+		}
+
+		return true;
+	}
+
+	protected void validatePieceMove(final Position sourcePosition, final Position targetPosition) {
+		final int subtractX = targetPosition.getX() - sourcePosition.getX();
+		final int subtractY = targetPosition.getY() - sourcePosition.getY();
+
+		final boolean isCanGo = directions.stream()
+			.anyMatch(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY);
+
+		if (!isCanGo) {
+			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+		}
+	}
 
 	@Override
 	public boolean equals(final Object o) {

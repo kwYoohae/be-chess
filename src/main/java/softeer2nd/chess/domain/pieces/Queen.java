@@ -21,23 +21,4 @@ public class Queen extends Piece{
 			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
 	}
-
-	private boolean checkRecursive(final int subtractX, final int subtractY, final int mulNumber) {
-		if (mulNumber == 8)
-			return false;
-
-		final boolean isCanGo = directions.stream()
-			.anyMatch(direction -> {
-				final int xDegree = direction.getXDegree() * mulNumber;
-				final int yDegree = direction.getYDegree() * mulNumber;
-
-				return xDegree == subtractX && yDegree == subtractY;
-			});
-
-		if (!isCanGo) {
-			return checkRecursive(subtractX, subtractY, mulNumber + 1);
-		}
-
-		return true;
-	}
 }
