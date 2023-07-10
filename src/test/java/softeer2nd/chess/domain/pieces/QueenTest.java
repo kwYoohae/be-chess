@@ -5,6 +5,7 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -41,7 +42,7 @@ class QueenTest {
 	}
 
 	@ParameterizedTest
-	@DisplayName("퀸은 대간선, 상하좌우 이외의 곳은 움직일 수 없어야한다")
+	@DisplayName("퀸은 대각선, 상하좌우 이외의 곳은 움직일 수 없어야한다")
 	@ValueSource(strings = {"f3", "b3", "b5", "f5"})
 	void canNotGo(String destination) {
 		// given
@@ -58,5 +59,24 @@ class QueenTest {
 		assertThatThrownBy(() -> board.move(position, destination))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+	}
+
+	@Test
+	@DisplayName("퀸은 같은 편의 기물로는 이동할 수 없다")
+	void canNotGoSameColor() {
+		// given
+		board.initializeEmpty();
+
+		String position = "d4";
+		String pawnPosition = "d5";
+		final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(position));
+		final Piece pawn = Piece.createPawn(Piece.Color.WHITE, new Position(pawnPosition));
+		board.move(position, queen);
+		board.move(pawnPosition, pawn);
+
+		// when, then
+		assertThatThrownBy(() -> board.move(position, pawnPosition))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
 	}
 }
