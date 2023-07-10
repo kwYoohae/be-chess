@@ -1,6 +1,6 @@
 package softeer2nd.chess.domain.pieces;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 class RookTest {
 
@@ -34,6 +35,23 @@ class RookTest {
 		board.move(position, destination);
 
 		// then
-		assertEquals(board.findPiece(destination), rook);
+		assertThat(board.findPiece(destination)).isEqualTo(rook);
+	}
+
+	@ParameterizedTest
+	@DisplayName("룩은 대각선으로는 움직일 수 없다")
+	@ValueSource(strings = {"e5", "e3", "c3", "c5"})
+	void canNotGo(String destination) {
+		// given
+		board.initializeEmpty();
+
+		String position = "d4";
+		final Piece rook = Piece.createRook(Piece.Color.WHITE, new Position(position));
+		board.move(position, rook);
+
+		// when
+		assertThatThrownBy(() -> board.move(position, destination))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
 }
