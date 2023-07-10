@@ -133,7 +133,8 @@ public abstract class Piece {
 		SOUTHEAST(1, -1),
 		SOUTH(0, -1),
 		SOUTHWEST(-1,-1),
-		WEST(-1, 0);
+		WEST(-1, 0),
+		NORTHWEST(-1, 1);
 
 		private final int xDegree;
 		private final int yDegree;
@@ -152,7 +153,7 @@ public abstract class Piece {
 		}
 
 		public static List<Direction> everyDirection() {
-			return Arrays.asList(NORTH, EAST, SOUTH, WEST, NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHEAST);
+			return Arrays.asList(NORTH, EAST, SOUTH, WEST, NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHWEST);
 		}
 	}
 
