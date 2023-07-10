@@ -78,6 +78,7 @@ public class Board {
 		final int y = position.getY();
 
 		final Rank rank = boards.get(y);
+		piece.setPosition(position);
 		rank.move(x, piece);
 	}
 
