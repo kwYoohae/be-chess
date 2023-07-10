@@ -14,8 +14,8 @@ public class Knight extends Piece{
 
 	@Override
 	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
-		final int subtractX = sourcePosition.getX() - targetPosition.getX();
-		final int subtractY = sourcePosition.getY() - targetPosition.getY();
+		final int subtractX = targetPosition.getX() - sourcePosition.getX();
+		final int subtractY = targetPosition.getY() - sourcePosition.getY();
 
 		final boolean isCanGo = directions.stream()
 			.anyMatch(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY);
