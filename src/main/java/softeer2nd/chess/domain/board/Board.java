@@ -100,6 +100,10 @@ public class Board {
 	}
 
 	public void move(final String sourcePosition, final String targetPosition) {
+		if (sourcePosition.equals(targetPosition)) {
+			throw new IllegalArgumentException(PIECE_NOT_MOVE_SELF_POSITION);
+		}
+
 		final Piece sourcePiece = findPiece(sourcePosition);
 
 		sourcePiece.checkPieceCanGo(new Position(sourcePosition), new Position(targetPosition));

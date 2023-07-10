@@ -9,6 +9,7 @@ public final class ExceptionMessage {
 	public static final String PIECE_CAN_NOT_GO_DESTINATION_POSITION = "이 기물은 해당 장소로 갈 수 없습니다";
 	public static final String PIECE_CAN_NOT_GO_SAME_COLOR_PIECE = "기물은 같은 팀의 말의 장소로 갈 수 없습니다";
 	public static final String BLANK_PIECE_CAN_NOT_MOVE = "기물이 없는곳을 움직일 수는 없습니다";
+	public static final String PIECE_NOT_MOVE_SELF_POSITION = "기물은 자기 자신으로는 움직일 수 없습니다";
 
 	private ExceptionMessage() {
 		throw new IllegalStateException(EXCEPTION_MESSAGE_CLASS_MUST_NOT_INSTANTIATE);
