@@ -1,6 +1,7 @@
 package softeer2nd.chess.domain.pieces;
 
 import static org.assertj.core.api.Assertions.*;
+import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,5 +38,25 @@ class QueenTest {
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(queen);
+	}
+
+	@ParameterizedTest
+	@DisplayName("퀸은 대간선, 상하좌우 이외의 곳은 움직일 수 없어야한다")
+	@ValueSource(strings = {"f3", "b3", "b5", "f5"})
+	void canNotGo(String destination) {
+		// given
+		board.initializeEmpty();
+
+		String position = "d4";
+		final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(position));
+		board.move(position, queen);
+
+		// when
+		board.move(position, destination);
+
+		// then
+		assertThatThrownBy(() -> board.move(position, destination))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
 }
