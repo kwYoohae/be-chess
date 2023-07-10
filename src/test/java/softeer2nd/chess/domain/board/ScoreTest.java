@@ -1,7 +1,6 @@
 package softeer2nd.chess.domain.board;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
 
@@ -11,16 +10,19 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.view.ChessView;
 
 class ScoreTest {
 
 	private Board board;
 	private Score score;
+	private ChessView chessView;
 
 	@BeforeEach
 	void beforeEach() {
 		board = new Board();
 		score = new Score(board);
+		chessView = new ChessView(board);
 	}
 
 	@Test
@@ -60,7 +62,7 @@ class ScoreTest {
 		assertThat(score.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
 		assertThat(score.calculatePoint(Piece.Color.WHITE)).isEqualTo(7.0);
 
-		System.out.println(board.showBoard());
+		System.out.println(chessView.showBoard());
 	}
 
 	@Test
@@ -89,8 +91,6 @@ class ScoreTest {
 		// when, then
 		assertThat(score.calculatePoint(Piece.Color.BLACK)).isEqualTo(20.0);
 		assertThat(score.calculatePoint(Piece.Color.WHITE)).isEqualTo(19.5);
-
-		System.out.println(board.showBoard());
 	}
 
 	@Test

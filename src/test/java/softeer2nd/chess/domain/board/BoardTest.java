@@ -9,14 +9,17 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.view.ChessView;
 
 class BoardTest {
 
 	private Board board;
+	private ChessView chessView;
 
 	@BeforeEach
 	void beforeEach() {
 		board = new Board();
+		chessView = new ChessView(board);
 	}
 
 	@Test
@@ -25,7 +28,7 @@ class BoardTest {
 		board.initialize();
 		assertThat(board.pieceCount()).isEqualTo(32);
 		String blankRank = appendNewLine("........");
-		assertThat(board.showBoard()).isEqualTo(
+		assertThat(chessView.showBoard()).isEqualTo(
 			appendNewLine("RNBQKBNR") +
 				appendNewLine("PPPPPPPP") +
 				blankRank + blankRank + blankRank + blankRank +
@@ -127,7 +130,7 @@ class BoardTest {
 
 		assertThat(board.findPiece(position)).isEqualTo(piece);
 		String blankLine = "........";
-		assertThat(board.showBoard())
+		assertThat(chessView.showBoard())
 			.isEqualTo(appendNewLine(blankLine) +
 				appendNewLine(blankLine) +
 				appendNewLine(blankLine) +
@@ -144,7 +147,7 @@ class BoardTest {
 		board.initializeEmpty();
 
 		String blankLine = "........";
-		assertThat(board.showBoard())
+		assertThat(chessView.showBoard())
 			.isEqualTo(appendNewLine(blankLine) +
 				appendNewLine(blankLine) +
 				appendNewLine(blankLine) +

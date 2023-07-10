@@ -1,18 +1,18 @@
 package softeer2nd.chess.domain;
 
-import softeer2nd.chess.view.ChessView;
+import softeer2nd.chess.view.OutputView;
 import softeer2nd.chess.view.Command;
 import softeer2nd.chess.view.InputView;
 
 public class GameManager {
 
 	private final InputView inputView;
-	private final ChessView chessView;
+	private final OutputView outputView;
 	private final Chess chess;
 
-	public GameManager(final InputView inputView, final ChessView chessView, final Chess chess) {
+	public GameManager(final InputView inputView, final OutputView outputView, final Chess chess) {
 		this.inputView = inputView;
-		this.chessView = chessView;
+		this.outputView = outputView;
 		this.chess = chess;
 	}
 
@@ -23,7 +23,7 @@ public class GameManager {
 			if (gameState == Command.START) {
 				initializeGame();
 			} else if (gameState == Command.END) {
-				chessView.gameEnd();
+				outputView.gameEnd();
 				break;
 			} else if (gameState == Command.MOVE) {
 				movePiece(command);
@@ -32,9 +32,9 @@ public class GameManager {
 	}
 
 	private void initializeGame() {
-		chessView.gameStart();
+		outputView.gameStart();
 		chess.initializeBoard();
-		chessView.printBoard(chess);
+		outputView.printBoard(chess);
 	}
 
 	private void movePiece(String command) {
@@ -43,6 +43,6 @@ public class GameManager {
 		String destinationPosition = commands[2];
 
 		chess.movePiece(sourcePosition, destinationPosition);
-		chessView.printBoard(chess);
+		outputView.printBoard(chess);
 	}
 }
