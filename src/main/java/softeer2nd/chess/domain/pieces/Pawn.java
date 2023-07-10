@@ -14,10 +14,28 @@ public class Pawn extends Piece{
 		setPawnDirection(color);
 	}
 
-	//TODO: Step-7에서 Pawn이 초기에는 직진만 가능한것 등등 예외처리 하기
 	@Override
 	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
+		if (checkFirstMove(sourcePosition, targetPosition))
+			return;
+
 		validatePieceMove(sourcePosition, targetPosition);
+	}
+
+	private boolean checkFirstMove(final Position sourcePosition, final Position targetPosition) {
+		final int y = sourcePosition.getY();
+
+		if (y != BLACK_PAWN_START_INDEX && y != WHITE_PAWN_START_INDEX)
+			return false;
+
+		Direction direction = directions.get(0);
+		final int subtractY = targetPosition.getY() - sourcePosition.getY();
+		final int subtractX = targetPosition.getX() - sourcePosition.getX();
+
+		if (subtractX == direction.getXDegree() * 2 && subtractY == direction.getYDegree() * 2) {
+			return true;
+		}
+		return false;
 	}
 
 	private void setPawnDirection(Color color) {
