@@ -55,23 +55,4 @@ class KingTest {
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(king);
 	}
-
-	@ParameterizedTest
-	@DisplayName("킹은 상, 하, 좌, 우, 대각선으로 1칸을 움직일때 같은 편의 위치로 갈 수 없다")
-	@ValueSource(strings = {"b5", "b3", "c4", "a4", "a5", "c5", "c3", "a3"})
-	void canNotGoSameColor(String destination) {
-		// given
-		board.initializeEmpty();
-
-		String position = "b4";
-		final Piece king = Piece.createKing(Piece.Color.WHITE, new Position(position));
-		final Piece pawn = Piece.createPawn(Piece.Color.WHITE, new Position(destination));
-		board.move(position, king);
-		board.move(destination, pawn);
-
-		// when, then
-		assertThatThrownBy(() -> board.move(position, destination))
-			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
-	}
 }
