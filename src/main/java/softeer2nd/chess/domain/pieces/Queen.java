@@ -14,13 +14,8 @@ public class Queen extends Piece{
 
 	@Override
 	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
-		final int sourceX = sourcePosition.getX();
-		final int sourceY = sourcePosition.getY();
-		final int destinationX = targetPosition.getX();
-		final int destinationY = targetPosition.getY();
-
-		final int subtractX = sourceX - destinationX;
-		final int subtractY = sourceY - destinationY;
+		final int subtractX = sourcePosition.getX() - targetPosition.getX();
+		final int subtractY = sourcePosition.getY() - targetPosition.getY();
 
 		final boolean isCanGo = checkRecursive(subtractX, subtractY, 1);
 		if (!isCanGo) {
