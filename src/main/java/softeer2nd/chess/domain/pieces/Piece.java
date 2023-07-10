@@ -2,6 +2,8 @@ package softeer2nd.chess.domain.pieces;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import softeer2nd.chess.domain.board.position.Position;
@@ -150,6 +152,36 @@ public class Piece {
 		}
 		public double getDefaultPoint() {
 			return defaultPoint;
+		}
+	}
+
+	public enum Direction {
+		NORTH(0, 1),
+		NORTHEAST(1,1),
+		EAST(1,0),
+		SOUTHEAST(1, -1),
+		SOUTH(0, -1),
+		SOUTHWEST(-1,-1),
+		WEST(-1, 0);
+
+		private final int xDegree;
+		private final int yDegree;
+
+		private Direction(int xDegree, int yDegree) {
+			this.xDegree = xDegree;
+			this.yDegree = yDegree;
+		}
+
+		public int getXDegree() {
+			return xDegree;
+		}
+
+		public int getYDegree() {
+			return yDegree;
+		}
+
+		public static List<Direction> everyDirection() {
+			return Arrays.asList(NORTH, EAST, SOUTH, WEST, NORTHEAST, SOUTHEAST, SOUTHWEST, NORTHEAST);
 		}
 	}
 
