@@ -2,13 +2,22 @@ package softeer2nd.chess.domain.pieces;
 
 import static org.assertj.core.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class PieceTest {
+
+    private Board board;
+
+    @BeforeEach
+    void beforeEach() {
+        board = new Board();
+    }
 
     @Test
     @DisplayName("흰색과 검은색 기물들이 모두 생성 되어야 한다")
@@ -50,6 +59,44 @@ class PieceTest {
         assertThatThrownBy(() -> Piece.createPawn(Piece.Color.NOCOLOR, new Position("a1")))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ExceptionMessage.NOT_EXIST_PIECE);
+    }
+
+    @Test
+    @DisplayName("자기팀의 기물로는 이동할 수 없습니다")
+    void canNotGoSameTeam() {
+        // given
+        board.initializeEmpty();
+
+        String queenPosition = "d4";
+        String pawnPosition = "d5";
+        String kingPosition = "d6";
+        String rookPosition = "c5";
+        final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(queenPosition));
+        final Piece king = Piece.createKing(Piece.Color.WHITE, new Position(kingPosition));
+        final Piece pawn = Piece.createPawn(Piece.Color.WHITE, new Position(pawnPosition));
+        final Piece rook = Piece.createRook(Piece.Color.WHITE, new Position(rookPosition));
+        board.move(queenPosition, queen);
+        board.move(pawnPosition, pawn);
+        board.move(kingPosition, king);
+        board.move(rookPosition, rook);
+
+        // when
+        assertThatThrownBy(() -> board.move(kingPosition, pawnPosition))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+
+        assertThatThrownBy(() -> board.move(queenPosition, pawnPosition))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+
+        assertThatThrownBy(() -> board.move(kingPosition, pawnPosition))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+
+        assertThatThrownBy(() -> board.move(rookPosition, pawnPosition))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+
     }
 
     void verifyColor(Piece piece, final Piece.Color color) {
