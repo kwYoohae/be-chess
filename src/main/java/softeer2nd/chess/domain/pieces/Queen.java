@@ -17,8 +17,7 @@ public class Queen extends Piece{
 		final int subtractX = sourcePosition.getX() - targetPosition.getX();
 		final int subtractY = sourcePosition.getY() - targetPosition.getY();
 
-		final boolean isCanGo = checkRecursive(subtractX, subtractY, 1);
-		if (!isCanGo) {
+		if (!checkRecursive(subtractX, subtractY, 1)) {
 			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
 	}

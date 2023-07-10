@@ -162,6 +162,10 @@ public abstract class Piece {
 		public static List<Direction> linearDirection() {
 			return Arrays.asList(NORTH, EAST, SOUTH, WEST);
 		}
+
+		public static List<Direction> diagonalDirection() {
+			return Arrays.asList(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST);
+		}
 	}
 
 }
