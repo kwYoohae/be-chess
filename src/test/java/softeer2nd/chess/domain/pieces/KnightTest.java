@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 class KnightTest {
 
@@ -36,5 +37,22 @@ class KnightTest {
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(knight);
+	}
+
+	@ParameterizedTest
+	@DisplayName("나이트는 한칸뛰고 대각선으로만 갈 수 있다")
+	@ValueSource(strings = {"d5", "d3", "c4", "e4"})
+	void canNotGo(String destination) {
+		// given
+		board.initializeEmpty();
+
+		String position = "d4";
+		final Piece knight = Piece.createKnight(Piece.Color.WHITE, new Position(position));
+		board.move(position, knight);
+
+		// when, then
+		assertThatThrownBy(() -> board.move(position, destination))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
 }
