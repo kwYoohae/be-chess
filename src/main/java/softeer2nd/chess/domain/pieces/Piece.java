@@ -63,6 +63,9 @@ public abstract class Piece {
 	public Type getType() {
 		return type;
 	}
+	public void setPosition(Position position) {
+		this.position = position;
+	}
 
 	public boolean isBlack() {
 		return color == Color.BLACK;
