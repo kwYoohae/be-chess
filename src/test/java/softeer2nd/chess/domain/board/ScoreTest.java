@@ -31,11 +31,11 @@ class ScoreTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b2", Piece.createBlackPawn(new Position("b2")));
-		addPiece("a7", Piece.createBlackPawn(new Position("a7")));
-		addPiece("c4", Piece.createWhitePawn(new Position("c4")));
-		addPiece("h6", Piece.createWhitePawn(new Position("h6")));
-		addPiece("f6", Piece.createWhitePawn(new Position("f6")));
+		addPiece("b2", Piece.createPawn(Piece.Color.BLACK, new Position("b2")));
+		addPiece("a7", Piece.createPawn(Piece.Color.BLACK, new Position("a7")));
+		addPiece("c4", Piece.createPawn(Piece.Color.WHITE, new Position("c4")));
+		addPiece("h6", Piece.createPawn(Piece.Color.WHITE, new Position("h6")));
+		addPiece("f6", Piece.createPawn(Piece.Color.WHITE, new Position("f6")));
 
 		// when, then
 		assertThat(score.calculatePoint(Piece.Color.BLACK)).isEqualTo(2.0);
@@ -48,15 +48,15 @@ class ScoreTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b6", Piece.createBlackPawn(new Position("b6")));
-		addPiece("e6", Piece.createBlackQueen(new Position("e6")));
-		addPiece("b8", Piece.createBlackKing(new Position("b8")));
-		addPiece("c8", Piece.createBlackRook(new Position("c8")));
+		addPiece("b6", Piece.createPawn(Piece.Color.BLACK, new Position("b6")));
+		addPiece("e6", Piece.createQueen(Piece.Color.BLACK, new Position("e6")));
+		addPiece("b8", Piece.createKing(Piece.Color.BLACK, new Position("b8")));
+		addPiece("c8", Piece.createRook(Piece.Color.BLACK, new Position("c8")));
 
-		addPiece("f2", Piece.createWhitePawn(new Position("f2")));
-		addPiece("g2", Piece.createWhitePawn(new Position("g2")));
-		addPiece("e1", Piece.createWhiteRook(new Position("e1")));
-		addPiece("f1", Piece.createWhiteKing(new Position("f1")));
+		addPiece("f2", Piece.createPawn(Piece.Color.WHITE, new Position("f2")));
+		addPiece("g2", Piece.createPawn(Piece.Color.WHITE, new Position("g2")));
+		addPiece("e1", Piece.createRook(Piece.Color.WHITE, new Position("e1")));
+		addPiece("f1", Piece.createKing(Piece.Color.WHITE, new Position("f1")));
 
 		// when, then
 		assertThat(score.calculatePoint(Piece.Color.BLACK)).isEqualTo(15.0);
@@ -71,22 +71,22 @@ class ScoreTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b8", Piece.createBlackKing(new Position("b8")));
-		addPiece("c8", Piece.createBlackRook(new Position("c8")));
-		addPiece("a7", Piece.createBlackPawn(new Position("a7")));
-		addPiece("c7", Piece.createBlackPawn(new Position("c7")));
-		addPiece("d7", Piece.createBlackBishop(new Position("d7")));
-		addPiece("b6", Piece.createBlackPawn(new Position("b6")));
-		addPiece("e6", Piece.createBlackQueen(new Position("e6")));
+		addPiece("b8", Piece.createKing(Piece.Color.BLACK, new Position("b8")));
+		addPiece("c8", Piece.createRook(Piece.Color.BLACK, new Position("c8")));
+		addPiece("a7", Piece.createPawn(Piece.Color.BLACK, new Position("a7")));
+		addPiece("c7", Piece.createPawn(Piece.Color.BLACK, new Position("c7")));
+		addPiece("d7", Piece.createBishop(Piece.Color.BLACK, new Position("d7")));
+		addPiece("b6", Piece.createPawn(Piece.Color.BLACK, new Position("b6")));
+		addPiece("e6", Piece.createQueen(Piece.Color.BLACK, new Position("e6")));
 
-		addPiece("f4", Piece.createWhiteKnight(new Position("f4")));
-		addPiece("g4", Piece.createWhiteQueen(new Position("g4")));
-		addPiece("f3", Piece.createWhitePawn(new Position("f3")));
-		addPiece("h3", Piece.createWhitePawn(new Position("h3")));
-		addPiece("f2", Piece.createWhitePawn(new Position("f2")));
-		addPiece("g2", Piece.createWhitePawn(new Position("g2")));
-		addPiece("e1", Piece.createWhiteRook(new Position("e1")));
-		addPiece("f1", Piece.createWhiteKing(new Position("f1")));
+		addPiece("f4", Piece.createKnight(Piece.Color.WHITE, new Position("f4")));
+		addPiece("g4", Piece.createQueen(Piece.Color.WHITE, new Position("g4")));
+		addPiece("f3", Piece.createPawn(Piece.Color.WHITE, new Position("f3")));
+		addPiece("h3", Piece.createPawn(Piece.Color.WHITE, new Position("h3")));
+		addPiece("f2", Piece.createPawn(Piece.Color.WHITE, new Position("f2")));
+		addPiece("g2", Piece.createPawn(Piece.Color.WHITE, new Position("g2")));
+		addPiece("e1", Piece.createRook(Piece.Color.WHITE, new Position("e1")));
+		addPiece("f1", Piece.createKing(Piece.Color.WHITE, new Position("f1")));
 
 		// when, then
 		assertThat(score.calculatePoint(Piece.Color.BLACK)).isEqualTo(20.0);
@@ -104,19 +104,19 @@ class ScoreTest {
 		List<Piece> whitePieces = score.getPiecesInBoard(Piece.Color.WHITE);
 
 		// then
-		assertThat(blackPieces).contains(Piece.createBlackBishop(new Position("b8")),
-			Piece.createBlackRook(new Position("c8")),
-			Piece.createBlackQueen(new Position("e8")),
-			Piece.createBlackKing(new Position("d8")),
-			Piece.createBlackKnight(new Position("f8")),
-			Piece.createBlackPawn(new Position("a8")));
+		assertThat(blackPieces).contains(Piece.createBishop(Piece.Color.BLACK, new Position("b8")),
+			Piece.createRook(Piece.Color.BLACK, new Position("c8")),
+			Piece.createQueen(Piece.Color.BLACK, new Position("e8")),
+			Piece.createKing(Piece.Color.BLACK, new Position("d8")),
+			Piece.createKnight(Piece.Color.BLACK, new Position("f8")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("a8")));
 		assertThat(whitePieces).contains(
-			Piece.createWhiteBishop(new Position("b1")),
-			Piece.createWhiteRook(new Position("c1")),
-			Piece.createWhiteQueen(new Position("e1")),
-			Piece.createWhiteKing(new Position("d1")),
-			Piece.createWhiteKnight(new Position("f1")),
-			Piece.createWhitePawn(new Position("a1")));
+			Piece.createBishop(Piece.Color.WHITE, new Position("b1")),
+			Piece.createRook(Piece.Color.WHITE, new Position("c1")),
+			Piece.createQueen(Piece.Color.WHITE, new Position("e1")),
+			Piece.createKing(Piece.Color.WHITE, new Position("d1")),
+			Piece.createKnight(Piece.Color.WHITE, new Position("f1")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("a1")));
 
 	}
 
@@ -135,40 +135,40 @@ class ScoreTest {
 
 		// then
 		assertThat(blackPieces).containsExactly(
-			Piece.createBlackKing(new Position("e8")),
-			Piece.createBlackPawn(new Position("a7")),
-			Piece.createBlackPawn(new Position("b7")),
-			Piece.createBlackPawn(new Position("c7")),
-			Piece.createBlackPawn(new Position("d7")),
-			Piece.createBlackPawn(new Position("e7")),
-			Piece.createBlackPawn(new Position("f7")),
-			Piece.createBlackPawn(new Position("g7")),
-			Piece.createBlackPawn(new Position("h7")),
-			Piece.createBlackKnight(new Position("b8")),
-			Piece.createBlackKnight(new Position("g8")),
-			Piece.createBlackBishop(new Position("c8")),
-			Piece.createBlackBishop(new Position("f8")),
-			Piece.createBlackRook(new Position("a8")),
-			Piece.createBlackRook(new Position("h8")),
-			Piece.createBlackQueen(new Position("d8")));
+			Piece.createKing(Piece.Color.BLACK, new Position("e8")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("a7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("b7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("c7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("d7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("e7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("f7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("g7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("h7")),
+			Piece.createKnight(Piece.Color.BLACK, new Position("b8")),
+			Piece.createKnight(Piece.Color.BLACK, new Position("g8")),
+			Piece.createBishop(Piece.Color.BLACK, new Position("c8")),
+			Piece.createBishop(Piece.Color.BLACK, new Position("f8")),
+			Piece.createRook(Piece.Color.BLACK, new Position("a8")),
+			Piece.createRook(Piece.Color.BLACK, new Position("h8")),
+			Piece.createQueen(Piece.Color.BLACK, new Position("d8")));
 
 		assertThat(whitePieces).containsExactly(
-			Piece.createWhiteKing(new Position("e1")),
-			Piece.createWhitePawn(new Position("a2")),
-			Piece.createWhitePawn(new Position("b2")),
-			Piece.createWhitePawn(new Position("c2")),
-			Piece.createWhitePawn(new Position("d2")),
-			Piece.createWhitePawn(new Position("e2")),
-			Piece.createWhitePawn(new Position("f2")),
-			Piece.createWhitePawn(new Position("g2")),
-			Piece.createWhitePawn(new Position("h2")),
-			Piece.createWhiteKnight(new Position("b1")),
-			Piece.createWhiteKnight(new Position("g1")),
-			Piece.createWhiteBishop(new Position("c1")),
-			Piece.createWhiteBishop(new Position("f1")),
-			Piece.createWhiteRook(new Position("a1")),
-			Piece.createWhiteRook(new Position("h1")),
-			Piece.createWhiteQueen(new Position("d1")));
+			Piece.createKing(Piece.Color.WHITE, new Position("e1")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("a2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("b2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("c2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("d2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("e2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("f2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("g2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("h2")),
+			Piece.createKnight(Piece.Color.WHITE, new Position("b1")),
+			Piece.createKnight(Piece.Color.WHITE, new Position("g1")),
+			Piece.createBishop(Piece.Color.WHITE, new Position("c1")),
+			Piece.createBishop(Piece.Color.WHITE, new Position("f1")),
+			Piece.createRook(Piece.Color.WHITE, new Position("a1")),
+			Piece.createRook(Piece.Color.WHITE, new Position("h1")),
+			Piece.createQueen(Piece.Color.WHITE, new Position("d1")));
 	}
 
 	@Test
@@ -186,40 +186,40 @@ class ScoreTest {
 
 		// then
 		assertThat(blackPieces).containsExactly(
-			Piece.createBlackQueen(new Position("d8")),
-			Piece.createBlackRook(new Position("h8")),
-			Piece.createBlackRook(new Position("a8")),
-			Piece.createBlackBishop(new Position("f8")),
-			Piece.createBlackBishop(new Position("c8")),
-			Piece.createBlackKnight(new Position("g8")),
-			Piece.createBlackKnight(new Position("b8")),
-			Piece.createBlackPawn(new Position("h7")),
-			Piece.createBlackPawn(new Position("g7")),
-			Piece.createBlackPawn(new Position("f7")),
-			Piece.createBlackPawn(new Position("e7")),
-			Piece.createBlackPawn(new Position("d7")),
-			Piece.createBlackPawn(new Position("c7")),
-			Piece.createBlackPawn(new Position("b7")),
-			Piece.createBlackPawn(new Position("a7")),
-			Piece.createBlackKing(new Position("e8")));
+			Piece.createQueen(Piece.Color.BLACK, new Position("d8")),
+			Piece.createRook(Piece.Color.BLACK, new Position("h8")),
+			Piece.createRook(Piece.Color.BLACK, new Position("a8")),
+			Piece.createBishop(Piece.Color.BLACK, new Position("f8")),
+			Piece.createBishop(Piece.Color.BLACK, new Position("c8")),
+			Piece.createKnight(Piece.Color.BLACK, new Position("g8")),
+			Piece.createKnight(Piece.Color.BLACK, new Position("b8")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("h7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("g7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("f7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("e7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("d7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("c7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("b7")),
+			Piece.createPawn(Piece.Color.BLACK, new Position("a7")),
+			Piece.createKing(Piece.Color.BLACK, new Position("e8")));
 
 		assertThat(whitePieces).containsExactly(
-			Piece.createWhiteQueen(new Position("d1")),
-			Piece.createWhiteRook(new Position("h1")),
-			Piece.createWhiteRook(new Position("a1")),
-			Piece.createWhiteBishop(new Position("f1")),
-			Piece.createWhiteBishop(new Position("c1")),
-			Piece.createWhiteKnight(new Position("g1")),
-			Piece.createWhiteKnight(new Position("b1")),
-			Piece.createWhitePawn(new Position("h2")),
-			Piece.createWhitePawn(new Position("g2")),
-			Piece.createWhitePawn(new Position("f2")),
-			Piece.createWhitePawn(new Position("e2")),
-			Piece.createWhitePawn(new Position("d2")),
-			Piece.createWhitePawn(new Position("c2")),
-			Piece.createWhitePawn(new Position("b2")),
-			Piece.createWhitePawn(new Position("a2")),
-			Piece.createWhiteKing(new Position("e1")));
+			Piece.createQueen(Piece.Color.WHITE, new Position("d1")),
+			Piece.createRook(Piece.Color.WHITE, new Position("h1")),
+			Piece.createRook(Piece.Color.WHITE, new Position("a1")),
+			Piece.createBishop(Piece.Color.WHITE, new Position("f1")),
+			Piece.createBishop(Piece.Color.WHITE, new Position("c1")),
+			Piece.createKnight(Piece.Color.WHITE, new Position("g1")),
+			Piece.createKnight(Piece.Color.WHITE, new Position("b1")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("h2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("g2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("f2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("e2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("d2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("c2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("b2")),
+			Piece.createPawn(Piece.Color.WHITE, new Position("a2")),
+			Piece.createKing(Piece.Color.WHITE, new Position("e1")));
 	}
 
 	private void addPiece(String position, Piece piece) {

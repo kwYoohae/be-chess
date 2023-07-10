@@ -13,12 +13,12 @@ class PieceTest {
     @Test
     @DisplayName("흰색과 검은색 기물들이 모두 생성 되어야 한다")
     void create_piece() {
-        verifyPawn(Piece.createWhitePawn(new Position("a1")), Piece.createBlackPawn(new Position("a2")), Piece.Type.PAWN);
-        verifyPawn(Piece.createWhiteKnight(new Position("b1")), Piece.createBlackKnight(new Position("b2")), Piece.Type.KNIGHT);
-        verifyPawn(Piece.createWhiteRook(new Position("c1")), Piece.createBlackRook(new Position("c2")), Piece.Type.ROOK);
-        verifyPawn(Piece.createWhiteBishop(new Position("d1")), Piece.createBlackBishop(new Position("d2")), Piece.Type.BISHOP);
-        verifyPawn(Piece.createWhiteQueen(new Position("e1")), Piece.createBlackQueen(new Position("e2")), Piece.Type.QUEEN);
-        verifyPawn(Piece.createWhiteKing(new Position("f1")), Piece.createBlackKing(new Position("f2")), Piece.Type.KING);
+        verifyPawn(Piece.createPawn(Piece.Color.WHITE, new Position("a1")), Piece.createPawn(Piece.Color.BLACK, new Position("a2")), Piece.Type.PAWN);
+        verifyPawn(Piece.createKnight(Piece.Color.WHITE, new Position("b1")), Piece.createKnight(Piece.Color.BLACK, new Position("b2")), Piece.Type.KNIGHT);
+        verifyPawn(Piece.createRook(Piece.Color.WHITE, new Position("c1")), Piece.createRook(Piece.Color.BLACK, new Position("c2")), Piece.Type.ROOK);
+        verifyPawn(Piece.createBishop(Piece.Color.WHITE, new Position("d1")), Piece.createBishop(Piece.Color.BLACK, new Position("d2")), Piece.Type.BISHOP);
+        verifyPawn(Piece.createQueen(Piece.Color.WHITE, new Position("e1")), Piece.createQueen(Piece.Color.BLACK, new Position("e2")), Piece.Type.QUEEN);
+        verifyPawn(Piece.createKing(Piece.Color.WHITE, new Position("f1")), Piece.createKing(Piece.Color.BLACK, new Position("f2")), Piece.Type.KING);
 
         Piece blank = Piece.createBlank(new Position("c3"));
         assertThat(blank.isBlack()).isFalse();
@@ -29,28 +29,25 @@ class PieceTest {
     @Test
     @DisplayName("기물들의 색은 생성한 그대로여야 한다")
     void checkColor() {
-        verifyColor(Piece.createBlackKing(new Position("a1")), Piece.Color.BLACK);
-        verifyColor(Piece.createBlackPawn(new Position("b1")), Piece.Color.BLACK);
-        verifyColor(Piece.createBlackKnight(new Position("c1")), Piece.Color.BLACK);
-        verifyColor(Piece.createBlackQueen(new Position("d1")), Piece.Color.BLACK);
-        verifyColor(Piece.createBlackBishop(new Position("e1")), Piece.Color.BLACK);
-        verifyColor(Piece.createBlackRook(new Position("f1")), Piece.Color.BLACK);
+        verifyColor(Piece.createKing(Piece.Color.BLACK, new Position("a1")), Piece.Color.BLACK);
+        verifyColor(Piece.createPawn(Piece.Color.BLACK, new Position("b1")), Piece.Color.BLACK);
+        verifyColor(Piece.createKnight(Piece.Color.BLACK, new Position("c1")), Piece.Color.BLACK);
+        verifyColor(Piece.createQueen(Piece.Color.BLACK, new Position("d1")), Piece.Color.BLACK);
+        verifyColor(Piece.createBishop(Piece.Color.BLACK, new Position("e1")), Piece.Color.BLACK);
+        verifyColor(Piece.createRook(Piece.Color.BLACK, new Position("f1")), Piece.Color.BLACK);
 
-        verifyColor(Piece.createWhiteKing(new Position("a2")), Piece.Color.WHITE);
-        verifyColor(Piece.createWhitePawn(new Position("b2")), Piece.Color.WHITE);
-        verifyColor(Piece.createWhiteKnight(new Position("c2")), Piece.Color.WHITE);
-        verifyColor(Piece.createWhiteQueen(new Position("d2")), Piece.Color.WHITE);
-        verifyColor(Piece.createWhiteBishop(new Position("e2")), Piece.Color.WHITE);
-        verifyColor(Piece.createWhiteRook(new Position("f2")), Piece.Color.WHITE);
+        verifyColor(Piece.createKing(Piece.Color.WHITE, new Position("a2")), Piece.Color.WHITE);
+        verifyColor(Piece.createPawn(Piece.Color.WHITE, new Position("b2")), Piece.Color.WHITE);
+        verifyColor(Piece.createKnight(Piece.Color.WHITE, new Position("c2")), Piece.Color.WHITE);
+        verifyColor(Piece.createQueen(Piece.Color.WHITE, new Position("d2")), Piece.Color.WHITE);
+        verifyColor(Piece.createBishop(Piece.Color.WHITE, new Position("e2")), Piece.Color.WHITE);
+        verifyColor(Piece.createRook(Piece.Color.WHITE, new Position("f2")), Piece.Color.WHITE);
     }
 
     @Test
     @DisplayName("존재하지 않는 기물을 생성할 경우 에러가 발생한다")
     void notExistsPiece() {
-        assertThatThrownBy(() -> Piece.createPiece(Piece.Color.NOCOLOR, Piece.Type.PAWN, new Position("a1")))
-            .isInstanceOf(IllegalArgumentException.class)
-            .hasMessage(ExceptionMessage.NOT_EXIST_PIECE);
-        assertThatThrownBy(() -> Piece.createPiece(Piece.Color.WHITE, Piece.Type.NO_PIECE, new Position("b1")))
+        assertThatThrownBy(() -> Piece.createPawn(Piece.Color.NOCOLOR, new Position("a1")))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(ExceptionMessage.NOT_EXIST_PIECE);
     }

@@ -8,83 +8,50 @@ import java.util.Objects;
 
 import softeer2nd.chess.domain.board.position.Position;
 
-public class Piece {
+public abstract class Piece {
 
-	private final Color color;
-	private final Type type;
-	private Position position;
+	protected Color color;
+	protected Type type;
+	protected Position position;
 
-	private Piece(Color color, Type type, Position position) {
-		this.color = color;
-		this.type = type;
-		this.position = position;
+	public static Piece createPawn(Color color, Position position) {
+		validatePiece(color);
+		return new Pawn(color, Type.PAWN, position);
 	}
 
-	public static Piece createWhitePawn(Position position) {
-		return createWhite(Type.PAWN, position);
+	public static Piece createKnight(Color color, Position position) {
+		validatePiece(color);
+		return new Knight(color, Type.KNIGHT, position);
 	}
 
-	public static Piece createWhiteKnight(Position position) {
-		return createWhite(Type.KNIGHT, position);
+	public static Piece createRook(Color color, Position position) {
+		validatePiece(color);
+		return new Rook(color, Type.ROOK, position);
 	}
 
-	public static Piece createWhiteRook(Position position) {
-		return createWhite(Type.ROOK, position);
+	public static Piece createBishop(Color color, Position position) {
+		validatePiece(color);
+		return new Bishop(color, Type.BISHOP, position);
 	}
 
-	public static Piece createWhiteBishop(Position position) {
-		return createWhite(Type.BISHOP, position);
+	public static Piece createQueen(Color color, Position position) {
+		validatePiece(color);
+		return new Queen(color, Type.QUEEN, position);
 	}
 
-	public static Piece createWhiteQueen(Position position) {
-		return createWhite(Type.QUEEN, position);
-	}
-
-	public static Piece createWhiteKing(Position position) {
-		return createWhite(Type.KING, position);
-	}
-
-	public static Piece createBlackPawn(Position position) {
-		return createBlack(Type.PAWN, position);
-	}
-
-	public static Piece createBlackKnight(Position position) {
-		return createBlack(Type.KNIGHT, position);
-	}
-
-	public static Piece createBlackRook(Position position) {
-		return createBlack(Type.ROOK, position);
-	}
-
-	public static Piece createBlackBishop(Position position) {
-		return createBlack(Type.BISHOP, position);
-	}
-
-	public static Piece createBlackQueen(Position position) {
-		return createBlack(Type.QUEEN, position);
-	}
-
-	public static Piece createBlackKing(Position position) {
-		return createBlack(Type.KING, position);
+	public static Piece createKing(Color color, Position position) {
+		validatePiece(color);
+		return new King(color, Type.KING, position);
 	}
 
 	public static Piece createBlank(Position position) {
-		return createPiece(Color.NOCOLOR, Type.NO_PIECE, position);
+		return new Blank(Color.NOCOLOR, Type.NO_PIECE, position);
 	}
 
-	private static Piece createBlack(Type type, Position position) {
-		return createPiece(Color.BLACK, type, position);
-	}
-
-	private static Piece createWhite(Type type, Position position) {
-		return createPiece(Color.WHITE, type, position);
-	}
-
-	public static Piece createPiece(Color color, Type type, Position position) {
-		if ((color == Color.NOCOLOR && type != Type.NO_PIECE) || (color != Color.NOCOLOR && type == Type.NO_PIECE)) {
+	public static void validatePiece(Color color) {
+		if (color == Color.NOCOLOR) {
 			throw new IllegalArgumentException(NOT_EXIST_PIECE);
 		}
-		return new Piece(color, type, position);
 	}
 
 	public Color getColor() {
