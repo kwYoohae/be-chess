@@ -14,13 +14,8 @@ public class King extends Piece{
 
 	@Override
 	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
-		int sourceX = sourcePosition.getX();
-		int sourceY = sourcePosition.getY();
-		int targetX = targetPosition.getX();
-		int targetY = targetPosition.getY();
-
-		int subtractX = sourceX - targetX;
-		int subtractY = sourceY - targetY;
+		int subtractX = sourcePosition.getX() - targetPosition.getX();
+		int subtractY = sourcePosition.getY() - targetPosition.getY();
 
 		final boolean isCanGo = directions.stream()
 			.anyMatch(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY);
