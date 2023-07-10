@@ -1,6 +1,7 @@
 package softeer2nd.chess.domain.pieces;
 
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 public class King extends Piece{
 
@@ -12,7 +13,7 @@ public class King extends Piece{
 	}
 
 	@Override
-	public boolean checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
+	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
 		int sourceX = sourcePosition.getX();
 		int sourceY = sourcePosition.getY();
 		int targetX = targetPosition.getX();
@@ -21,7 +22,11 @@ public class King extends Piece{
 		int subtractX = sourceX - targetX;
 		int subtractY = sourceY - targetY;
 
-		return directions.stream()
+		final boolean isCanGo = directions.stream()
 			.anyMatch(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY);
+
+		if (!isCanGo) {
+			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+		}
 	}
 }

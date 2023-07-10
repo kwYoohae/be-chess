@@ -11,7 +11,7 @@ public class Knight extends Piece{
 	}
 
 	@Override
-	public boolean checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
-		return false;
+	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
+
 	}
 }

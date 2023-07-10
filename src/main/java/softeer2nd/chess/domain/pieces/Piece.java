@@ -85,7 +85,7 @@ public abstract class Piece {
 		return position;
 	}
 
-	public abstract boolean checkPieceCanGo(final Position sourcePosition, final Position targetPosition);
+	public abstract void checkPieceCanGo(final Position sourcePosition, final Position targetPosition);
 
 	@Override
 	public boolean equals(final Object o) {

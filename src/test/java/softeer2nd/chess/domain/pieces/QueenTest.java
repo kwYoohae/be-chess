@@ -52,9 +52,6 @@ class QueenTest {
 		final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(position));
 		board.move(position, queen);
 
-		// when
-		board.move(position, destination);
-
 		// then
 		assertThatThrownBy(() -> board.move(position, destination))
 			.isInstanceOf(IllegalArgumentException.class)
