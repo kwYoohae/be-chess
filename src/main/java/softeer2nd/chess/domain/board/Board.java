@@ -101,12 +101,23 @@ public class Board {
 	public void move(final String sourcePosition, final String targetPosition) {
 		final Piece sourcePiece = findPiece(sourcePosition);
 
+		// TODO: throw 어디서 할건지 리팩토링 하기
 		if (!sourcePiece.checkPieceCanGo(new Position(sourcePosition), new Position(targetPosition))) {
 			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
+		validateSamePieceMovePosition(sourcePosition, targetPosition);
 
 		move(targetPosition, sourcePiece);
 		move(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
+	}
+
+	private void validateSamePieceMovePosition(final String sourcePosition, final String targetPosition) {
+		final Piece sourcePiece = findPiece(sourcePosition);
+		final Piece targetPiece = findPiece(targetPosition);
+
+		if (sourcePiece.getColor() == targetPiece.getColor()) {
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+		}
 	}
 
 	public List<Rank> getBoards() {
