@@ -14,7 +14,7 @@ public abstract class Piece {
 	protected Color color;
 	protected Type type;
 	protected Position position;
-	protected List<Direction> direction = new ArrayList<>();
+	protected List<Direction> directions = new ArrayList<>();
 
 	public static Piece createPawn(Color color, Position position) {
 		validatePiece(color);
@@ -82,7 +82,7 @@ public abstract class Piece {
 		return position;
 	}
 
-	public abstract boolean checkPieceCanGo(Position sourcePosition, Position destinationPosition);
+	public abstract boolean checkPieceCanGo(final Position sourcePosition, final Position targetPosition);
 
 	@Override
 	public boolean equals(final Object o) {

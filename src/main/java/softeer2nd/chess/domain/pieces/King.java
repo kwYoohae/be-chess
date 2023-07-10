@@ -8,20 +8,20 @@ public class King extends Piece{
 		this.color = color;
 		this.type = type;
 		this.position = position;
-		this.direction = Direction.everyDirection();
+		this.directions = Direction.everyDirection();
 	}
 
 	@Override
-	public boolean checkPieceCanGo(Position sourcePosition, Position destinationPosition) {
+	public boolean checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
 		int sourceX = sourcePosition.getX();
 		int sourceY = sourcePosition.getY();
-		int destinationX = destinationPosition.getX();
-		int destinationY = destinationPosition.getY();
+		int targetX = targetPosition.getX();
+		int targetY = targetPosition.getY();
 
-		int subtractX = sourceX - destinationX;
-		int subtractY = sourceY - destinationY;
+		int subtractX = sourceX - targetX;
+		int subtractY = sourceY - targetY;
 
-		return direction.stream()
+		return directions.stream()
 			.anyMatch(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY);
 	}
 }
