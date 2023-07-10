@@ -1,6 +1,7 @@
 package softeer2nd.chess.domain.pieces;
 
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 public class Queen extends Piece{
 
@@ -12,7 +13,7 @@ public class Queen extends Piece{
 	}
 
 	@Override
-	public boolean checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
+	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
 		final int sourceX = sourcePosition.getX();
 		final int sourceY = sourcePosition.getY();
 		final int destinationX = targetPosition.getX();
@@ -21,7 +22,10 @@ public class Queen extends Piece{
 		final int subtractX = sourceX - destinationX;
 		final int subtractY = sourceY - destinationY;
 
-		return checkRecursive(subtractX, subtractY, 1);
+		final boolean isCanGo = checkRecursive(subtractX, subtractY, 1);
+		if (!isCanGo) {
+			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+		}
 	}
 
 	private boolean checkRecursive(final int subtractX, final int subtractY, final int mulNumber) {
@@ -37,8 +41,9 @@ public class Queen extends Piece{
 			});
 
 		if (!isCanGo) {
-			checkRecursive(subtractX, subtractY, mulNumber + 1);
+			return checkRecursive(subtractX, subtractY, mulNumber + 1);
 		}
+
 		return true;
 	}
 }
