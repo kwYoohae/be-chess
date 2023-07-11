@@ -102,6 +102,19 @@ class PieceTest {
 
 	}
 
+	@Test
+	@DisplayName("나이트를 제외한 기물은 넘어다닐 수 없습니다")
+	void canNotGoJumpOtherPiece() {
+		// given
+		board.initialize();
+
+		// when, then
+		assertThatThrownBy(() -> chess.movePiece("h1", "h3"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_JUMP_TO_PIECE);
+	}
+
+
 	void verifyMoveSameColor(String sourcePosition, String targetPosition, Piece piece) {
 		board.addPiece(sourcePosition, piece);
 
