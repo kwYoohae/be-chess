@@ -23,11 +23,10 @@ class QueenTest {
 		chess = new Chess(board);
 	}
 
-
 	@ParameterizedTest
 	@DisplayName("퀸은 상, 하, 좌, 우, 대각선으로 어디든 움직일 수 있다")
 	@ValueSource(strings = {"c4", "d3", "e4", "d5", "c3", "e3", "e5", "c5", "d8", "d1",
-	"a4", "h4", "g1", "a1", "a7", "h8"})
+		"a4", "h4", "g1", "a1", "a7", "h8"})
 	void canGo(String destination) {
 		// given
 		board.initializeEmpty();

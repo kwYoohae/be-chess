@@ -36,8 +36,8 @@ class KingTest {
 
 		// when, then
 		assertThatThrownBy(() -> {
-				chess.movePiece("b4", "b7");
-			}).isInstanceOf(IllegalArgumentException.class)
+			chess.movePiece("b4", "b7");
+		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
 

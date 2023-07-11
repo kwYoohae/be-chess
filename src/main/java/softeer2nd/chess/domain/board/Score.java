@@ -1,12 +1,10 @@
 package softeer2nd.chess.domain.board;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 
 public class Score {

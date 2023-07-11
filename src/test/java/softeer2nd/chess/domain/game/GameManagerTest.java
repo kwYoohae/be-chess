@@ -35,7 +35,8 @@ class GameManagerTest {
 		OutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 
-		GameManager gameManager = new GameManager(new InputView(new Scanner(inputStream)), new OutputView(), new Chess(board));
+		GameManager gameManager = new GameManager(new InputView(new Scanner(inputStream)), new OutputView(),
+			new Chess(board));
 
 		// when
 		gameManager.startGame();

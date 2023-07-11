@@ -25,7 +25,7 @@ class BishopTest {
 
 	@ParameterizedTest
 	@DisplayName("비숍은 대각선 어디든 움직일 수 있다")
-	@ValueSource(strings = {"c5", "c3", "e3", "e5", "a7", "a1","g1","h8"})
+	@ValueSource(strings = {"c5", "c3", "e3", "e5", "a7", "a1", "g1", "h8"})
 	void canGo(String destination) {
 		// given
 		board.initializeEmpty();

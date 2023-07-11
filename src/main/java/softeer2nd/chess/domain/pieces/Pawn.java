@@ -2,7 +2,7 @@ package softeer2nd.chess.domain.pieces;
 
 import softeer2nd.chess.domain.board.position.Position;
 
-public class Pawn extends Piece{
+public class Pawn extends Piece {
 
 	private static final int BLACK_PAWN_START_INDEX = 6;
 	private static final int WHITE_PAWN_START_INDEX = 1;
@@ -30,7 +30,8 @@ public class Pawn extends Piece{
 		return direction;
 	}
 
-	private Direction checkFirstMove(final Position sourcePosition, final Position targetPosition, final Direction direction) {
+	private Direction checkFirstMove(final Position sourcePosition, final Position targetPosition,
+		final Direction direction) {
 		if (color == Color.WHITE && sourcePosition.getY() != WHITE_PAWN_START_INDEX) {
 			return Direction.EMPTY;
 		}

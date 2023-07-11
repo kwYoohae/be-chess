@@ -33,8 +33,10 @@ class PawnTest {
 		chess.movePiece("b7", "b5");
 
 		//then
-		assertThat(board.findPiece("b4")).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position("b4"), Piece.Type.PAWN));
-		assertThat(board.findPiece("b5")).isEqualTo(Piece.createPiece(Piece.Color.BLACK, new Position("b5"), Piece.Type.PAWN));
+		assertThat(board.findPiece("b4")).isEqualTo(
+			Piece.createPiece(Piece.Color.WHITE, new Position("b4"), Piece.Type.PAWN));
+		assertThat(board.findPiece("b5")).isEqualTo(
+			Piece.createPiece(Piece.Color.BLACK, new Position("b5"), Piece.Type.PAWN));
 	}
 
 	@Test
@@ -55,7 +57,6 @@ class PawnTest {
 		final Piece piece = Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN);
 		assertThat(board.findPiece(targetPosition)).isEqualTo(piece);
 	}
-
 
 	@Test
 	@DisplayName("폰이 대각선으로 움직일때 상대 기물이 없으면 오류가 발생한다")

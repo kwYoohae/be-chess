@@ -2,7 +2,7 @@ package softeer2nd.chess.domain.pieces;
 
 import softeer2nd.chess.domain.board.position.Position;
 
-public class Knight extends Piece{
+public class Knight extends Piece {
 
 	protected Knight(Color color, Type type, Position position) {
 		this.color = color;

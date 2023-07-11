@@ -193,7 +193,8 @@ class BoardTest {
 
 		// then
 		assertThat(Piece.createBlank(new Position(sourcePosition))).isEqualTo(board.findPiece(sourcePosition));
-		assertThat(Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN)).isEqualTo(board.findPiece(targetPosition));
+		assertThat(Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN)).isEqualTo(
+			board.findPiece(targetPosition));
 	}
 
 	@Test

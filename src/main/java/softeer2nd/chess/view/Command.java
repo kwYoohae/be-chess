@@ -20,6 +20,7 @@ public enum Command {
 			.orElseThrow(() -> new IllegalArgumentException(NOT_EXECUTE_COMMAND));
 	}
 
+
 	public static void validationCommand(String input) {
 		final String[] inputs = input.split(" ");
 

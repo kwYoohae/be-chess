@@ -52,6 +52,7 @@ public class Position {
 		final int positionNumber = Character.getNumericValue(secondPosition);
 		return startNumber <= positionNumber && endNumber >= positionNumber;
 	}
+
 	private int convertToSecondPosition(char charY) {
 		return Character.getNumericValue(charY) - 1;
 	}

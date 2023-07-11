@@ -70,7 +70,8 @@ public class Chess {
 		}
 	}
 
-	private void checkPawnMovable(final Position sourcePosition, final Position targetPosition, final Direction direction) {
+	private void checkPawnMovable(final Position sourcePosition, final Position targetPosition,
+		final Direction direction) {
 		if (direction == Direction.NORTH || direction == Direction.SOUTH)
 			return;
 

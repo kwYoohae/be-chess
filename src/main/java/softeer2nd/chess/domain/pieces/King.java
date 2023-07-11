@@ -2,7 +2,7 @@ package softeer2nd.chess.domain.pieces;
 
 import softeer2nd.chess.domain.board.position.Position;
 
-public class King extends Piece{
+public class King extends Piece {
 
 	protected King(Color color, Type type, Position position) {
 		this.color = color;

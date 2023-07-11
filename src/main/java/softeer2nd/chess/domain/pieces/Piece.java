@@ -53,6 +53,7 @@ public abstract class Piece {
 	public Type getType() {
 		return type;
 	}
+
 	public void setPosition(Position position) {
 		this.position = position;
 	}
@@ -76,6 +77,7 @@ public abstract class Piece {
 	}
 
 	public abstract Direction getPieceDirection(final Position sourcePosition, final Position targetPosition);
+
 	protected Direction getDirectionRecursive(final int subtractX, final int subtractY, final int multiplyNumber) {
 		if (multiplyNumber == 8)
 			return Direction.EMPTY;
@@ -132,6 +134,7 @@ public abstract class Piece {
 
 		private final char representation;
 		private final double defaultPoint;
+
 		Type(final char representation, final double defaultPoint) {
 			this.representation = representation;
 			this.defaultPoint = defaultPoint;
@@ -144,6 +147,7 @@ public abstract class Piece {
 		public char getBlackRepresentation() {
 			return Character.toUpperCase(representation);
 		}
+
 		public double getDefaultPoint() {
 			return defaultPoint;
 		}
@@ -152,12 +156,12 @@ public abstract class Piece {
 	public enum Direction {
 		NORTH(0, 1),
 		DOUBLE_NORTH(0, 2),
-		NORTHEAST(1,1),
-		EAST(1,0),
+		NORTHEAST(1, 1),
+		EAST(1, 0),
 		SOUTHEAST(1, -1),
 		SOUTH(0, -1),
 		DOUBLE_SOUTH(0, -2),
-		SOUTHWEST(-1,-1),
+		SOUTHWEST(-1, -1),
 		WEST(-1, 0),
 		NORTHWEST(-1, 1),
 
@@ -170,8 +174,7 @@ public abstract class Piece {
 		WWN(-2, 1),
 		WWS(-2, -1),
 
-		EMPTY(0,0);
-
+		EMPTY(0, 0);
 
 		private final int xDegree;
 		private final int yDegree;
