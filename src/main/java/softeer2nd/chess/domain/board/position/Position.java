@@ -2,7 +2,6 @@ package softeer2nd.chess.domain.board.position;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
-import java.util.Objects;
 import java.util.Optional;
 
 public class Position {
@@ -13,21 +12,6 @@ public class Position {
 	private final String position;
 	private Optional<Integer> cachedX;
 	private Optional<Integer> cachedY;
-
-	@Override
-	public boolean equals(final Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		final Position position1 = (Position)o;
-		return Objects.equals(position, position1.position);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(position);
-	}
 
 	public Position(final String position) {
 		validatePosition(position);

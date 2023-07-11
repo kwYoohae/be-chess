@@ -13,10 +13,6 @@ public enum Command {
 		this.command = command;
 	}
 
-	public String getCommand() {
-		return command;
-	}
-
 	public static Command valueOfInput(String input) {
 		return Arrays.stream(values())
 			.filter(value -> input.startsWith(value.command))
