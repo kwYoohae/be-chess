@@ -42,13 +42,15 @@ class PawnTest {
 		// given
 		board.initializeEmpty();
 
-		board.addPiece("d2", Piece.createPiece(Piece.Color.WHITE, new Position("d2"), Piece.Type.PAWN));
-		board.addPiece("c3", Piece.createPiece(Piece.Color.BLACK, new Position("c3"), Piece.Type.PAWN));
+		String sourcePosition = "d2";
+		String targetPosition = "c3";
+		board.addPiece(sourcePosition, Piece.createPiece(Piece.Color.WHITE, new Position(sourcePosition), Piece.Type.PAWN));
+		board.addPiece(targetPosition, Piece.createPiece(Piece.Color.BLACK, new Position(targetPosition), Piece.Type.PAWN));
 
 		// when
-		chess.movePiece("d2", "c3");
+		chess.movePiece(sourcePosition, targetPosition);
 
 		// then
-		assertThat(board.findPiece("c3")).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position("c3"), Piece.Type.PAWN));
+		assertThat(board.findPiece(targetPosition)).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN));
 	}
 }
