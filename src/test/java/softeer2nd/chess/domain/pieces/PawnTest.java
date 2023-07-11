@@ -76,6 +76,20 @@ class PawnTest {
 			.hasMessage(ExceptionMessage.PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
 	}
 
+	@Test
+	@DisplayName("폰은 처음 이동하는것이 아니면 2칸을 이동하지 못한다")
+	void pawnSecondMoveCanNotDoubleMove() {
+		// given
+		board.initialize();
+
+		chess.movePiece("b2", "b3");
+
+		// when, then
+		assertThatThrownBy(() -> chess.movePiece("b3", "b5"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+	}
+
 	private void addPiece(String position, Piece.Color color, Piece.Type type) {
 		final Piece piece = Piece.createPiece(color, new Position(position), type);
 		board.addPiece(position, piece);
