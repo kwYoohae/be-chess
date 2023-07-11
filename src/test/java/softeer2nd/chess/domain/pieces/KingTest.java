@@ -8,17 +8,20 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class KingTest {
 
+	private Chess chess;
 	private Board board;
 
 	@BeforeEach
 	void beforeEach() {
 		board = new Board();
+		chess = new Chess(board);
 	}
 
 	@Test
@@ -33,7 +36,7 @@ class KingTest {
 
 		// when, then
 		assertThatThrownBy(() -> {
-				board.move("b4", "b7");
+				chess.movePiece("b4", "b7");
 			}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
@@ -50,7 +53,7 @@ class KingTest {
 		board.move(position, king);
 
 		// when
-		board.move(position, destination);
+		chess.movePiece(position, destination);
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(king);

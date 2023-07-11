@@ -65,6 +65,11 @@ public class Board {
 		return rank.getPiece(x);
 	}
 
+	public Piece findPiece(final int x, final int y) {
+		final Rank rank = boards.get(y);
+		return rank.getPiece(x);
+	}
+
 	public void initializeEmpty() {
 		boards.clear();
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
@@ -99,14 +104,24 @@ public class Board {
 			.count();
 	}
 
-	public void move(final String sourcePosition, final String targetPosition) {
-		if (sourcePosition.equals(targetPosition)) {
-			throw new IllegalArgumentException(PIECE_NOT_MOVE_SELF_POSITION);
-		}
+	public boolean checkAllPieceInDirection(Position source, Position target, Piece.Direction direction) {
+		int x = source.getX() + direction.getXDegree();
+		int y = source.getX() + direction.getYDegree();
 
+		while (target.getX() != x && target.getY() != y) {
+			final Piece piece = findPiece(x, y);
+			if (piece.getType() != Piece.Type.NO_PIECE)
+				return false;
+			x += direction.getXDegree();
+			y += direction.getYDegree();
+		}
+		return true;
+	}
+
+	public void move(final String sourcePosition, final String targetPosition) {
 		final Piece sourcePiece = findPiece(sourcePosition);
 
-		sourcePiece.checkPieceCanGo(new Position(sourcePosition), new Position(targetPosition));
+		sourcePiece.getPieceDirection(new Position(sourcePosition), new Position(targetPosition));
 		validateSamePieceMovePosition(sourcePosition, targetPosition);
 
 		move(targetPosition, sourcePiece);

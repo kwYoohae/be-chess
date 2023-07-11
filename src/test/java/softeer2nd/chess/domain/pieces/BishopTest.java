@@ -7,17 +7,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class BishopTest {
 
+	private Chess chess;
 	private Board board;
 
 	@BeforeEach
 	void beforeEach() {
 		board = new Board();
+		chess = new Chess(board);
 	}
 
 	@ParameterizedTest
@@ -32,7 +35,7 @@ class BishopTest {
 		board.move(position, bishop);
 
 		// when
-		board.move(position, destination);
+		chess.movePiece(position, destination);
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(bishop);
@@ -50,7 +53,7 @@ class BishopTest {
 		board.move(position, bishop);
 
 		// when
-		assertThatThrownBy(() -> board.move(position, destination))
+		assertThatThrownBy(() -> chess.movePiece(position, destination))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}

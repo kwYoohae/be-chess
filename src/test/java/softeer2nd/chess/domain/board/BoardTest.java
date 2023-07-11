@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.exception.ExceptionMessage;
@@ -14,6 +15,7 @@ import softeer2nd.chess.view.ChessView;
 
 class BoardTest {
 
+	private Chess chess;
 	private Board board;
 	private ChessView chessView;
 
@@ -21,6 +23,7 @@ class BoardTest {
 	void beforeEach() {
 		board = new Board();
 		chessView = new ChessView(board);
+		chess = new Chess(board);
 	}
 
 	@Test
@@ -202,7 +205,7 @@ class BoardTest {
 		String position = "b2";
 
 		// when, then
-		assertThatThrownBy(() -> board.move(position, position))
+		assertThatThrownBy(() -> chess.movePiece(position, position))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_NOT_MOVE_SELF_POSITION);
 	}

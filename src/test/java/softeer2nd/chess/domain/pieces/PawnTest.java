@@ -6,16 +6,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 
 class PawnTest {
 
+	private Chess chess;
 	private Board board;
 
 	@BeforeEach
 	void beforeEach() {
 		board = new Board();
+		chess = new Chess(board);
 	}
 
 	@Test
@@ -25,8 +28,8 @@ class PawnTest {
 		board.initialize();
 
 		// when
-		board.move("b2", "b4");
-		board.move("b7", "b5");
+		chess.movePiece("b2", "b4");
+		chess.movePiece("b7", "b5");
 
 		//then
 		assertThat(board.findPiece("b4")).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position("b4"), Piece.Type.PAWN));

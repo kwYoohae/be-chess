@@ -15,24 +15,29 @@ public class Pawn extends Piece{
 	}
 
 	@Override
-	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
-		if (checkFirstMove(sourcePosition, targetPosition))
-			return;
-
-		validatePieceMove(sourcePosition, targetPosition);
+	public Direction getPieceDirection(final Position sourcePosition, final Position targetPosition) {
+		return findDirection(sourcePosition, targetPosition);
 	}
 
-	private boolean checkFirstMove(final Position sourcePosition, final Position targetPosition) {
-		final int y = sourcePosition.getY();
+	@Override
+	protected Direction findDirection(final Position sourcePosition, final Position targetPosition) {
+		Direction direction = super.findDirection(sourcePosition, targetPosition);
 
-		if (y != BLACK_PAWN_START_INDEX && y != WHITE_PAWN_START_INDEX)
-			return false;
+		if (direction == Direction.DOUBLE_SOUTH || direction == Direction.DOUBLE_NORTH) {
+			direction = checkFirstMove(sourcePosition, targetPosition, direction);
+		}
 
-		Direction direction = directions.get(0);
-		final int subtractY = targetPosition.getY() - sourcePosition.getY();
-		final int subtractX = targetPosition.getX() - sourcePosition.getX();
+		return direction;
+	}
 
-		return subtractX == direction.getXDegree() * 2 && subtractY == direction.getYDegree() * 2;
+	private Direction checkFirstMove(final Position sourcePosition, final Position targetPosition, final Direction direction) {
+		if (color == Color.WHITE && sourcePosition.getY() != WHITE_PAWN_START_INDEX) {
+			return Direction.EMPTY;
+		}
+		if (color == Color.BLACK && sourcePosition.getY() != BLACK_PAWN_START_INDEX) {
+			return Direction.EMPTY;
+		}
+		return direction;
 	}
 
 	private void setPawnDirection(Color color) {

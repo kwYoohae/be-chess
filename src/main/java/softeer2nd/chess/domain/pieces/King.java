@@ -12,7 +12,7 @@ public class King extends Piece{
 	}
 
 	@Override
-	public void checkPieceCanGo(final Position sourcePosition, final Position targetPosition) {
-		validatePieceMove(sourcePosition, targetPosition);
+	public Direction getPieceDirection(final Position sourcePosition, final Position targetPosition) {
+		return findDirection(sourcePosition, targetPosition);
 	}
 }

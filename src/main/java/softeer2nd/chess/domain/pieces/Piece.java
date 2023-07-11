@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 
 import softeer2nd.chess.domain.board.position.Position;
-import softeer2nd.chess.exception.ExceptionMessage;
 
 public abstract class Piece {
 
@@ -76,37 +75,36 @@ public abstract class Piece {
 		return position;
 	}
 
-	public abstract void checkPieceCanGo(final Position sourcePosition, final Position targetPosition);
-
-	protected boolean checkRecursive(final int subtractX, final int subtractY, final int multiplyNumber) {
+	public abstract Direction getPieceDirection(final Position sourcePosition, final Position targetPosition);
+	protected Direction getDirectionRecursive(final int subtractX, final int subtractY, final int multiplyNumber) {
 		if (multiplyNumber == 8)
-			return false;
+			return Direction.EMPTY;
 
-		final boolean isCanGo = directions.stream()
-			.anyMatch(direction -> {
+		Direction result = directions.stream()
+			.filter(direction -> {
 				final int xDegree = direction.getXDegree() * multiplyNumber;
 				final int yDegree = direction.getYDegree() * multiplyNumber;
+				return xDegree == subtractX && yDegree == subtractY;
+			})
+			.findAny()
+			.orElse(Direction.EMPTY);
 
-				return xDegree == subtractX && subtractY == yDegree;
-			});
-
-		if (!isCanGo) {
-			return checkRecursive(subtractX, subtractY, multiplyNumber + 1);
+		if (result == Direction.EMPTY) {
+			result = getDirectionRecursive(subtractX, subtractY, multiplyNumber + 1);
+			return result;
 		}
 
-		return true;
+		return result;
 	}
 
-	protected void validatePieceMove(final Position sourcePosition, final Position targetPosition) {
+	protected Direction findDirection(final Position sourcePosition, final Position targetPosition) {
 		final int subtractX = targetPosition.getX() - sourcePosition.getX();
 		final int subtractY = targetPosition.getY() - sourcePosition.getY();
 
-		final boolean isCanGo = directions.stream()
-			.anyMatch(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY);
-
-		if (!isCanGo) {
-			throw new IllegalArgumentException(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
-		}
+		return directions.stream()
+			.filter(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY)
+			.findAny()
+			.orElse(Direction.EMPTY);
 	}
 
 	@Override
@@ -153,10 +151,12 @@ public abstract class Piece {
 
 	public enum Direction {
 		NORTH(0, 1),
+		DOUBLE_NORTH(0, 2),
 		NORTHEAST(1,1),
 		EAST(1,0),
 		SOUTHEAST(1, -1),
 		SOUTH(0, -1),
+		DOUBLE_SOUTH(0, -2),
 		SOUTHWEST(-1,-1),
 		WEST(-1, 0),
 		NORTHWEST(-1, 1),
@@ -168,7 +168,9 @@ public abstract class Piece {
 		EEN(2, 1),
 		EES(2, -1),
 		WWN(-2, 1),
-		WWS(-2, -1);
+		WWS(-2, -1),
+
+		EMPTY(0,0);
 
 
 		private final int xDegree;
@@ -200,11 +202,11 @@ public abstract class Piece {
 		}
 
 		public static List<Direction> whitePawnDirection() {
-			return Arrays.asList(NORTH, NORTHEAST, NORTHWEST);
+			return Arrays.asList(NORTH, NORTHEAST, NORTHWEST, DOUBLE_NORTH);
 		}
 
 		public static List<Direction> blackPawnDirection() {
-			return Arrays.asList(SOUTH, SOUTHWEST, SOUTHEAST);
+			return Arrays.asList(SOUTH, SOUTHWEST, SOUTHEAST, DOUBLE_SOUTH);
 		}
 
 		public static List<Direction> knightDirection() {

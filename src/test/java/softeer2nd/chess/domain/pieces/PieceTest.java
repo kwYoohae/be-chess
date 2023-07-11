@@ -7,17 +7,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class PieceTest {
 
+	private Chess chess;
 	private Board board;
 
 	@BeforeEach
 	void beforeEach() {
 		board = new Board();
+		chess = new Chess(board);
 	}
 
 	@Test
@@ -102,7 +105,7 @@ class PieceTest {
 	void verifyMoveSameColor(String sourcePosition, String targetPosition, Piece piece) {
 		board.move(sourcePosition, piece);
 
-		assertThatThrownBy(() -> board.move(sourcePosition, targetPosition))
+		assertThatThrownBy(() -> chess.movePiece(sourcePosition, targetPosition))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
 	}

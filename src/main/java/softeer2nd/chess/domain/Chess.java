@@ -4,7 +4,9 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.Score;
+import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.domain.pieces.Piece.Direction;
 import softeer2nd.chess.view.ChessView;
 
 public class Chess {
@@ -29,11 +31,8 @@ public class Chess {
 
 	public void movePiece(final String sourcePosition, final String targetPosition) {
 		validSelfPositionMove(sourcePosition, targetPosition);
-
-		final Piece sourcePiece = board.findPiece(sourcePosition);
-		final Piece targetPiece = board.findPiece(targetPosition);
-
-		if (checkOpportunityPieceInDestination(sourcePiece, targetPiece))
+		checkMovable(new Position(sourcePosition), new Position(targetPosition));
+		validOpportunityPieceInDestination(sourcePosition, targetPosition);
 
 		board.move(sourcePosition, targetPosition);
 	}
@@ -44,9 +43,56 @@ public class Chess {
 		}
 	}
 
-	private boolean checkOpportunityPieceInDestination(final Piece sourcePiece, final Piece targetPiece) {
+	private void validOpportunityPieceInDestination(final String sourcePosition, final String targetPosition) {
+		final Piece sourcePiece = board.findPiece(sourcePosition);
+		final Piece targetPiece = board.findPiece(targetPosition);
 		if (sourcePiece.getColor() == targetPiece.getColor())
-			return false;
-		return true;
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
+	}
+
+	private void checkMovable(final Position sourcePosition, final Position targetPosition) {
+		final Piece piece = board.findPiece(sourcePosition.getX(), sourcePosition.getY());
+		Direction direction = piece.getPieceDirection(sourcePosition, targetPosition);
+		if (direction == Direction.EMPTY) {
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+		}
+
+		if (piece.getType() == Piece.Type.KNIGHT)
+			return;
+
+		if (piece.getType() == Piece.Type.PAWN) {
+			checkPawnMovable(sourcePosition, targetPosition, direction);
+			return;
+		}
+
+		if (!board.checkAllPieceInDirection(sourcePosition, targetPosition, direction)) {
+			throw new IllegalArgumentException(PIECE_JUMP_TO_PIECE);
+		}
+	}
+
+	private void checkPawnMovable(final Position sourcePosition, final Position targetPosition, final Direction direction) {
+		if (direction == Direction.NORTH || direction == Direction.SOUTH)
+			return;
+
+		if (direction == Direction.DOUBLE_NORTH || direction == Direction.DOUBLE_SOUTH) {
+			checkDoubleMovable(sourcePosition, direction);
+			return;
+		}
+
+		final Piece targetPiece = board.findPiece(targetPosition.getX(), targetPosition.getY());
+		if (targetPiece.getType() == Piece.Type.NO_PIECE)
+			throw new IllegalArgumentException(PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
+	}
+
+	private void checkDoubleMovable(Position sourcePosition, Direction direction) {
+		Direction addDirection = Direction.NORTH;
+		if (direction == Direction.DOUBLE_SOUTH)
+			addDirection = Direction.SOUTH;
+
+		int x = sourcePosition.getX() + addDirection.getXDegree();
+		int y = sourcePosition.getY() + addDirection.getYDegree();
+		final Piece piece = board.findPiece(x, y);
+		if (piece.getType() != Piece.Type.NO_PIECE)
+			throw new IllegalArgumentException(PIECE_JUMP_TO_PIECE);
 	}
 }
