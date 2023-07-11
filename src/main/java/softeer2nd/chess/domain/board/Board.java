@@ -104,9 +104,9 @@ public class Board {
 
 	public boolean checkAllPieceInDirection(Position source, Position target, Piece.Direction direction) {
 		int x = source.getX() + direction.getXDegree();
-		int y = source.getX() + direction.getYDegree();
+		int y = source.getY() + direction.getYDegree();
 
-		while (target.getX() != x && target.getY() != y) {
+		while (target.getX() != x || target.getY() != y) {
 			final Piece piece = findPiece(x, y);
 			if (piece.getType() != Piece.Type.NO_PIECE)
 				return false;
