@@ -35,4 +35,20 @@ class PawnTest {
 		assertThat(board.findPiece("b4")).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position("b4"), Piece.Type.PAWN));
 		assertThat(board.findPiece("b5")).isEqualTo(Piece.createPiece(Piece.Color.BLACK, new Position("b5"), Piece.Type.PAWN));
 	}
+
+	@Test
+	@DisplayName("폰은 대각선에 상대편 기물이 있으면 대각선으로 공격할 수 있다")
+	void pawnAttackDiagonal() {
+		// given
+		board.initializeEmpty();
+
+		board.addPiece("d2", Piece.createPiece(Piece.Color.WHITE, new Position("d2"), Piece.Type.PAWN));
+		board.addPiece("c3", Piece.createPiece(Piece.Color.BLACK, new Position("c3"), Piece.Type.PAWN));
+
+		// when
+		chess.movePiece("d2", "c3");
+
+		// then
+		assertThat(board.findPiece("c3")).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position("c3"), Piece.Type.PAWN));
+	}
 }
