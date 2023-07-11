@@ -130,7 +130,7 @@ class BoardTest {
 
 		String position = "b5";
 		final Piece piece = Piece.createPiece(Piece.Color.BLACK, new Position(position), Piece.Type.ROOK);
-		addPiece(position, piece);
+		board.addPiece(position, piece);
 
 		assertThat(board.findPiece(position)).isEqualTo(piece);
 		String blankLine = "........";
@@ -168,10 +168,10 @@ class BoardTest {
 		// given
 		board.initializeEmpty();
 
-		addPiece("b2", Piece.createPiece(Piece.Color.BLACK, new Position("b2"), Piece.Type.PAWN));
-		addPiece("b7", Piece.createPiece(Piece.Color.BLACK, new Position("b7"), Piece.Type.PAWN));
-		addPiece("c4", Piece.createPiece(Piece.Color.WHITE, new Position("c4"), Piece.Type.PAWN));
-		addPiece("h6", Piece.createPiece(Piece.Color.WHITE, new Position("h6"), Piece.Type.PAWN));
+		board.addPiece("b2", Piece.createPiece(Piece.Color.BLACK, new Position("b2"), Piece.Type.PAWN));
+		board.addPiece("b7", Piece.createPiece(Piece.Color.BLACK, new Position("b7"), Piece.Type.PAWN));
+		board.addPiece("c4", Piece.createPiece(Piece.Color.WHITE, new Position("c4"), Piece.Type.PAWN));
+		board.addPiece("h6", Piece.createPiece(Piece.Color.WHITE, new Position("h6"), Piece.Type.PAWN));
 
 		// when, then
 		assertThat(board.checkSamePawnInColum(Piece.Color.BLACK)).isTrue();
@@ -208,9 +208,5 @@ class BoardTest {
 		assertThatThrownBy(() -> chess.movePiece(position, position))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_NOT_MOVE_SELF_POSITION);
-	}
-
-	private void addPiece(String position, Piece piece) {
-		board.move(position, piece);
 	}
 }

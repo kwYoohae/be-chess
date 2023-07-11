@@ -34,7 +34,7 @@ class QueenTest {
 
 		String position = "d4";
 		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.QUEEN);
-		board.move(position, queen);
+		board.addPiece(position, queen);
 
 		// when
 		chess.movePiece(position, destination);
@@ -52,7 +52,7 @@ class QueenTest {
 
 		String position = "d4";
 		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.QUEEN);
-		board.move(position, queen);
+		board.addPiece(position, queen);
 
 		// then
 		assertThatThrownBy(() -> chess.movePiece(position, destination))

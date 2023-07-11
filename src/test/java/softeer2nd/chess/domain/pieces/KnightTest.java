@@ -32,7 +32,7 @@ class KnightTest {
 
 		String position = "d4";
 		final Piece knight = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.KNIGHT);
-		board.move(position, knight);
+		board.addPiece(position, knight);
 
 		// when
 		chess.movePiece(position, destination);
@@ -50,7 +50,7 @@ class KnightTest {
 
 		String position = "d4";
 		final Piece knight = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.KNIGHT);
-		board.move(position, knight);
+		board.addPiece(position, knight);
 
 		// when, then
 		assertThatThrownBy(() -> chess.movePiece(position, destination))

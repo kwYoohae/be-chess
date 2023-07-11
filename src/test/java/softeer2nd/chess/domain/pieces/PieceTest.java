@@ -91,7 +91,7 @@ class PieceTest {
 		final Piece bishop = Piece.createPiece(Piece.Color.WHITE, new Position(bishopPosition), BISHOP);
 		final Piece knight = Piece.createPiece(Piece.Color.WHITE, new Position(knightPosition), KNIGHT);
 
-		board.move(pawnPosition, pawn);
+		board.addPiece(pawnPosition, pawn);
 
 		// when, then
 		verifyMoveSameColor(queenPosition, pawnPosition, queen);
@@ -103,7 +103,7 @@ class PieceTest {
 	}
 
 	void verifyMoveSameColor(String sourcePosition, String targetPosition, Piece piece) {
-		board.move(sourcePosition, piece);
+		board.addPiece(sourcePosition, piece);
 
 		assertThatThrownBy(() -> chess.movePiece(sourcePosition, targetPosition))
 			.isInstanceOf(IllegalArgumentException.class)

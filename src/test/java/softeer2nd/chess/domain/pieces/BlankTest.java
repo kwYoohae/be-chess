@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.exception.ExceptionMessage;
 
@@ -14,10 +15,11 @@ class BlankTest {
 	void blankCanNotMove() {
 		// given
 		Board board = new Board();
+		Chess chess = new Chess(board);
 		board.initializeEmpty();
 
 		// when, then
-		Assertions.assertThatThrownBy(() -> board.move("a1", "a2"))
+		Assertions.assertThatThrownBy(() -> chess.movePiece("a1", "a2"))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.BLANK_PIECE_CAN_NOT_MOVE);
 	}

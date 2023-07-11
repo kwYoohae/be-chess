@@ -32,7 +32,7 @@ class RookTest {
 
 		String position = "d4";
 		final Piece rook = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.ROOK);
-		board.move(position, rook);
+		board.addPiece(position, rook);
 
 		// when
 		chess.movePiece(position, destination);
@@ -50,7 +50,7 @@ class RookTest {
 
 		String position = "d4";
 		final Piece rook = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.ROOK);
-		board.move(position, rook);
+		board.addPiece(position, rook);
 
 		// when
 		assertThatThrownBy(() -> chess.movePiece(position, destination))

@@ -32,7 +32,7 @@ class BishopTest {
 
 		String position = "d4";
 		final Piece bishop = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.BISHOP);
-		board.move(position, bishop);
+		board.addPiece(position, bishop);
 
 		// when
 		chess.movePiece(position, destination);
@@ -50,7 +50,7 @@ class BishopTest {
 
 		String position = "d4";
 		final Piece bishop = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.BISHOP);
-		board.move(position, bishop);
+		board.addPiece(position, bishop);
 
 		// when
 		assertThatThrownBy(() -> chess.movePiece(position, destination))

@@ -1,7 +1,5 @@
 package softeer2nd.chess.domain.board;
 
-import static softeer2nd.chess.exception.ExceptionMessage.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -77,7 +75,7 @@ public class Board {
 		}
 	}
 
-	public void move(final String input, final Piece piece) {
+	public void addPiece(final String input, final Piece piece) {
 		final Position position = new Position(input);
 		final int x = position.getX();
 		final int y = position.getY();
@@ -121,20 +119,8 @@ public class Board {
 	public void move(final String sourcePosition, final String targetPosition) {
 		final Piece sourcePiece = findPiece(sourcePosition);
 
-		sourcePiece.getPieceDirection(new Position(sourcePosition), new Position(targetPosition));
-		validateSamePieceMovePosition(sourcePosition, targetPosition);
-
-		move(targetPosition, sourcePiece);
-		move(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
-	}
-
-	private void validateSamePieceMovePosition(final String sourcePosition, final String targetPosition) {
-		final Piece sourcePiece = findPiece(sourcePosition);
-		final Piece targetPiece = findPiece(targetPosition);
-
-		if (sourcePiece.getColor() == targetPiece.getColor()) {
-			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
-		}
+		addPiece(targetPosition, sourcePiece);
+		addPiece(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
 	}
 
 	public List<Rank> getBoards() {
