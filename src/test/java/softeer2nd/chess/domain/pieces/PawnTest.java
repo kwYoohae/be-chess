@@ -90,6 +90,20 @@ class PawnTest {
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
 
+	@Test
+	@DisplayName("폰은 처음에 2칸을 움직일때, 사이에 다른 기물이 존재하면 가지 못한다")
+	void pawnBetweenHavePieceCanNotMoveDouble() {
+		// given
+		board.initialize();
+
+		addPiece("c3", Piece.Color.WHITE, Piece.Type.PAWN);
+
+		// when, then
+		assertThatThrownBy(() -> chess.movePiece("c2", "c4"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PIECE_JUMP_TO_PIECE);
+	}
+
 	private void addPiece(String position, Piece.Color color, Piece.Type type) {
 		final Piece piece = Piece.createPiece(color, new Position(position), type);
 		board.addPiece(position, piece);
