@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.exception.ExceptionMessage;
 
 class PawnTest {
 
@@ -44,13 +45,39 @@ class PawnTest {
 
 		String sourcePosition = "d2";
 		String targetPosition = "c3";
-		board.addPiece(sourcePosition, Piece.createPiece(Piece.Color.WHITE, new Position(sourcePosition), Piece.Type.PAWN));
-		board.addPiece(targetPosition, Piece.createPiece(Piece.Color.BLACK, new Position(targetPosition), Piece.Type.PAWN));
+		addPiece(sourcePosition, Piece.Color.WHITE, Piece.Type.PAWN);
+		addPiece(targetPosition, Piece.Color.BLACK, Piece.Type.PAWN);
 
 		// when
 		chess.movePiece(sourcePosition, targetPosition);
 
 		// then
-		assertThat(board.findPiece(targetPosition)).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN));
+		final Piece piece = Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN);
+		assertThat(board.findPiece(targetPosition)).isEqualTo(piece);
+	}
+
+
+	@Test
+	@DisplayName("폰이 대각선으로 움직일때 상대 기물이 없으면 오류가 발생한다")
+	void pawnAttackDiagonalError() {
+		// given
+		board.initializeEmpty();
+
+		String sourcePosition = "d2";
+		addPiece(sourcePosition, Piece.Color.WHITE, Piece.Type.PAWN);
+
+		// when, then
+		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "c3"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
+
+		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "e3"))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
+	}
+
+	private void addPiece(String position, Piece.Color color, Piece.Type type) {
+		final Piece piece = Piece.createPiece(color, new Position(position), type);
+		board.addPiece(position, piece);
 	}
 }
