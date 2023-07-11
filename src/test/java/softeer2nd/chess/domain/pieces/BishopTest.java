@@ -28,7 +28,7 @@ class BishopTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece bishop = Piece.createBishop(Piece.Color.WHITE, new Position(position));
+		final Piece bishop = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.BISHOP);
 		board.move(position, bishop);
 
 		// when
@@ -46,7 +46,7 @@ class BishopTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece bishop = Piece.createBishop(Piece.Color.WHITE, new Position(position));
+		final Piece bishop = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.BISHOP);
 		board.move(position, bishop);
 
 		// when

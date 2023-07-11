@@ -28,7 +28,7 @@ class RookTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece rook = Piece.createRook(Piece.Color.WHITE, new Position(position));
+		final Piece rook = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.ROOK);
 		board.move(position, rook);
 
 		// when
@@ -46,7 +46,7 @@ class RookTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece rook = Piece.createRook(Piece.Color.WHITE, new Position(position));
+		final Piece rook = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.ROOK);
 		board.move(position, rook);
 
 		// when

@@ -17,42 +17,32 @@ public abstract class Piece {
 	protected Position position;
 	protected List<Direction> directions = new ArrayList<>();
 
-	public static Piece createPawn(Color color, Position position) {
-		validatePiece(color);
-		return new Pawn(color, Type.PAWN, position);
-	}
-
-	public static Piece createKnight(Color color, Position position) {
-		validatePiece(color);
-		return new Knight(color, Type.KNIGHT, position);
-	}
-
-	public static Piece createRook(Color color, Position position) {
-		validatePiece(color);
-		return new Rook(color, Type.ROOK, position);
-	}
-
-	public static Piece createBishop(Color color, Position position) {
-		validatePiece(color);
-		return new Bishop(color, Type.BISHOP, position);
-	}
-
-	public static Piece createQueen(Color color, Position position) {
-		validatePiece(color);
-		return new Queen(color, Type.QUEEN, position);
-	}
-
-	public static Piece createKing(Color color, Position position) {
-		validatePiece(color);
-		return new King(color, Type.KING, position);
+	public static Piece createPiece(Color color, Position position, Type type) {
+		validatePiece(color, type);
+		switch (type) {
+			case KING:
+				return new King(color, type, position);
+			case PAWN:
+				return new Pawn(color, type, position);
+			case ROOK:
+				return new Rook(color, type, position);
+			case QUEEN:
+				return new Queen(color, type, position);
+			case BISHOP:
+				return new Bishop(color, type, position);
+			case KNIGHT:
+				return new Knight(color, type, position);
+			default:
+				return new Blank(Color.NOCOLOR, Type.NO_PIECE, position);
+		}
 	}
 
 	public static Piece createBlank(Position position) {
 		return new Blank(Color.NOCOLOR, Type.NO_PIECE, position);
 	}
 
-	public static void validatePiece(Color color) {
-		if (color == Color.NOCOLOR) {
+	public static void validatePiece(Color color, Type type) {
+		if ((color == Color.NOCOLOR && type != Type.NO_PIECE) || (color != Color.NOCOLOR && type == Type.NO_PIECE)) {
 			throw new IllegalArgumentException(NOT_EXIST_PIECE);
 		}
 	}

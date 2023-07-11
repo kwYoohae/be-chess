@@ -30,7 +30,7 @@ class QueenTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(position));
+		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.QUEEN);
 		board.move(position, queen);
 
 		// when
@@ -48,7 +48,7 @@ class QueenTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece queen = Piece.createQueen(Piece.Color.WHITE, new Position(position));
+		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.QUEEN);
 		board.move(position, queen);
 
 		// then

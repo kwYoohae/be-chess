@@ -28,7 +28,7 @@ class KingTest {
 		board.initializeEmpty();
 
 		String position = "b4";
-		final Piece king = Piece.createKing(Piece.Color.WHITE, new Position(position));
+		final Piece king = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.KING);
 		board.move(position, king);
 
 		// when, then
@@ -46,7 +46,7 @@ class KingTest {
 		board.initializeEmpty();
 
 		String position = "b4";
-		final Piece king = Piece.createKing(Piece.Color.WHITE, new Position(position));
+		final Piece king = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.KING);
 		board.move(position, king);
 
 		// when

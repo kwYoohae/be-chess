@@ -29,7 +29,7 @@ class PawnTest {
 		board.move("b7", "b5");
 
 		//then
-		assertThat(board.findPiece("b4")).isEqualTo(Piece.createPawn(Piece.Color.WHITE, new Position("b4")));
-		assertThat(board.findPiece("b5")).isEqualTo(Piece.createPawn(Piece.Color.BLACK, new Position("b5")));
+		assertThat(board.findPiece("b4")).isEqualTo(Piece.createPiece(Piece.Color.WHITE, new Position("b4"), Piece.Type.PAWN));
+		assertThat(board.findPiece("b5")).isEqualTo(Piece.createPiece(Piece.Color.BLACK, new Position("b5"), Piece.Type.PAWN));
 	}
 }

@@ -1,7 +1,6 @@
 package softeer2nd.chess.domain.pieces;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,7 +28,7 @@ class KnightTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece knight = Piece.createKnight(Piece.Color.WHITE, new Position(position));
+		final Piece knight = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.KNIGHT);
 		board.move(position, knight);
 
 		// when
@@ -47,7 +46,7 @@ class KnightTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece knight = Piece.createKnight(Piece.Color.WHITE, new Position(position));
+		final Piece knight = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.KNIGHT);
 		board.move(position, knight);
 
 		// when, then
