@@ -10,7 +10,6 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
-import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
@@ -32,7 +31,7 @@ class KingTest {
 		board.initializeEmpty();
 
 		String position = "b4";
-		final Piece king = Piece.createPiece(Color.WHITE, new Position(position), Piece.Type.KING);
+		final Piece king = Piece.createPiece(Color.WHITE, Piece.Type.KING);
 		board.addPiece(position, king);
 
 		// when, then
@@ -50,7 +49,7 @@ class KingTest {
 		board.initializeEmpty();
 
 		String position = "b4";
-		final Piece king = Piece.createPiece(Color.WHITE, new Position(position), Piece.Type.KING);
+		final Piece king = Piece.createPiece(Color.WHITE, Piece.Type.KING);
 		board.addPiece(position, king);
 
 		// when

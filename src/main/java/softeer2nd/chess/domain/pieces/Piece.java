@@ -14,37 +14,35 @@ public abstract class Piece {
 
 	protected Color color;
 	protected Type type;
-	protected Position position;
 	protected List<Direction> directions = new ArrayList<>();
 
-	protected Piece(final Color color, final Type type, final Position position) {
+	protected Piece(final Color color, final Type type) {
 		this.color = color;
 		this.type = type;
-		this.position = position;
 	}
 
-	public static Piece createPiece(Color color, Position position, Type type) {
+	public static Piece createPiece(Color color, Type type) {
 		validatePiece(color, type);
 		switch (type) {
 			case KING:
-				return new King(color, type, position);
+				return new King(color, type);
 			case PAWN:
-				return new Pawn(color, type, position);
+				return new Pawn(color, type);
 			case ROOK:
-				return new Rook(color, type, position);
+				return new Rook(color, type);
 			case QUEEN:
-				return new Queen(color, type, position);
+				return new Queen(color, type);
 			case BISHOP:
-				return new Bishop(color, type, position);
+				return new Bishop(color, type);
 			case KNIGHT:
-				return new Knight(color, type, position);
+				return new Knight(color, type);
 			default:
-				return new Blank(Color.NOCOLOR, Type.NO_PIECE, position);
+				return new Blank(Color.NOCOLOR, Type.NO_PIECE);
 		}
 	}
 
-	public static Piece createBlank(Position position) {
-		return new Blank(Color.NOCOLOR, Type.NO_PIECE, position);
+	public static Piece createBlank() {
+		return new Blank(Color.NOCOLOR, Type.NO_PIECE);
 	}
 
 	public static void validatePiece(Color color, Type type) {
@@ -61,10 +59,6 @@ public abstract class Piece {
 		return type;
 	}
 
-	public void setPosition(Position position) {
-		this.position = position;
-	}
-
 	public boolean isBlack() {
 		return color == Color.BLACK;
 	}
@@ -77,10 +71,6 @@ public abstract class Piece {
 		if (color == Color.BLACK)
 			return type.getBlackRepresentation();
 		return type.getWhiteRepresentation();
-	}
-
-	public Position getPosition() {
-		return position;
 	}
 
 	public abstract Direction getPieceDirection(final Position sourcePosition, final Position targetPosition);

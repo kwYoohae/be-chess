@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
-import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
@@ -35,9 +34,9 @@ class PawnTest {
 
 		//then
 		assertThat(board.findPiece("b4")).isEqualTo(
-			Piece.createPiece(Color.WHITE, new Position("b4"), Piece.Type.PAWN));
+			Piece.createPiece(Color.WHITE, Piece.Type.PAWN));
 		assertThat(board.findPiece("b5")).isEqualTo(
-			Piece.createPiece(Color.BLACK, new Position("b5"), Piece.Type.PAWN));
+			Piece.createPiece(Color.BLACK, Piece.Type.PAWN));
 	}
 
 	@Test
@@ -55,7 +54,7 @@ class PawnTest {
 		chess.movePiece(sourcePosition, targetPosition);
 
 		// then
-		final Piece piece = Piece.createPiece(Color.WHITE, new Position(targetPosition), Piece.Type.PAWN);
+		final Piece piece = Piece.createPiece(Color.WHITE, Piece.Type.PAWN);
 		assertThat(board.findPiece(targetPosition)).isEqualTo(piece);
 	}
 
@@ -107,7 +106,7 @@ class PawnTest {
 	}
 
 	private void addPiece(String position, Color color, Piece.Type type) {
-		final Piece piece = Piece.createPiece(color, new Position(position), type);
+		final Piece piece = Piece.createPiece(color, type);
 		board.addPiece(position, piece);
 	}
 }

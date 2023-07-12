@@ -82,7 +82,6 @@ public class Board {
 		final int y = position.getY();
 
 		final Rank rank = boards.get(y);
-		piece.setPosition(position);
 		rank.move(x, piece);
 	}
 
@@ -121,7 +120,7 @@ public class Board {
 		final Piece sourcePiece = findPiece(sourcePosition);
 
 		addPiece(targetPosition, sourcePiece);
-		addPiece(sourcePosition, Piece.createBlank(new Position(sourcePosition)));
+		addPiece(sourcePosition, Piece.createBlank());
 	}
 
 	public List<Rank> getBoards() {

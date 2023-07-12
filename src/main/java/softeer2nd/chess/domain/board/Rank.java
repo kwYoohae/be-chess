@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.board.position.Row;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.component.Color;
@@ -31,7 +30,7 @@ public class Rank {
 		final List<Piece> pawns = IntStream.range(0, MAX_ROW)
 			.mapToObj((i) -> {
 				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
-				return Piece.createPiece(color, new Position(position), Type.PAWN);
+				return Piece.createPiece(color, Type.PAWN);
 			})
 			.collect(Collectors.toList());
 
@@ -42,7 +41,7 @@ public class Rank {
 		final List<Piece> blanks = IntStream.range(0, MAX_ROW)
 			.mapToObj((i) -> {
 				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
-				return Piece.createBlank(new Position(position));
+				return Piece.createBlank();
 			})
 			.collect(Collectors.toList());
 
@@ -53,14 +52,14 @@ public class Rank {
 		String startIndex = getStartIndex(color);
 
 		List<Piece> pieces = new ArrayList<>();
-		pieces.add(createPiece(color, new Position(Row.A.getPosition() + startIndex), Type.ROOK));
-		pieces.add(createPiece(color, new Position(Row.B.getPosition() + startIndex), Type.KNIGHT));
-		pieces.add(createPiece(color, new Position(Row.C.getPosition() + startIndex), Type.BISHOP));
-		pieces.add(createPiece(color, new Position(Row.D.getPosition() + startIndex), Type.QUEEN));
-		pieces.add(createPiece(color, new Position(Row.E.getPosition() + startIndex), Type.KING));
-		pieces.add(createPiece(color, new Position(Row.F.getPosition() + startIndex), Type.BISHOP));
-		pieces.add(createPiece(color, new Position(Row.G.getPosition() + startIndex), Type.KNIGHT));
-		pieces.add(createPiece(color, new Position(Row.H.getPosition() + startIndex), Type.ROOK));
+		pieces.add(createPiece(color, Type.ROOK));
+		pieces.add(createPiece(color, Type.KNIGHT));
+		pieces.add(createPiece(color, Type.BISHOP));
+		pieces.add(createPiece(color, Type.QUEEN));
+		pieces.add(createPiece(color, Type.KING));
+		pieces.add(createPiece(color, Type.BISHOP));
+		pieces.add(createPiece(color, Type.KNIGHT));
+		pieces.add(createPiece(color, Type.ROOK));
 
 		return new Rank(pieces);
 	}

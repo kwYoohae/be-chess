@@ -5,8 +5,8 @@ import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Rook extends Piece {
 
-	protected Rook(Color color, Type type, Position position) {
-		super(color, type, position);
+	protected Rook(Color color, Type type) {
+		super(color, type);
 		this.directions = Direction.linearDirection();
 	}
 

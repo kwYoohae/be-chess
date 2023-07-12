@@ -4,8 +4,8 @@ import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.component.Color;
 public class King extends Piece {
 
-	protected King(Color color, Type type, Position position) {
-		super(color, type, position);
+	protected King(Color color, Type type) {
+		super(color, type);
 		this.directions = Direction.everyDirection();
 	}
 

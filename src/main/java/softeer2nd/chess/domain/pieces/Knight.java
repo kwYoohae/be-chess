@@ -5,8 +5,8 @@ import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Knight extends Piece {
 
-	protected Knight(Color color, Type type, Position position) {
-		super(color, type, position);
+	protected Knight(Color color, Type type) {
+		super(color, type);
 		directions = Direction.knightDirection();
 	}
 

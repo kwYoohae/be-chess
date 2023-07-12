@@ -8,8 +8,8 @@ public class Pawn extends Piece {
 	private static final int BLACK_PAWN_START_INDEX = 6;
 	private static final int WHITE_PAWN_START_INDEX = 1;
 
-	protected Pawn(Color color, Type type, Position position) {
-		super(color, type, position);
+	protected Pawn(Color color, Type type) {
+		super(color, type);
 		setPawnDirection(color);
 	}
 
