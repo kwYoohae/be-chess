@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.domain.pieces.component.Color;
 
 public abstract class Piece {
 
@@ -128,10 +129,6 @@ public abstract class Piece {
 	@Override
 	public int hashCode() {
 		return Objects.hash(color, type);
-	}
-
-	public enum Color {
-		WHITE, BLACK, NOCOLOR;
 	}
 
 	public enum Type {

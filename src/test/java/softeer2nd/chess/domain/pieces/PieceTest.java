@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class PieceTest {
@@ -26,19 +27,19 @@ class PieceTest {
 	@Test
 	@DisplayName("흰색과 검은색 기물들이 모두 생성 되어야 한다")
 	void create_piece() {
-		verifyPawn(Piece.createPiece(Piece.Color.WHITE, new Position("a1"), PAWN),
-			Piece.createPiece(Piece.Color.BLACK, new Position("a2"),
+		verifyPawn(Piece.createPiece(Color.WHITE, new Position("a1"), PAWN),
+			Piece.createPiece(Color.BLACK, new Position("a2"),
 				PAWN), PAWN);
-		verifyPawn(Piece.createPiece(Piece.Color.WHITE, new Position("b1"), KNIGHT),
-			Piece.createPiece(Piece.Color.BLACK, new Position("b2"), KNIGHT), KNIGHT);
-		verifyPawn(Piece.createPiece(Piece.Color.WHITE, new Position("c1"), ROOK),
-			Piece.createPiece(Piece.Color.BLACK, new Position("c2"), ROOK), ROOK);
-		verifyPawn(Piece.createPiece(Piece.Color.WHITE, new Position("d1"), BISHOP),
-			Piece.createPiece(Piece.Color.BLACK, new Position("d2"), BISHOP), BISHOP);
-		verifyPawn(Piece.createPiece(Piece.Color.WHITE, new Position("e1"), QUEEN),
-			Piece.createPiece(Piece.Color.BLACK, new Position("e2"), QUEEN), QUEEN);
-		verifyPawn(Piece.createPiece(Piece.Color.WHITE, new Position("f1"), KING),
-			Piece.createPiece(Piece.Color.BLACK, new Position("f2"), KING), KING);
+		verifyPawn(Piece.createPiece(Color.WHITE, new Position("b1"), KNIGHT),
+			Piece.createPiece(Color.BLACK, new Position("b2"), KNIGHT), KNIGHT);
+		verifyPawn(Piece.createPiece(Color.WHITE, new Position("c1"), ROOK),
+			Piece.createPiece(Color.BLACK, new Position("c2"), ROOK), ROOK);
+		verifyPawn(Piece.createPiece(Color.WHITE, new Position("d1"), BISHOP),
+			Piece.createPiece(Color.BLACK, new Position("d2"), BISHOP), BISHOP);
+		verifyPawn(Piece.createPiece(Color.WHITE, new Position("e1"), QUEEN),
+			Piece.createPiece(Color.BLACK, new Position("e2"), QUEEN), QUEEN);
+		verifyPawn(Piece.createPiece(Color.WHITE, new Position("f1"), KING),
+			Piece.createPiece(Color.BLACK, new Position("f2"), KING), KING);
 
 		Piece blank = Piece.createBlank(new Position("c3"));
 		assertThat(blank.isBlack()).isFalse();
@@ -49,25 +50,25 @@ class PieceTest {
 	@Test
 	@DisplayName("기물들의 색은 생성한 그대로여야 한다")
 	void checkColor() {
-		verifyColor(Piece.createPiece(Piece.Color.BLACK, new Position("a1"), KING), Piece.Color.BLACK);
-		verifyColor(Piece.createPiece(Piece.Color.BLACK, new Position("b1"), PAWN), Piece.Color.BLACK);
-		verifyColor(Piece.createPiece(Piece.Color.BLACK, new Position("c1"), KNIGHT), Piece.Color.BLACK);
-		verifyColor(Piece.createPiece(Piece.Color.BLACK, new Position("d1"), QUEEN), Piece.Color.BLACK);
-		verifyColor(Piece.createPiece(Piece.Color.BLACK, new Position("e1"), BISHOP), Piece.Color.BLACK);
-		verifyColor(Piece.createPiece(Piece.Color.BLACK, new Position("f1"), ROOK), Piece.Color.BLACK);
+		verifyColor(Piece.createPiece(Color.BLACK, new Position("a1"), KING), Color.BLACK);
+		verifyColor(Piece.createPiece(Color.BLACK, new Position("b1"), PAWN), Color.BLACK);
+		verifyColor(Piece.createPiece(Color.BLACK, new Position("c1"), KNIGHT),Color.BLACK);
+		verifyColor(Piece.createPiece(Color.BLACK, new Position("d1"), QUEEN), Color.BLACK);
+		verifyColor(Piece.createPiece(Color.BLACK, new Position("e1"), BISHOP), Color.BLACK);
+		verifyColor(Piece.createPiece(Color.BLACK, new Position("f1"), ROOK), Color.BLACK);
 
-		verifyColor(Piece.createPiece(Piece.Color.WHITE, new Position("a2"), KING), Piece.Color.WHITE);
-		verifyColor(Piece.createPiece(Piece.Color.WHITE, new Position("b2"), PAWN), Piece.Color.WHITE);
-		verifyColor(Piece.createPiece(Piece.Color.WHITE, new Position("c2"), KNIGHT), Piece.Color.WHITE);
-		verifyColor(Piece.createPiece(Piece.Color.WHITE, new Position("d2"), QUEEN), Piece.Color.WHITE);
-		verifyColor(Piece.createPiece(Piece.Color.WHITE, new Position("e2"), BISHOP), Piece.Color.WHITE);
-		verifyColor(Piece.createPiece(Piece.Color.WHITE, new Position("f2"), ROOK), Piece.Color.WHITE);
+		verifyColor(Piece.createPiece(Color.WHITE, new Position("a2"), KING), Color.WHITE);
+		verifyColor(Piece.createPiece(Color.WHITE, new Position("b2"), PAWN), Color.WHITE);
+		verifyColor(Piece.createPiece(Color.WHITE, new Position("c2"), KNIGHT), Color.WHITE);
+		verifyColor(Piece.createPiece(Color.WHITE, new Position("d2"), QUEEN), Color.WHITE);
+		verifyColor(Piece.createPiece(Color.WHITE, new Position("e2"), BISHOP), Color.WHITE);
+		verifyColor(Piece.createPiece(Color.WHITE, new Position("f2"), ROOK), Color.WHITE);
 	}
 
 	@Test
 	@DisplayName("존재하지 않는 기물을 생성할 경우 에러가 발생한다")
 	void notExistsPiece() {
-		assertThatThrownBy(() -> Piece.createPiece(Piece.Color.NOCOLOR, new Position("a1"), PAWN))
+		assertThatThrownBy(() -> Piece.createPiece(Color.NOCOLOR, new Position("a1"), PAWN))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.NOT_EXIST_PIECE);
 	}
@@ -84,12 +85,12 @@ class PieceTest {
 		String rookPosition = "c5";
 		String bishopPosition = "e6";
 		String knightPosition = "f4";
-		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(queenPosition), QUEEN);
-		final Piece king = Piece.createPiece(Piece.Color.WHITE, new Position(kingPosition), KING);
-		final Piece pawn = Piece.createPiece(Piece.Color.WHITE, new Position(pawnPosition), PAWN);
-		final Piece rook = Piece.createPiece(Piece.Color.WHITE, new Position(rookPosition), ROOK);
-		final Piece bishop = Piece.createPiece(Piece.Color.WHITE, new Position(bishopPosition), BISHOP);
-		final Piece knight = Piece.createPiece(Piece.Color.WHITE, new Position(knightPosition), KNIGHT);
+		final Piece queen = Piece.createPiece(Color.WHITE, new Position(queenPosition), QUEEN);
+		final Piece king = Piece.createPiece(Color.WHITE, new Position(kingPosition), KING);
+		final Piece pawn = Piece.createPiece(Color.WHITE, new Position(pawnPosition), PAWN);
+		final Piece rook = Piece.createPiece(Color.WHITE, new Position(rookPosition), ROOK);
+		final Piece bishop = Piece.createPiece(Color.WHITE, new Position(bishopPosition), BISHOP);
+		final Piece knight = Piece.createPiece(Color.WHITE, new Position(knightPosition), KNIGHT);
 
 		board.addPiece(pawnPosition, pawn);
 
@@ -123,13 +124,13 @@ class PieceTest {
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
 	}
 
-	void verifyColor(Piece piece, final Piece.Color color) {
-		if (color == Piece.Color.WHITE) {
+	void verifyColor(Piece piece, final Color color) {
+		if (color == Color.WHITE) {
 			assertThat(piece.isWhite()).isTrue();
 			assertThat(piece.isBlack()).isFalse();
 		}
 
-		if (color == Piece.Color.BLACK) {
+		if (color == Color.BLACK) {
 			assertThat(piece.isBlack()).isTrue();
 			assertThat(piece.isWhite()).isFalse();
 		}

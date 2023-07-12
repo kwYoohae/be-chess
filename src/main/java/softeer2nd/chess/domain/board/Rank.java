@@ -12,6 +12,7 @@ import java.util.stream.IntStream;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.board.position.Row;
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Rank {
 

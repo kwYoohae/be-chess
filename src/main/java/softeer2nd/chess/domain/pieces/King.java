@@ -1,7 +1,7 @@
 package softeer2nd.chess.domain.pieces;
 
 import softeer2nd.chess.domain.board.position.Position;
-
+import softeer2nd.chess.domain.pieces.component.Color;
 public class King extends Piece {
 
 	protected King(Color color, Type type, Position position) {

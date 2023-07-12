@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Score {
 
@@ -15,11 +16,11 @@ public class Score {
 		this.board = board;
 	}
 
-	public double calculatePoint(final Piece.Color color) {
+	public double calculatePoint(final Color color) {
 		return calculatePawnPoint(color) + calculateExceptPawnPoint(color);
 	}
 
-	private double calculatePawnPoint(Piece.Color color) {
+	private double calculatePawnPoint(Color color) {
 		double pawnScore = 0.0d;
 		for (int i = 0; i < Board.BOARD_MAX_INDEX; i++) {
 			final long pawnCount = board.countPawnInColumn(color, i);
@@ -34,14 +35,14 @@ public class Score {
 		return pawnCount * Piece.Type.PAWN.getDefaultPoint();
 	}
 
-	private double calculateExceptPawnPoint(Piece.Color color) {
+	private double calculateExceptPawnPoint(Color color) {
 		final List<Rank> boards = board.getBoards();
 		return boards.stream()
 			.map(rank -> rank.getScoreExceptPawnInRank(color))
 			.reduce(0.0d, Double::sum);
 	}
 
-	public List<Piece> getPiecesInBoard(Piece.Color color) {
+	public List<Piece> getPiecesInBoard(Color color) {
 		List<Rank> boards = board.getBoards();
 		return boards.stream()
 			.flatMap(rank -> rank.getRow().stream())

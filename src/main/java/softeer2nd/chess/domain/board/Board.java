@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
+import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Board {
 
@@ -20,11 +21,11 @@ public class Board {
 
 	public void initialize() {
 		boards.clear();
-		boards.add(Rank.initializeOtherPieces(Piece.Color.WHITE));
-		boards.add(Rank.initializePawn(Piece.Color.WHITE, WHITE_PAWN_START_INDEX));
+		boards.add(Rank.initializeOtherPieces(Color.WHITE));
+		boards.add(Rank.initializePawn(Color.WHITE, WHITE_PAWN_START_INDEX));
 		initializeBlanks();
-		boards.add(Rank.initializePawn(Piece.Color.BLACK, BLACK_PAWN_START_INDEX));
-		boards.add(Rank.initializeOtherPieces(Piece.Color.BLACK));
+		boards.add(Rank.initializePawn(Color.BLACK, BLACK_PAWN_START_INDEX));
+		boards.add(Rank.initializeOtherPieces(Color.BLACK));
 	}
 
 	private void initializeBlanks() {
@@ -32,7 +33,7 @@ public class Board {
 			.forEach((index) -> boards.add(Rank.initializeBlank(index)));
 	}
 
-	public String getPawnsResult(Piece.Color color) {
+	public String getPawnsResult(Color color) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = BOARD_MAX_INDEX - 1; i >= 0; i--) {
 			final Rank row = boards.get(i);
@@ -48,7 +49,7 @@ public class Board {
 			.reduce(0L, Long::sum);
 	}
 
-	public long pieceCount(Piece.Type type, Piece.Color color) {
+	public long pieceCount(Piece.Type type, Color color) {
 		return boards.stream()
 			.map(row -> row.pieceCount(type, color))
 			.reduce(0L, Long::sum);
@@ -85,7 +86,7 @@ public class Board {
 		rank.move(x, piece);
 	}
 
-	public boolean checkSamePawnInColum(final Piece.Color color) {
+	public boolean checkSamePawnInColum(final Color color) {
 		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
 			if (countPawnInColumn(color, i) > 1)
 				return true;
@@ -93,7 +94,7 @@ public class Board {
 		return false;
 	}
 
-	public long countPawnInColumn(final Piece.Color color, int xPos) {
+	public long countPawnInColumn(final Color color, int xPos) {
 		return IntStream.range(0, BOARD_MAX_INDEX)
 			.filter((i) -> {
 				final Rank rank = boards.get(i);

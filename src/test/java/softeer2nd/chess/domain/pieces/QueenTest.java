@@ -11,6 +11,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.domain.pieces.component.Color;
 
 class QueenTest {
 
@@ -32,7 +33,7 @@ class QueenTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.QUEEN);
+		final Piece queen = Piece.createPiece(Color.WHITE, new Position(position), Piece.Type.QUEEN);
 		board.addPiece(position, queen);
 
 		// when
@@ -50,7 +51,7 @@ class QueenTest {
 		board.initializeEmpty();
 
 		String position = "d4";
-		final Piece queen = Piece.createPiece(Piece.Color.WHITE, new Position(position), Piece.Type.QUEEN);
+		final Piece queen = Piece.createPiece(Color.WHITE, new Position(position), Piece.Type.QUEEN);
 		board.addPiece(position, queen);
 
 		// then

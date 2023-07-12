@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
+import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class PawnTest {
@@ -34,9 +35,9 @@ class PawnTest {
 
 		//then
 		assertThat(board.findPiece("b4")).isEqualTo(
-			Piece.createPiece(Piece.Color.WHITE, new Position("b4"), Piece.Type.PAWN));
+			Piece.createPiece(Color.WHITE, new Position("b4"), Piece.Type.PAWN));
 		assertThat(board.findPiece("b5")).isEqualTo(
-			Piece.createPiece(Piece.Color.BLACK, new Position("b5"), Piece.Type.PAWN));
+			Piece.createPiece(Color.BLACK, new Position("b5"), Piece.Type.PAWN));
 	}
 
 	@Test
@@ -47,14 +48,14 @@ class PawnTest {
 
 		String sourcePosition = "d2";
 		String targetPosition = "c3";
-		addPiece(sourcePosition, Piece.Color.WHITE, Piece.Type.PAWN);
-		addPiece(targetPosition, Piece.Color.BLACK, Piece.Type.PAWN);
+		addPiece(sourcePosition, Color.WHITE, Piece.Type.PAWN);
+		addPiece(targetPosition, Color.BLACK, Piece.Type.PAWN);
 
 		// when
 		chess.movePiece(sourcePosition, targetPosition);
 
 		// then
-		final Piece piece = Piece.createPiece(Piece.Color.WHITE, new Position(targetPosition), Piece.Type.PAWN);
+		final Piece piece = Piece.createPiece(Color.WHITE, new Position(targetPosition), Piece.Type.PAWN);
 		assertThat(board.findPiece(targetPosition)).isEqualTo(piece);
 	}
 
@@ -65,7 +66,7 @@ class PawnTest {
 		board.initializeEmpty();
 
 		String sourcePosition = "d2";
-		addPiece(sourcePosition, Piece.Color.WHITE, Piece.Type.PAWN);
+		addPiece(sourcePosition, Color.WHITE, Piece.Type.PAWN);
 
 		// when, then
 		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "c3"))
@@ -97,7 +98,7 @@ class PawnTest {
 		// given
 		board.initialize();
 
-		addPiece("c3", Piece.Color.WHITE, Piece.Type.PAWN);
+		addPiece("c3", Color.WHITE, Piece.Type.PAWN);
 
 		// when, then
 		assertThatThrownBy(() -> chess.movePiece("c2", "c4"))
@@ -105,7 +106,7 @@ class PawnTest {
 			.hasMessage(ExceptionMessage.PIECE_JUMP_TO_PIECE);
 	}
 
-	private void addPiece(String position, Piece.Color color, Piece.Type type) {
+	private void addPiece(String position, Color color, Piece.Type type) {
 		final Piece piece = Piece.createPiece(color, new Position(position), type);
 		board.addPiece(position, piece);
 	}
