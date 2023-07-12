@@ -16,6 +16,12 @@ public abstract class Piece {
 	protected Position position;
 	protected List<Direction> directions = new ArrayList<>();
 
+	protected Piece(final Color color, final Type type, final Position position) {
+		this.color = color;
+		this.type = type;
+		this.position = position;
+	}
+
 	public static Piece createPiece(Color color, Position position, Type type) {
 		validatePiece(color, type);
 		switch (type) {

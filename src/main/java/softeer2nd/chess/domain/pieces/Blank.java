@@ -6,9 +6,7 @@ import softeer2nd.chess.exception.ExceptionMessage;
 public class Blank extends Piece {
 
 	protected Blank(Color color, Type type, Position position) {
-		this.color = color;
-		this.type = type;
-		this.position = position;
+		super(color, type, position);
 	}
 
 	@Override
