@@ -5,7 +5,14 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 import java.util.Arrays;
 
 public enum Row {
-	A('a', 0), B('b', 1), C('c', 2), D('d', 3), E('e', 4), F('f', 5), G('g', 6), H('h', 7);
+	A('a', 0),
+	B('b', 1),
+	C('c', 2),
+	D('d', 3),
+	E('e', 4),
+	F('f', 5),
+	G('g', 6),
+	H('h', 7);
 
 	private final char position;
 	private final int index;
