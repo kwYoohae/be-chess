@@ -6,6 +6,8 @@ import softeer2nd.chess.view.InputView;
 
 public class GameManager {
 
+	private static final String BLANK = " ";
+
 	private final InputView inputView;
 	private final OutputView outputView;
 	private final Chess chess;
@@ -38,7 +40,7 @@ public class GameManager {
 	}
 
 	private void movePiece(String command) {
-		final String[] commands = command.split(" ");
+		final String[] commands = command.split(BLANK);
 		String sourcePosition = commands[1];
 		String destinationPosition = commands[2];
 
