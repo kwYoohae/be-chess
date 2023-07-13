@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.domain.board.intializer.BoardInitializer;
 import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
@@ -15,7 +16,7 @@ class BlankTest {
 	@DisplayName("기물이 없는곳은 움직일 수 없습니다")
 	void blankCanNotMove() {
 		// given
-		Board board = new Board();
+		Board board = new Board(new BoardInitializer());
 		Chess chess = new Chess(board);
 		board.initializeEmpty();
 

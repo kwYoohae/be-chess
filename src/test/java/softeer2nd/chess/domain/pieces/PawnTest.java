@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.domain.board.intializer.BoardInitializer;
 import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
@@ -18,7 +19,7 @@ class PawnTest {
 
 	@BeforeEach
 	void beforeEach() {
-		board = new Board();
+		board = new Board(new BoardInitializer());
 		chess = new Chess(board);
 	}
 

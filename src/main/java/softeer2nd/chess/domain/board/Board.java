@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import softeer2nd.chess.domain.board.intializer.BoardInitializer;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.component.Color;
@@ -12,25 +13,16 @@ import softeer2nd.chess.domain.pieces.component.Color;
 public class Board {
 
 	public static final int BOARD_MAX_INDEX = 8;
-	private static final int BLANK_START_INDEX = 3;
-	private static final int BLANK_END_INDEX = 6;
 	private static final int WHITE_PAWN_START_INDEX = 2;
 	private static final int BLACK_PAWN_START_INDEX = 7;
-
 	private final List<Rank> boards = new ArrayList<>();
-
-	public void initialize() {
-		boards.clear();
-		boards.add(Rank.initializeOtherPieces(Color.WHITE));
-		boards.add(Rank.initializePawn(Color.WHITE, WHITE_PAWN_START_INDEX));
-		initializeBlanks();
-		boards.add(Rank.initializePawn(Color.BLACK, BLACK_PAWN_START_INDEX));
-		boards.add(Rank.initializeOtherPieces(Color.BLACK));
+	private final BoardInitializer boardInitializer;
+	public Board(BoardInitializer boardInitializer) {
+		this.boardInitializer = boardInitializer;
 	}
 
-	private void initializeBlanks() {
-		IntStream.range(BLANK_START_INDEX, BLANK_END_INDEX + 1)
-			.forEach((index) -> boards.add(Rank.initializeBlank(index)));
+	public void initialize() {
+		boardInitializer.initialize(boards);
 	}
 
 	public String getPawnsResult(Color color) {
@@ -70,10 +62,7 @@ public class Board {
 	}
 
 	public void initializeEmpty() {
-		boards.clear();
-		for (int i = 0; i < BOARD_MAX_INDEX; i++) {
-			boards.add(Rank.initializeBlank(i + 1));
-		}
+		boardInitializer.initializeEmpty(boards);
 	}
 
 	public void addPiece(final String input, final Piece piece) {

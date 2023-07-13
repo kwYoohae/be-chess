@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import softeer2nd.chess.domain.board.intializer.BoardInitializer;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.view.ChessView;
@@ -21,7 +22,7 @@ class ScoreTest {
 
 	@BeforeEach
 	void beforeEach() {
-		board = new Board();
+		board = new Board(new BoardInitializer());
 		score = new Score(board);
 		chessView = new ChessView(board);
 	}

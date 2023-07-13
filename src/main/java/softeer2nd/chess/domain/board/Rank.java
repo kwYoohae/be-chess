@@ -3,72 +3,21 @@ package softeer2nd.chess.domain.board;
 import static softeer2nd.chess.domain.pieces.Piece.*;
 import static softeer2nd.chess.utils.StringUtils.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import softeer2nd.chess.domain.board.position.Row;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Rank {
 
-	private static final String BLACK_PIECE_START_INDEX = "8";
-	private static final String WHITE_PIECE_START_INDEX = "1";
 	private static final int MAX_ROW = 8;
 	private static final String BLANK_LINE = "........";
 	private static final String EMPTY_STRING = "";
 	private final List<Piece> row;
 
-	private Rank(List<Piece> row) {
+	public Rank(List<Piece> row) {
 		this.row = row;
-	}
-
-	public static Rank initializePawn(Color color, int columnIndex) {
-		final List<Piece> pawns = IntStream.range(0, MAX_ROW)
-			.mapToObj((i) -> {
-				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
-				return Piece.createPiece(color, Type.PAWN);
-			})
-			.collect(Collectors.toList());
-
-		return new Rank(pawns);
-	}
-
-	public static Rank initializeBlank(int columnIndex) {
-		final List<Piece> blanks = IntStream.range(0, MAX_ROW)
-			.mapToObj((i) -> {
-				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
-				return Piece.createBlank();
-			})
-			.collect(Collectors.toList());
-
-		return new Rank(blanks);
-	}
-
-	public static Rank initializeOtherPieces(Color color) {
-		String startIndex = getStartIndex(color);
-
-		List<Piece> pieces = new ArrayList<>();
-		pieces.add(createPiece(color, Type.ROOK));
-		pieces.add(createPiece(color, Type.KNIGHT));
-		pieces.add(createPiece(color, Type.BISHOP));
-		pieces.add(createPiece(color, Type.QUEEN));
-		pieces.add(createPiece(color, Type.KING));
-		pieces.add(createPiece(color, Type.BISHOP));
-		pieces.add(createPiece(color, Type.KNIGHT));
-		pieces.add(createPiece(color, Type.ROOK));
-
-		return new Rank(pieces);
-	}
-
-	private static String getStartIndex(final Color color) {
-		String startIndex = WHITE_PIECE_START_INDEX;
-		if (color == Color.BLACK)
-			startIndex = BLACK_PIECE_START_INDEX;
-		return startIndex;
 	}
 
 	public List<Piece> getRow() {

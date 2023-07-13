@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.domain.board.intializer.BoardInitializer;
 import softeer2nd.chess.domain.pieces.component.Color;
 
 class QueenTest {
@@ -19,7 +20,7 @@ class QueenTest {
 
 	@BeforeEach
 	void beforeEach() {
-		board = new Board();
+		board = new Board(new BoardInitializer());
 		chess = new Chess(board);
 	}
 
