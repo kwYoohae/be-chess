@@ -10,22 +10,33 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.GameManager;
+import softeer2nd.chess.exception.ExceptionMessage;
 import softeer2nd.chess.view.OutputView;
 import softeer2nd.chess.view.InputView;
 
 class GameManagerTest {
 
+	private Board board;
+	private Chess chess;
+	private GameManager gameManager;
+	private OutputView outputView = new OutputView();
+
+	@BeforeEach
+	void beforeEach() {
+		board = new Board();
+		chess = new Chess(board);
+	}
 	@Test
 	@DisplayName("move를 할 수 있어야 한다")
 	void move() {
 		// given
-		Board board = new Board();
 		board.initialize();
 
 		String commnad = appendNewLine("start") + appendNewLine("move b2 b3") + appendNewLine("end");
@@ -35,8 +46,7 @@ class GameManagerTest {
 		OutputStream outputStream = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outputStream));
 
-		GameManager gameManager = new GameManager(new InputView(new Scanner(inputStream)), new OutputView(),
-			new Chess(board));
+		gameManager = new GameManager(new InputView(new Scanner(inputStream)), outputView, chess);
 
 		// when
 		gameManager.startGame();
@@ -54,6 +64,19 @@ class GameManagerTest {
 		System.out.println(outputStream);
 	}
 
-	// @Test
-	// @DisplayName("자신의 턴에는 자신의 기물만 움질일 수 있다. ")
+	@Test
+	@DisplayName("자신의 턴에는 자신의 기물만 움질일 수 있다. ")
+	void pieceMoveOnlyMyTurn() {
+		// given
+		String commnad = appendNewLine("start") + appendNewLine("move b7 b5");
+		InputStream inputStream = new ByteArrayInputStream(commnad.getBytes());
+		System.setIn(System.in);
+
+		gameManager = new GameManager(new InputView(new Scanner(inputStream)), outputView, chess);
+
+		// when
+		assertThatThrownBy(() -> gameManager.startGame())
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessage(ExceptionMessage.USER_MOVABLE_OWN_TURUN);
+	}
 }
