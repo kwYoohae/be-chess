@@ -30,13 +30,13 @@ public class Pawn extends Piece {
 		Direction direction = super.findDirection(sourcePosition, targetPosition);
 
 		if (direction == Direction.DOUBLE_SOUTH || direction == Direction.DOUBLE_NORTH) {
-			validFirstMove(sourcePosition, targetPosition);
+			validFirstMove(sourcePosition);
 		}
 
 		return direction;
 	}
 
-	private void validFirstMove(final Position sourcePosition, final Position targetPosition) {
+	private void validFirstMove(final Position sourcePosition) {
 		if (color == Color.WHITE && sourcePosition.getY() != WHITE_PAWN_START_INDEX) {
 			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}

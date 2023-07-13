@@ -64,18 +64,32 @@ public class MoveValidator {
 	}
 
 	private void validPawnMovable(final Position sourcePosition, final Position targetPosition, final Direction direction) {
-		if (direction == Direction.NORTH || direction == Direction.SOUTH)
-			return;
+		int xDegree = direction.getXDegree();
+		int yDegree = direction.getYDegree();
 
+		if (Math.abs(xDegree) == Math.abs(yDegree)) {
+			validPawnDiagonalMovable(targetPosition);
+			return;
+		}
+
+		final Piece piece = board.findPiece(targetPosition.getOrigin());
+		if (piece.getType() != Piece.Type.NO_PIECE)
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+
+		if (direction == Direction.DOUBLE_SOUTH || direction == Direction.DOUBLE_NORTH)
+			validPawnDoubleMovable(sourcePosition, targetPosition, direction);
+	}
+
+	private void validPawnDoubleMovable(final Position sourcePosition, final Position targetPosition, Direction direction) {
 		if (direction == Direction.DOUBLE_NORTH) {
-			validPieceExistsInDirection(sourcePosition, targetPosition, Direction.NORTH);
-			return;
+			direction = Direction.NORTH;
+		} else if (direction == Direction.DOUBLE_SOUTH) {
+			direction = Direction.SOUTH;
 		}
-		if (direction == Direction.DOUBLE_SOUTH) {
-			validPieceExistsInDirection(sourcePosition, targetPosition, Direction.SOUTH);
-			return;
+
+		if (!validPieceExistsInDirection(sourcePosition, targetPosition, direction)) {
+			throw new IllegalArgumentException(PIECE_JUMP_TO_PIECE);
 		}
-		validPawnDiagonalMovable(targetPosition);
 	}
 
 	private void validPawnDiagonalMovable(final Position targetPosition) {
