@@ -30,10 +30,7 @@ public enum Command {
 		if(!validateCommandLength(inputs)) {
 			return false;
 		}
-		if(!validateCommand(inputs)) {
-			return false;
-		}
-		return true;
+		return validateCommand(inputs);
 	}
 
 	private static boolean validateCommandLength(String[] inputs) {
