@@ -22,17 +22,27 @@ public class GameManager {
 	}
 
 	public void startGame() {
-		while (true) {
+		Command gameState = Command.EMPTY;
+		while (gameState != Command.END) {
 			String command = inputView.getUserInput();
-			Command gameState = Command.valueOfInput(command);
-			if (gameState == Command.START) {
+			gameState = Command.valueOfInput(command);
+			checkCommand(command, gameState);
+		}
+	}
+
+	private void checkCommand(String command, Command gameState) {
+		switch (gameState) {
+			case START:
 				initializeGame();
-			} else if (gameState == Command.END) {
+				break;
+			case MOVE:
+				movePiece(command);
+				break;
+			case END:
 				outputView.gameEnd();
 				break;
-			} else if (gameState == Command.MOVE) {
-				movePiece(command);
-			}
+			default:
+				outputView.wrongCommand();
 		}
 	}
 

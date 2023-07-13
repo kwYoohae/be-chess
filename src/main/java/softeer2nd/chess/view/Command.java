@@ -5,7 +5,10 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 import java.util.Arrays;
 
 public enum Command {
-	START("start"), END("end"), MOVE("move");
+	START("start"),
+	END("end"),
+	MOVE("move"),
+	EMPTY("empty");
 
 	private final String command;
 
