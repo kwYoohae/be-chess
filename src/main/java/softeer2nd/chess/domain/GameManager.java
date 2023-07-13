@@ -74,4 +74,10 @@ public class GameManager {
 	public Color getTurn() {
 		return turn;
 	}
+
+	private void check() {
+		if (chess.isChecked(turn)) {
+			outputView.printCheck(turn);
+		}
+	}
 }

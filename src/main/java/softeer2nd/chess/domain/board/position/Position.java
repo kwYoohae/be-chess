@@ -4,6 +4,8 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import java.util.Optional;
 
+import softeer2nd.chess.domain.board.Board;
+
 public class Position {
 
 	private static final int POSITION_COUNT = 2;
@@ -18,6 +20,13 @@ public class Position {
 		this.position = position;
 		cachedX = Optional.empty();
 		cachedY = Optional.empty();
+	}
+
+	public Position(final int x, final int y) {
+		validatePosition(x, y);
+		cachedX = Optional.of(x);
+		cachedY = Optional.of(y);
+		position = convertToPositionToString(x, y);
 	}
 
 	public int getX() {
@@ -50,6 +59,11 @@ public class Position {
 		}
 	}
 
+	private void validatePosition(final int x, final int y) {
+		if (x < 0 || x >= Board.BOARD_MAX_INDEX || y < 0 || y >= Board.BOARD_MAX_INDEX)
+			throw new IllegalArgumentException(POSITION_INPUT_IS_WRONG);
+	}
+
 	private boolean checkColumnInChar(char secondPosition) {
 		final int startNumber = Character.getNumericValue(COLUMN[0]);
 		final int endNumber = Character.getNumericValue(COLUMN[7]);
@@ -59,6 +73,12 @@ public class Position {
 
 	private int convertToSecondPosition(char charY) {
 		return Character.getNumericValue(charY) - 1;
+	}
+
+	private String convertToPositionToString(int x, int y) {
+		final Row row = Row.valueOfIndex(x);
+		final String secondString = String.valueOf(y + 1);
+		return row.getPosition() + secondString;
 	}
 
 }

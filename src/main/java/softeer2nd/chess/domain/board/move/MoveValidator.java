@@ -16,18 +16,6 @@ public class MoveValidator {
 		this.board = board;
 	}
 
-	public void movePiece(final String sourceInput, final String targetInput, final Color turn) {
-		validMovableTurn(sourceInput, turn);
-		validSelfPosition(sourceInput, targetInput);
-
-		final Position sourcePosition = new Position(sourceInput);
-		final Position targetPosition = new Position(targetInput);
-		validMovable(sourcePosition, targetPosition);
-		validOpportunityPieceInDestination(sourcePosition, targetPosition);
-
-		board.move(sourceInput, targetInput);
-	}
-
 	public void validMovableTurn(final String sourceInput, final Color turn) {
 		final Piece piece = board.findPiece(sourceInput);
 
@@ -56,20 +44,23 @@ public class MoveValidator {
 			return;
 		}
 
-		validPieceExistsInDirection(sourcePosition, targetPosition, movableDirection);
+		if (!validPieceExistsInDirection(sourcePosition, targetPosition, movableDirection)) {
+			throw new IllegalArgumentException(PIECE_JUMP_TO_PIECE);
+		}
 	}
 
-	private void validPieceExistsInDirection(Position sourcePosition, Position targtPosition, Direction direction) {
+	public boolean validPieceExistsInDirection(Position sourcePosition, Position targtPosition, Direction direction) {
 		int x = sourcePosition.getX() + direction.getXDegree();
 		int y = sourcePosition.getY() + direction.getYDegree();
 
 		while (targtPosition.getX() != x || targtPosition.getY() != y) {
 			final Piece piece = board.findPiece(x, y);
 			if (piece.getType() != Piece.Type.NO_PIECE)
-				throw new IllegalArgumentException(PIECE_JUMP_TO_PIECE);
+				return false;
 			x += direction.getXDegree();
 			y += direction.getYDegree();
 		}
+		return true;
 	}
 
 	private void validPawnMovable(final Position sourcePosition, final Position targetPosition, final Direction direction) {

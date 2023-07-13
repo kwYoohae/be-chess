@@ -81,6 +81,7 @@ public abstract class Piece {
 	}
 
 	public abstract Direction getMovableDirection(final Position sourcePosition, final Position targetPosition);
+
 	public abstract boolean isRecursive();
 
 	protected Direction getDirectionAllPlace(final int subtractX, final int subtractY) {
@@ -221,6 +222,9 @@ public abstract class Piece {
 		public static List<Direction> knightDirection() {
 			return Arrays.asList(NNE, NNW, SSE, SSW, EEN, EES, WWN, WWS);
 		}
-	}
 
+		public static List<Direction> pawnAttackDirection(Color color) {
+			return color == Color.WHITE ? Arrays.asList(NORTHWEST, NORTHEAST) : Arrays.asList(SOUTHWEST, SOUTHEAST);
+		}
+	}
 }
