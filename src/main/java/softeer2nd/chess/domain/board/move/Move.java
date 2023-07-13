@@ -31,6 +31,9 @@ public class Move {
 	private void validMovableTurn(final String sourceInput, final Color turn) {
 		final Piece piece = board.findPiece(sourceInput);
 
+		if (piece.getColor() == Color.NOCOLOR) {
+			throw new IllegalArgumentException(BLANK_PIECE_CAN_NOT_MOVE);
+		}
 		if (piece.getColor() != turn) {
 			throw new IllegalArgumentException(USER_MOVABLE_OWN_TURUN);
 		}

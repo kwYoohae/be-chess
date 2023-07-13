@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
+import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 
 class BlankTest {
@@ -19,7 +20,7 @@ class BlankTest {
 		board.initializeEmpty();
 
 		// when, then
-		Assertions.assertThatThrownBy(() -> chess.movePiece("a1", "a2"))
+		Assertions.assertThatThrownBy(() -> chess.movePiece("a1", "a2", Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.BLANK_PIECE_CAN_NOT_MOVE);
 	}

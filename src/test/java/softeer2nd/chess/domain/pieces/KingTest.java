@@ -36,7 +36,7 @@ class KingTest {
 
 		// when, then
 		assertThatThrownBy(() -> {
-			chess.movePiece("b4", "b7");
+			chess.movePiece("b4", "b7", Color.WHITE);
 		}).isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
@@ -53,7 +53,7 @@ class KingTest {
 		board.addPiece(position, king);
 
 		// when
-		chess.movePiece(position, destination);
+		chess.movePiece(position, destination, Color.WHITE);
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(king);

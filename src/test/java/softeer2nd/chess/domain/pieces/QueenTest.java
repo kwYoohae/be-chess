@@ -36,7 +36,7 @@ class QueenTest {
 		board.addPiece(position, queen);
 
 		// when
-		chess.movePiece(position, destination);
+		chess.movePiece(position, destination, Color.WHITE);
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(queen);
@@ -54,7 +54,7 @@ class QueenTest {
 		board.addPiece(position, queen);
 
 		// then
-		assertThatThrownBy(() -> chess.movePiece(position, destination))
+		assertThatThrownBy(() -> chess.movePiece(position, destination, Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}

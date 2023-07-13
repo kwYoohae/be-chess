@@ -54,4 +54,6 @@ class GameManagerTest {
 		System.out.println(outputStream);
 	}
 
+	// @Test
+	// @DisplayName("자신의 턴에는 자신의 기물만 움질일 수 있다. ")
 }

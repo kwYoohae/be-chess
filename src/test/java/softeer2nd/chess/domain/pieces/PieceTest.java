@@ -94,11 +94,11 @@ class PieceTest {
 		board.addPiece(pawnPosition, pawn);
 
 		// when, then
-		verifyMoveSameColor(queenPosition, pawnPosition, queen);
-		verifyMoveSameColor(kingPosition, pawnPosition, king);
-		verifyMoveSameColor(rookPosition, pawnPosition, rook);
-		verifyMoveSameColor(bishopPosition, pawnPosition, bishop);
-		verifyMoveSameColor(knightPosition, pawnPosition, knight);
+		verifyMoveSameColor(queenPosition, pawnPosition, queen, Color.WHITE);
+		verifyMoveSameColor(kingPosition, pawnPosition, king, Color.WHITE);
+		verifyMoveSameColor(rookPosition, pawnPosition, rook, Color.WHITE);
+		verifyMoveSameColor(bishopPosition, pawnPosition, bishop, Color.WHITE);
+		verifyMoveSameColor(knightPosition, pawnPosition, knight, Color.WHITE);
 
 	}
 
@@ -109,16 +109,16 @@ class PieceTest {
 		board.initialize();
 
 		// when, then
-		assertThatThrownBy(() -> chess.movePiece("h1", "h3"))
+		assertThatThrownBy(() -> chess.movePiece("h1", "h3", Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_JUMP_TO_PIECE);
 	}
 
 
-	void verifyMoveSameColor(String sourcePosition, String targetPosition, Piece piece) {
+	void verifyMoveSameColor(String sourcePosition, String targetPosition, Piece piece, Color color) {
 		board.addPiece(sourcePosition, piece);
 
-		assertThatThrownBy(() -> chess.movePiece(sourcePosition, targetPosition))
+		assertThatThrownBy(() -> chess.movePiece(sourcePosition, targetPosition, color))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_SAME_COLOR_PIECE);
 	}

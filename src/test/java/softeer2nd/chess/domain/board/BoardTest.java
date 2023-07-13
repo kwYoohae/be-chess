@@ -207,7 +207,7 @@ class BoardTest {
 		String position = "b2";
 
 		// when, then
-		assertThatThrownBy(() -> chess.movePiece(position, position))
+		assertThatThrownBy(() -> chess.movePiece(position, position, Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_NOT_MOVE_SELF_POSITION);
 	}

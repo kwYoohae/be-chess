@@ -35,7 +35,7 @@ class BishopTest {
 		board.addPiece(position, bishop);
 
 		// when
-		chess.movePiece(position, destination);
+		chess.movePiece(position, destination, Color.WHITE);
 
 		// then
 		assertThat(board.findPiece(destination)).isEqualTo(bishop);
@@ -53,7 +53,7 @@ class BishopTest {
 		board.addPiece(position, bishop);
 
 		// when
-		assertThatThrownBy(() -> chess.movePiece(position, destination))
+		assertThatThrownBy(() -> chess.movePiece(position, destination, Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}

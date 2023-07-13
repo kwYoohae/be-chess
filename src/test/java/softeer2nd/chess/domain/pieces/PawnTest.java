@@ -29,8 +29,8 @@ class PawnTest {
 		board.initialize();
 
 		// when
-		chess.movePiece("b2", "b4");
-		chess.movePiece("b7", "b5");
+		chess.movePiece("b2", "b4", Color.WHITE);
+		chess.movePiece("b7", "b5", Color.BLACK);
 
 		//then
 		assertThat(board.findPiece("b4")).isEqualTo(
@@ -51,7 +51,7 @@ class PawnTest {
 		addPiece(targetPosition, Color.BLACK, Piece.Type.PAWN);
 
 		// when
-		chess.movePiece(sourcePosition, targetPosition);
+		chess.movePiece(sourcePosition, targetPosition, Color.WHITE);
 
 		// then
 		final Piece piece = Piece.createPiece(Color.WHITE, Piece.Type.PAWN);
@@ -68,11 +68,11 @@ class PawnTest {
 		addPiece(sourcePosition, Color.WHITE, Piece.Type.PAWN);
 
 		// when, then
-		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "c3"))
+		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "c3", Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
 
-		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "e3"))
+		assertThatThrownBy(() -> chess.movePiece(sourcePosition, "e3", Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
 	}
@@ -83,10 +83,10 @@ class PawnTest {
 		// given
 		board.initialize();
 
-		chess.movePiece("b2", "b3");
+		chess.movePiece("b2", "b3", Color.WHITE);
 
 		// when, then
-		assertThatThrownBy(() -> chess.movePiece("b3", "b5"))
+		assertThatThrownBy(() -> chess.movePiece("b3", "b5", Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 	}
@@ -100,7 +100,7 @@ class PawnTest {
 		addPiece("c3", Color.WHITE, Piece.Type.PAWN);
 
 		// when, then
-		assertThatThrownBy(() -> chess.movePiece("c2", "c4"))
+		assertThatThrownBy(() -> chess.movePiece("c2", "c4", Color.WHITE))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.PIECE_JUMP_TO_PIECE);
 	}
