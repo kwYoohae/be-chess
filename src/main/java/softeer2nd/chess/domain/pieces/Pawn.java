@@ -21,6 +21,11 @@ public class Pawn extends Piece {
 	}
 
 	@Override
+	public boolean isRecursive() {
+		return false;
+	}
+
+	@Override
 	protected Direction findDirection(final Position sourcePosition, final Position targetPosition) {
 		Direction direction = super.findDirection(sourcePosition, targetPosition);
 

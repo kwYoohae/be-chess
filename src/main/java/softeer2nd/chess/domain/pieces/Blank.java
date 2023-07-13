@@ -14,4 +14,10 @@ public class Blank extends Piece {
 	public Direction getMovableDirection(final Position sourcePosition, final Position targetPosition) {
 		throw new IllegalArgumentException(ExceptionMessage.BLANK_PIECE_CAN_NOT_MOVE);
 	}
+
+	@Override
+	public boolean isRecursive() {
+		return false;
+	}
+
 }

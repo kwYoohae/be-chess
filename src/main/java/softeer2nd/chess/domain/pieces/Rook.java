@@ -17,4 +17,9 @@ public class Rook extends Piece {
 
 		return getDirectionAllPlace(subtractX, subtractY);
 	}
+
+	@Override
+	public boolean isRecursive() {
+		return true;
+	}
 }

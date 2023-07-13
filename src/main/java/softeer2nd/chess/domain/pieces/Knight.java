@@ -14,4 +14,9 @@ public class Knight extends Piece {
 	public Direction getMovableDirection(final Position sourcePosition, final Position targetPosition) {
 		return findDirection(sourcePosition, targetPosition);
 	}
+
+	@Override
+	public boolean isRecursive() {
+		return false;
+	}
 }

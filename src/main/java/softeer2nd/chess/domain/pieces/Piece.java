@@ -4,6 +4,7 @@ import static softeer2nd.chess.exception.ExceptionMessage.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -75,7 +76,12 @@ public abstract class Piece {
 		return type.getWhiteRepresentation();
 	}
 
+	public List<Direction> getDirections() {
+		return Collections.unmodifiableList(directions);
+	}
+
 	public abstract Direction getMovableDirection(final Position sourcePosition, final Position targetPosition);
+	public abstract boolean isRecursive();
 
 	protected Direction getDirectionAllPlace(final int subtractX, final int subtractY) {
 		for (int i = 1; i <= BOARD_SIZE; i++) {

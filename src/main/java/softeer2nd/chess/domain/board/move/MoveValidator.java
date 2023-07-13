@@ -8,11 +8,11 @@ import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.Piece.Direction;
 import softeer2nd.chess.domain.pieces.component.Color;
 
-public class Move {
+public class MoveValidator {
 
 	private final Board board;
 
-	public Move(Board board) {
+	public MoveValidator(Board board) {
 		this.board = board;
 	}
 
@@ -28,7 +28,7 @@ public class Move {
 		board.move(sourceInput, targetInput);
 	}
 
-	private void validMovableTurn(final String sourceInput, final Color turn) {
+	public void validMovableTurn(final String sourceInput, final Color turn) {
 		final Piece piece = board.findPiece(sourceInput);
 
 		if (piece.getColor() == Color.NOCOLOR) {
@@ -39,12 +39,12 @@ public class Move {
 		}
 	}
 
-	private void validSelfPosition(final String sourceInput, final String targetInput) {
+	public void validSelfPosition(final String sourceInput, final String targetInput) {
 		if (sourceInput.equals(targetInput))
 			throw new IllegalArgumentException(PIECE_NOT_MOVE_SELF_POSITION);
 	}
 
-	private void validMovable(final Position sourcePosition, final Position targetPosition) {
+	public void validMovable(final Position sourcePosition, final Position targetPosition) {
 		final Piece movePiece = board.findPiece(sourcePosition.getOrigin());
 		final Direction movableDirection = movePiece.getMovableDirection(sourcePosition, targetPosition);
 
@@ -93,7 +93,7 @@ public class Move {
 			throw new IllegalArgumentException(PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY);
 	}
 
-	private void validOpportunityPieceInDestination(final Position sourcePosition, final Position targetPosition) {
+	public void validOpportunityPieceInDestination(final Position sourcePosition, final Position targetPosition) {
 		final Piece sourcePiece = board.findPiece(sourcePosition.getOrigin());
 		final Piece targetPiece = board.findPiece(targetPosition.getOrigin());
 		if (sourcePiece.getColor() == targetPiece.getColor())

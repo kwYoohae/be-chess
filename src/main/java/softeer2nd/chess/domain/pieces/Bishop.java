@@ -16,4 +16,9 @@ public class Bishop extends Piece {
 
 		return getDirectionAllPlace(subtractX, subtractY);
 	}
+
+	@Override
+	public boolean isRecursive() {
+		return true;
+	}
 }
