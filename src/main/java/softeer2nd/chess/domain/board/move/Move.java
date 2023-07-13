@@ -1,14 +1,15 @@
-package softeer2nd.chess.domain.board;
+package softeer2nd.chess.domain.board.move;
 
 import static softeer2nd.chess.exception.ExceptionMessage.*;
 
+import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.Piece.Direction;
 
 public class Move {
 
-	private Board board;
+	private final Board board;
 
 	public Move(Board board) {
 		this.board = board;

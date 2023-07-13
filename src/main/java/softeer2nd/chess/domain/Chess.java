@@ -1,7 +1,7 @@
 package softeer2nd.chess.domain;
 
 import softeer2nd.chess.domain.board.Board;
-import softeer2nd.chess.domain.board.Move;
+import softeer2nd.chess.domain.board.move.Move;
 import softeer2nd.chess.domain.board.Score;
 import softeer2nd.chess.view.ChessView;
 
