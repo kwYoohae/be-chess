@@ -12,31 +12,23 @@ public class Chess {
 	private final Score score;
 	private final ChessView chessView;
 	private final Move move;
-	private Color turn;
 
 	public Chess(Board board) {
 		this.board = board;
 		score = new Score(board);
 		chessView = new ChessView(board);
 		move = new Move(board);
-		turn = Color.WHITE;
 	}
 
 	public void initializeBoard() {
 		board.initialize();
-		turn = Color.WHITE;
 	}
 
 	public String showBoard() {
 		return chessView.showBoard();
 	}
 
-	public void movePiece(final String sourcePosition, final String targetPosition) {
+	public void movePiece(final String sourcePosition, final String targetPosition, final Color turn) {
 		move.movePiece(sourcePosition, targetPosition, turn);
-		turn = oppositeTurn();
-	}
-
-	private Color oppositeTurn() {
-		return turn == Color.WHITE ? Color.BLACK : Color.WHITE;
 	}
 }

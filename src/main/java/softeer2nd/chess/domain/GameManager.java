@@ -1,5 +1,6 @@
 package softeer2nd.chess.domain;
 
+import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.view.OutputView;
 import softeer2nd.chess.view.Command;
 import softeer2nd.chess.view.InputView;
@@ -11,11 +12,13 @@ public class GameManager {
 	private final InputView inputView;
 	private final OutputView outputView;
 	private final Chess chess;
+	private Color turn;
 
 	public GameManager(final InputView inputView, final OutputView outputView, final Chess chess) {
 		this.inputView = inputView;
 		this.outputView = outputView;
 		this.chess = chess;
+		turn = Color.WHITE;
 	}
 
 	public void startGame() {
@@ -36,7 +39,8 @@ public class GameManager {
 	private void initializeGame() {
 		outputView.gameStart();
 		chess.initializeBoard();
-		outputView.printBoard(chess);
+		turn = Color.WHITE;
+		outputView.printBoard(chess, turn);
 	}
 
 	private void movePiece(String command) {
@@ -44,7 +48,7 @@ public class GameManager {
 		String sourcePosition = commands[1];
 		String destinationPosition = commands[2];
 
-		chess.movePiece(sourcePosition, destinationPosition);
-		outputView.printBoard(chess);
+		chess.movePiece(sourcePosition, destinationPosition, turn);
+		outputView.printBoard(chess, turn);
 	}
 }
