@@ -13,8 +13,6 @@ import softeer2nd.chess.domain.pieces.component.Color;
 public class Board {
 
 	public static final int BOARD_MAX_INDEX = 8;
-	private static final int WHITE_PAWN_START_INDEX = 2;
-	private static final int BLACK_PAWN_START_INDEX = 7;
 	private final List<Rank> boards = new ArrayList<>();
 	private final BoardInitializer boardInitializer;
 	public Board(BoardInitializer boardInitializer) {

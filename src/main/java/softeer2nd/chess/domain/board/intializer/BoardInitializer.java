@@ -35,7 +35,7 @@ public class BoardInitializer {
 		}
 	}
 
-	private Rank initializePawn(Color color, int columnIndex) {
+	public Rank initializePawn(Color color, int columnIndex) {
 		final List<Piece> pawns = IntStream.range(0, BOARD_MAX_INDEX)
 			.mapToObj((i) -> {
 				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
@@ -46,7 +46,7 @@ public class BoardInitializer {
 		return new Rank(pawns);
 	}
 
-	private Rank initializeBlank(int columnIndex) {
+	public Rank initializeBlank(int columnIndex) {
 		final List<Piece> blanks = IntStream.range(0, BOARD_MAX_INDEX)
 			.mapToObj((i) -> {
 				String position = Row.valueOfIndex(i).getPosition() + String.valueOf(columnIndex);
@@ -57,7 +57,7 @@ public class BoardInitializer {
 		return new Rank(blanks);
 	}
 
-	private Rank initializeOtherPieces(Color color) {
+	public Rank initializeOtherPieces(Color color) {
 		List<Piece> pieces = new ArrayList<>();
 		pieces.add(createPiece(color, Type.ROOK));
 		pieces.add(createPiece(color, Type.KNIGHT));
@@ -71,8 +71,7 @@ public class BoardInitializer {
 		return new Rank(pieces);
 	}
 
-	private void initializeBlanks(List<Rank> ranks) {
-		List<Piece> pieces = new ArrayList<>();
+	public void initializeBlanks(List<Rank> ranks) {
 		IntStream.range(BLANK_START_INDEX, BLANK_END_INDEX + 1)
 			.forEach((index) -> ranks.add(initializeBlank(index)));
 	}
