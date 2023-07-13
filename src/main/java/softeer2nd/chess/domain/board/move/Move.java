@@ -6,6 +6,7 @@ import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.Piece;
 import softeer2nd.chess.domain.pieces.Piece.Direction;
+import softeer2nd.chess.domain.pieces.component.Color;
 
 public class Move {
 
@@ -15,7 +16,8 @@ public class Move {
 		this.board = board;
 	}
 
-	public void movePiece(final String sourceInput, final String targetInput) {
+	public void movePiece(final String sourceInput, final String targetInput, final Color turn) {
+		validMovableTurn(sourceInput, turn);
 		validSelfPosition(sourceInput, targetInput);
 
 		final Position sourcePosition = new Position(sourceInput);
@@ -24,6 +26,14 @@ public class Move {
 		validOpportunityPieceInDestination(sourcePosition, targetPosition);
 
 		board.move(sourceInput, targetInput);
+	}
+
+	private void validMovableTurn(final String sourceInput, final Color turn) {
+		final Piece piece = board.findPiece(sourceInput);
+
+		if (piece.getColor() != turn) {
+			throw new IllegalArgumentException(USER_MOVABLE_OWN_TURUN);
+		}
 	}
 
 	private void validSelfPosition(final String sourceInput, final String targetInput) {

@@ -12,6 +12,7 @@ public final class ExceptionMessage {
 	public static final String PIECE_NOT_MOVE_SELF_POSITION = "기물은 자기 자신으로는 움직일 수 없습니다";
 	public static final String PIECE_JUMP_TO_PIECE = "해당 기물은 상대 기물을 뛰어넘을 수 없습니다";
 	public static final String PAWN_CAN_MOVE_DIAGONAL_ONLY_TARGET_POSITION_HAVE_ENEMY = "Pawn이 대각선으로 움직일 수 있는경우는 상대 기물이 있을 경우입니다.";
+	public static final String USER_MOVABLE_OWN_TURUN = "자신의 턴에 자신의 기물만 움직일 수 있습니다";
 
 	private ExceptionMessage() {
 		throw new IllegalStateException(EXCEPTION_MESSAGE_CLASS_MUST_NOT_INSTANTIATE);
