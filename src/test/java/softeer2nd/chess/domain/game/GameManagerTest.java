@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import softeer2nd.chess.domain.Chess;
 import softeer2nd.chess.domain.board.Board;
 import softeer2nd.chess.domain.GameManager;
+import softeer2nd.chess.domain.pieces.component.Color;
 import softeer2nd.chess.exception.ExceptionMessage;
 import softeer2nd.chess.view.OutputView;
 import softeer2nd.chess.view.InputView;
@@ -78,5 +79,21 @@ class GameManagerTest {
 		assertThatThrownBy(() -> gameManager.startGame())
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessage(ExceptionMessage.USER_MOVABLE_OWN_TURUN);
+	}
+
+	@Test
+	@DisplayName("자신의 턴이 끝나면 상대방 턴으로 넘어간다")
+	void ifMovePieceChangeTurn() {
+		// given
+		String commnad = appendNewLine("start") + appendNewLine("move b2 b3") + appendNewLine("end");
+		InputStream inputStream = new ByteArrayInputStream(commnad.getBytes());
+		System.setIn(System.in);
+
+		gameManager = new GameManager(new InputView(new Scanner(inputStream)), outputView, chess);
+		// when
+		gameManager.startGame();
+
+		// then
+		assertThat(gameManager.getTurn()).isEqualTo(Color.BLACK);
 	}
 }
