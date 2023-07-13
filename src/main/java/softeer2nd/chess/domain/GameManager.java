@@ -49,6 +49,19 @@ public class GameManager {
 		String destinationPosition = commands[2];
 
 		chess.movePiece(sourcePosition, destinationPosition, turn);
+		changeTurn();
 		outputView.printBoard(chess, turn);
+	}
+
+	private void changeTurn() {
+		if (turn == Color.WHITE) {
+			this.turn = Color.BLACK;
+			return;
+		}
+		this.turn = Color.WHITE;
+	}
+
+	public Color getTurn() {
+		return turn;
 	}
 }
