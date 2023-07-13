@@ -1,7 +1,5 @@
 package softeer2nd.chess.view;
 
-import static softeer2nd.chess.exception.ExceptionMessage.*;
-
 import java.util.Arrays;
 
 public enum Command {
@@ -17,32 +15,40 @@ public enum Command {
 	}
 
 	public static Command valueOfInput(String input) {
+		if(!validationCommand(input)) {
+			return EMPTY;
+		}
 		return Arrays.stream(values())
 			.filter(value -> input.startsWith(value.command))
 			.findAny()
-			.orElseThrow(() -> new IllegalArgumentException(NOT_EXECUTE_COMMAND));
+			.orElse(EMPTY);
 	}
 
-	public static void validationCommand(String input) {
+	public static boolean validationCommand(String input) {
 		final String[] inputs = input.split(" ");
 
-		validateCommandLength(inputs);
-		validateCommand(inputs);
-	}
-
-	private static void validateCommandLength(String[] inputs) {
-		if (inputs.length != 1 && inputs.length != 3) {
-			throw new IllegalArgumentException(NOT_EXECUTE_COMMAND);
+		if(!validateCommandLength(inputs)) {
+			return false;
 		}
+		if(!validateCommand(inputs)) {
+			return false;
+		}
+		return true;
 	}
 
-	private static void validateCommand(String[] inputs) {
+	private static boolean validateCommandLength(String[] inputs) {
+		if (inputs.length != 1 && inputs.length != 3) {
+			return false;
+		}
+		return true;
+	}
+
+	private static boolean validateCommand(String[] inputs) {
 		if (inputs.length == 1 && (inputs[0].equals(START.command) || inputs[0].equals(END.command))) {
-			return;
+			return true;
 		}
 		if (inputs.length == 3 && inputs[0].equals(MOVE.command))
-			return;
-
-		throw new IllegalArgumentException(NOT_EXECUTE_COMMAND);
+			return true;
+		return false;
 	}
 }

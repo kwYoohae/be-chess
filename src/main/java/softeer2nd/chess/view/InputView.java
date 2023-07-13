@@ -14,8 +14,6 @@ public class InputView {
 
 	public String getUserInput() {
 		System.out.print(ASK_COMMAND_MESSAGE);
-		String input = scanner.nextLine();
-		Command.validationCommand(input);
-		return input;
+		return scanner.nextLine();
 	}
 }
