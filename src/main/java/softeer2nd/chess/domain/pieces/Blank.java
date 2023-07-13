@@ -11,7 +11,7 @@ public class Blank extends Piece {
 	}
 
 	@Override
-	public Direction getPieceDirection(final Position sourcePosition, final Position targetPosition) {
+	public Direction getMovableDirection(final Position sourcePosition, final Position targetPosition) {
 		throw new IllegalArgumentException(ExceptionMessage.BLANK_PIECE_CAN_NOT_MOVE);
 	}
 }

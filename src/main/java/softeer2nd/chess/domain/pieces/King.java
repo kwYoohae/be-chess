@@ -10,7 +10,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public Direction getPieceDirection(final Position sourcePosition, final Position targetPosition) {
+	public Direction getMovableDirection(final Position sourcePosition, final Position targetPosition) {
 		return findDirection(sourcePosition, targetPosition);
 	}
 }

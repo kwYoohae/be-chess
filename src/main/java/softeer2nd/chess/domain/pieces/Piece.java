@@ -12,6 +12,8 @@ import softeer2nd.chess.domain.pieces.component.Color;
 
 public abstract class Piece {
 
+	private static final int BOARD_SIZE = 8;
+
 	protected Color color;
 	protected Type type;
 	protected List<Direction> directions = new ArrayList<>();
@@ -73,13 +75,20 @@ public abstract class Piece {
 		return type.getWhiteRepresentation();
 	}
 
-	public abstract Direction getPieceDirection(final Position sourcePosition, final Position targetPosition);
+	public abstract Direction getMovableDirection(final Position sourcePosition, final Position targetPosition);
 
-	protected Direction getDirectionRecursive(final int subtractX, final int subtractY, final int multiplyNumber) {
-		if (multiplyNumber == 8)
-			return Direction.EMPTY;
+	protected Direction getDirectionAllPlace(final int subtractX, final int subtractY) {
+		for (int i = 1; i <= BOARD_SIZE; i++) {
+			Direction result = findDirection(subtractX, subtractY, i);
+			if (result != Direction.EMPTY)
+				return result;
+		}
 
-		Direction result = directions.stream()
+		throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
+	}
+
+	private Direction findDirection(final int subtractX, final int subtractY, final int multiplyNumber) {
+		return directions.stream()
 			.filter(direction -> {
 				final int xDegree = direction.getXDegree() * multiplyNumber;
 				final int yDegree = direction.getYDegree() * multiplyNumber;
@@ -87,13 +96,6 @@ public abstract class Piece {
 			})
 			.findAny()
 			.orElse(Direction.EMPTY);
-
-		if (result == Direction.EMPTY) {
-			result = getDirectionRecursive(subtractX, subtractY, multiplyNumber + 1);
-			return result;
-		}
-
-		return result;
 	}
 
 	protected Direction findDirection(final Position sourcePosition, final Position targetPosition) {
@@ -103,7 +105,7 @@ public abstract class Piece {
 		return directions.stream()
 			.filter(direction -> direction.getXDegree() == subtractX && direction.getYDegree() == subtractY)
 			.findAny()
-			.orElse(Direction.EMPTY);
+			.orElseThrow(() -> new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION));
 	}
 
 	@Override

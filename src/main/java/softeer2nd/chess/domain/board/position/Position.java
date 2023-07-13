@@ -36,6 +36,10 @@ public class Position {
 		return cachedY.get();
 	}
 
+	public String getOrigin() {
+		return position;
+	}
+
 	private void validatePosition(final String inputs) {
 		if (inputs.length() != POSITION_COUNT) {
 			throw new IllegalArgumentException(POSITION_INPUT_IS_TO_MANY_OR_LESS_LENGTH);

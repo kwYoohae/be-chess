@@ -1,5 +1,7 @@
 package softeer2nd.chess.domain.pieces;
 
+import static softeer2nd.chess.exception.ExceptionMessage.*;
+
 import softeer2nd.chess.domain.board.position.Position;
 import softeer2nd.chess.domain.pieces.component.Color;
 
@@ -14,7 +16,7 @@ public class Pawn extends Piece {
 	}
 
 	@Override
-	public Direction getPieceDirection(final Position sourcePosition, final Position targetPosition) {
+	public Direction getMovableDirection(final Position sourcePosition, final Position targetPosition) {
 		return findDirection(sourcePosition, targetPosition);
 	}
 
@@ -23,21 +25,19 @@ public class Pawn extends Piece {
 		Direction direction = super.findDirection(sourcePosition, targetPosition);
 
 		if (direction == Direction.DOUBLE_SOUTH || direction == Direction.DOUBLE_NORTH) {
-			direction = checkFirstMove(sourcePosition, targetPosition, direction);
+			validFirstMove(sourcePosition, targetPosition);
 		}
 
 		return direction;
 	}
 
-	private Direction checkFirstMove(final Position sourcePosition, final Position targetPosition,
-		final Direction direction) {
+	private void validFirstMove(final Position sourcePosition, final Position targetPosition) {
 		if (color == Color.WHITE && sourcePosition.getY() != WHITE_PAWN_START_INDEX) {
-			return Direction.EMPTY;
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
 		if (color == Color.BLACK && sourcePosition.getY() != BLACK_PAWN_START_INDEX) {
-			return Direction.EMPTY;
+			throw new IllegalArgumentException(PIECE_CAN_NOT_GO_DESTINATION_POSITION);
 		}
-		return direction;
 	}
 
 	private void setPawnDirection(Color color) {
