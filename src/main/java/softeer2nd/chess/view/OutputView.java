@@ -35,4 +35,8 @@ public class OutputView {
 	public void printIsNotStartedGame() {
 		System.out.println(IS_NOT_GAME_STARTED);
 	}
+
+	public void printError(final String message) {
+		System.out.println(message);
+	}
 }

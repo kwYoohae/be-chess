@@ -1,9 +1,9 @@
 package softeer2nd.chess.domain;
 
 import softeer2nd.chess.domain.pieces.component.Color;
-import softeer2nd.chess.view.OutputView;
 import softeer2nd.chess.view.Command;
 import softeer2nd.chess.view.InputView;
+import softeer2nd.chess.view.OutputView;
 
 public class GameManager {
 
@@ -74,10 +74,14 @@ public class GameManager {
 		String sourcePosition = commands[1];
 		String destinationPosition = commands[2];
 
-		chess.movePiece(sourcePosition, destinationPosition, turn);
-		outputView.printBoard(chess, turn);
-		changeTurn();
-		isChecked();
+		try	{
+			chess.movePiece(sourcePosition, destinationPosition, turn);
+			outputView.printBoard(chess, turn);
+			changeTurn();
+			isChecked();
+		} catch (IllegalArgumentException e) {
+			outputView.printError(e.getMessage());
+		}
 	}
 
 	private void changeTurn() {
