@@ -13,12 +13,14 @@ public class GameManager {
 	private final OutputView outputView;
 	private final Chess chess;
 	private Color turn;
+	private boolean isGameStarted;
 
 	public GameManager(final InputView inputView, final OutputView outputView, final Chess chess) {
 		this.inputView = inputView;
 		this.outputView = outputView;
 		this.chess = chess;
-		turn = Color.WHITE;
+		this.turn = Color.WHITE;
+		this.isGameStarted = false;
 	}
 
 	public void startGame() {
@@ -27,7 +29,15 @@ public class GameManager {
 			String command = inputView.getUserInput();
 			gameState = Command.valueOfInput(command);
 			checkCommand(command, gameState);
+			if (isGameEnd() && gameState == Command.MOVE) {
+				break;
+			}
 		}
+		outputView.gameEnd();
+	}
+
+	private boolean isGameEnd() {
+		return !chess.isKingAlive(turn);
 	}
 
 	private void checkCommand(String command, Command gameState) {
@@ -51,16 +61,23 @@ public class GameManager {
 		chess.initializeBoard();
 		turn = Color.WHITE;
 		outputView.printBoard(chess, turn);
+		isGameStarted = true;
 	}
 
 	private void movePiece(String command) {
+		if (!isGameStarted) {
+			outputView.printIsNotStartedGame();
+			return;
+		}
+
 		final String[] commands = command.split(BLANK);
 		String sourcePosition = commands[1];
 		String destinationPosition = commands[2];
 
 		chess.movePiece(sourcePosition, destinationPosition, turn);
-		changeTurn();
 		outputView.printBoard(chess, turn);
+		changeTurn();
+		isChecked();
 	}
 
 	private void changeTurn() {
@@ -71,13 +88,14 @@ public class GameManager {
 		this.turn = Color.WHITE;
 	}
 
-	public Color getTurn() {
-		return turn;
+	private void isChecked() {
+		if (chess.isChecked(Color.WHITE))
+			outputView.printCheck(Color.WHITE);
+		if (chess.isChecked(Color.BLACK))
+			outputView.printCheck(Color.BLACK);
 	}
 
-	private void check() {
-		if (chess.isChecked(turn)) {
-			outputView.printCheck(turn);
-		}
+	public Color getTurn() {
+		return turn;
 	}
 }

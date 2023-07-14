@@ -47,4 +47,8 @@ public class Chess {
 	public boolean isChecked(Color color) {
 		return check.checkMate(color);
 	}
+
+	public boolean isKingAlive(Color color) {
+		return board.isKingAlive(color);
+	}
 }

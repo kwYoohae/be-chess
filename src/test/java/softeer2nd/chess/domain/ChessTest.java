@@ -56,4 +56,25 @@ class ChessTest {
 		Assertions.assertThat(chess.isChecked(Color.WHITE)).isFalse();
 		Assertions.assertThat(chess.isChecked(Color.BLACK)).isTrue();
 	}
+
+	@Test
+	@DisplayName("King이 잡혔는지 확인할 수 있는가")
+	void isGameEnd() {
+		// given
+		board.initialize();
+
+		// when
+		chess.movePiece("d2","d4", Color.WHITE);
+		chess.movePiece("e7","e5", Color.BLACK);
+		chess.movePiece("d1","d3", Color.WHITE);
+		chess.movePiece("e8","e7", Color.BLACK);
+		chess.movePiece("d3","e3", Color.WHITE);
+		chess.movePiece("e7","e6", Color.BLACK);
+		chess.movePiece("e3","e5", Color.WHITE);
+		chess.movePiece("e6","f6", Color.BLACK);
+		chess.movePiece("e5","f6", Color.WHITE);
+
+		// then
+		Assertions.assertThat(chess.isKingAlive(Color.BLACK)).isFalse();
+	}
 }

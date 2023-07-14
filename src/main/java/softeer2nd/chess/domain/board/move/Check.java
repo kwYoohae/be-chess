@@ -68,7 +68,11 @@ public class Check {
 					return false;
 
 				final Piece piece = board.findPiece(x, y);
-				return piece.getColor() == color && piece.getType() == Piece.Type.KING;
+				final Position targetPosition = new Position(x, y);
+				if (piece.getColor() == color && piece.getType() == Piece.Type.KING) {
+					return moveValidator.validPieceExistsInDirection(sourcePosition, targetPosition, direction);
+				}
+				return false;
 			});
 	}
 
@@ -99,7 +103,7 @@ public class Check {
 	private boolean findKing(final Color color, final Position sourcePosition, final Position targetPosition,
 		final Piece.Direction direction) {
 		final Piece piece = board.findPiece(targetPosition.getOrigin());
-		if (piece.getColor() == Color.getOppositeColor(color) && piece.getType() == Piece.Type.KING) {
+		if (piece.getColor() == color && piece.getType() == Piece.Type.KING) {
 			return moveValidator.validPieceExistsInDirection(sourcePosition, targetPosition, direction);
 		}
 		return false;

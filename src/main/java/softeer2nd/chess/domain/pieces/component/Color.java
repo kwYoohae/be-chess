@@ -14,8 +14,7 @@ public enum Color {
 	public static Color getOppositeColor(Color color) {
 		return color == WHITE ? BLACK : WHITE;
 	}
-	@Override
-	public String toString() {
+	public String getName() {
 		return name;
 	}
 }

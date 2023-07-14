@@ -103,4 +103,10 @@ public class Board {
 	public Rank getRankInIndex(int index) {
 		return boards.get(index);
 	}
+
+	public boolean isKingAlive(Color color) {
+		return boards.stream()
+			.flatMap(rank -> rank.getRow().stream())
+			.anyMatch(piece -> piece.getType() == Piece.Type.KING && piece.getColor() == color);
+	}
 }
